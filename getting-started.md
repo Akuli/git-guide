@@ -94,7 +94,7 @@ If you are using Windows, you will need `dir` instead of `ls`,
 and the output will be shown slightly differently than above.
 
 In fact, the `.gitignore` is also there, but `ls` doesn't show file names starting with a dot by default.
-There's also `.git`, which is a folder where `git` stores files internally.
+There's also `.git`, which is a folder where git stores its data.
 To see them too, use `ls -a`, where `-a` is short for "all":
 
 ```sh
