@@ -54,6 +54,7 @@ Also, I'm not responsible for anything I say in this guide, as [the LICENCE of t
 
 After creating a repo on GitHub, the next step is to clone it.
 It means downloading a copy of the repo to your computer, so that you can edit the files in it.
+We will later run commands to keep your copy and GitHub in sync.
 
 I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
 In particular, I assume you know how the `cd` command changes the current working directory.
@@ -78,8 +79,9 @@ Unpacking objects: 100% (6/6), done.
 $ cd reponame
 ```
 
-Here `$` means "type the rest of this line to the terminal",
-and lines not starting with `$` are output from the commands.
+In the above example, lines starting with `$` are the commands that you should type to the terminal,
+and other lines are output from those commands.
+So `$` means "type the rest of this line to the terminal", and you should get the same output.
 The `cd` command doesn't output anything.
 
 As you can see by the `cd` command, `git clone` created a new folder.
