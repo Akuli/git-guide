@@ -1,0 +1,12 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  spell_check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt -y install aspell
+      - run: ./spellcheck.sh
