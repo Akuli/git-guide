@@ -3,7 +3,7 @@
 A commit is a pile of changes. For example
 [this commit](https://github.com/Akuli/git-guide/commit/07ee936f719060550b2033ac6501b31d52b8f627)
 changed two files in this guide:
-it deleted (red) and added (green) several things in `getting-started.md`,
+it deletted (red) and added (green) several things in `getting-started.md`,
 and added one line to `run_commands.py`.
 
 Before doing anything else, let's run `git status` just to see what's going on.
