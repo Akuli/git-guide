@@ -78,6 +78,7 @@ with tempfile.TemporaryDirectory() as tempdir_string:
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
     (tempdir / 'fake_github' / 'reponame' / 'README.md').touch()
     (tempdir / 'fake_github' / 'reponame' / 'LICENSE').touch()
+    (tempdir / 'fake_github' / 'reponame' / '.gitignore').touch()
     subprocess.run(
         'git init -q && git add . && git commit -q -m "Initial commit"',
         shell=True,

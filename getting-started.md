@@ -52,7 +52,7 @@ Also, I'm not responsible for anything I say in this guide, as [the LICENCE of t
 
 ## Cloning the repo
 
-When you have created a repo on GitHub, the first step is to clone it.
+After creating a repo on GitHub, the next step is to clone it.
 It means downloading a copy of the repo to your compter, so that you can edit the files in it.
 
 I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
@@ -80,6 +80,7 @@ $ cd reponame
 
 Here `$` means "type the rest of this line to the terminal",
 and lines not starting with `$` are output from the commands.
+The `cd` command doesn't output anything.
 
 As you can see by the `cd` command, `git clone` created a new folder.
 This folder is a clone of the GitHub repo, and that's where your code will be.
@@ -101,7 +102,7 @@ To see them too, use `ls -a`, where `-a` is short for "all":
 
 ```sh
 $ ls -a
-.  ..  .git  LICENSE  README.md
+.  ..  .git  .gitignore  LICENSE  README.md
 ```
 
 On Windows, `dir` shows everything by default.
@@ -112,7 +113,7 @@ On Windows, `dir` shows everything by default.
 Many other Git instructions recommend `git init` for making a new repo.
 Unlike the `git clone https://github.com/...` command above, `git init` does nothing with github;
 it creates the repo only on your computer.
-Therefore connecting it to GitHub requires more commands to be ran separately.
+Therefore connecting it to GitHub requires running more commands afterwards.
 
 If you just want to put your code to GitHub, then **don't use `git init`**.
 Just make the repo on GitHub first and then clone it.
