@@ -99,7 +99,7 @@ When everything looks good, we can commit:
 
 ```sh
 $ git commit
-[main 0459ee9] add better description to README
+[main cb3baec] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 ```
 
@@ -137,7 +137,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   07ee936..b9a428e  main -> main
+   094eb39..cb3baec  main -> main
 ```
 
 Git will ask for your GitHub username and password.

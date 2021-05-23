@@ -1,3 +1,4 @@
+import hashlib
 import pathlib
 import re
 import subprocess
@@ -19,6 +20,16 @@ class CommandRunner:
             'core.editor': tempdir / 'fake_editor',
         }
         self.working_dir.mkdir()
+
+    # Git commit hashes are different every time this script runs. Maybe they
+    # include some kind of UUID or system time, idk. But we want consistent output.
+    def substitute_commit_hashes(self, git_output):
+        git_log = subprocess.check_output(['git', 'log', '--format=%h %s'], cwd=self.working_dir)
+        for line in git_log.splitlines():
+            actual_hash, first_line_of_commit_message = line.split(maxsplit=1)
+            fake_hash = hashlib.md5(first_line_of_commit_message).hexdigest()[:7]
+            git_output = git_output.replace(actual_hash.decode('ascii'), fake_hash)
+        return git_output
 
     def run_command(self, bash_command):
         if bash_command == 'git clone https://github.com/username/reponame':
@@ -73,7 +84,7 @@ Unpacking objects: 100% (6/6), done.
             # fake output that looks like pushing to github, not like pushing
             # to repo on the same computer
             response.check_returncode()
-            return '''\
+            output = b'''\
 Username for 'https://github.com': username
 Password for 'https://username@github.com':
 Enumerating objects: 1, done.
@@ -81,14 +92,15 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   07ee936..b9a428e  main -> main
-'''
+''' + response.stdout.splitlines(keepends=True)[-1]
+        else:
+            output = response.stdout
 
-        output = response.stdout.expandtabs(8)
+        output = output.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
         output = output.replace(b'\r\n', b'\n')  # no idea why needed
         output = re.sub(rb'.*\r\x1b\[K', b'', output)  # the weird characters seem to mean "forget prev line"
-        return output.decode('utf-8')
+        return self.substitute_commit_hashes(output.decode('utf-8'))
 
     def add_outputs_to_commands(self, command_string):
         commands = [
@@ -135,6 +147,7 @@ echo "add better description to README" > "$1"
     runner = CommandRunner(tempdir)
 
     for filename in ['getting-started.md', 'committing.md']:
+        print("Running commands from", filename)
         path = pathlib.Path(filename)
         content = path.read_text()
         old_parts = content.split('```')
