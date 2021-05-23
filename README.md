@@ -14,3 +14,8 @@ Contents:
 Run `python3 run_commands.py` after editing the commands in a `.md` file.
 It will run the commands you wrote and put the output back to the markdown files.
 This way, the commands in markdown files look as if they were written to a terminal.
+
+Spell checking:
+
+    sudo apt install aspell
+    ./spellcheck.sh
