@@ -3,9 +3,15 @@ set -e
 
 rm -f misspelled.txt
 
+# Sometimes commit hashes contain a few consecutive letters, aspell thinks those are words
+function delete_commit_hashes()
+{
+    sed 's/\b[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]\b//g'
+}
+
 for file in *.md; do
     cat $file \
-        | sed 's/\b[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]\b//g' \
+        | delete_commit_hashes \
         | aspell -l en list \
         | tee -a wat \
         | (grep -v -f spellcheck_exclude.txt || true) \
