@@ -52,11 +52,9 @@ Also, I'm not responsible for anything I say in this guide, as [the LICENCE of t
 
 ## Cloning the repo
 
-Now you should have a repo on GitHub, with an URL like `https://github.com/username/reponame`.
-The next step is to downloading a copy of the repo to your computer, so that you can edit the files in it.
-This is called **cloning** the repo.
-Git won't automatically keep the cloned repo in sync with GitHub, and we'll learn to do that later,
-but to make that easier, Git saves the URL to a file when it clones the repo.
+After creating a repo on GitHub, the next step is to clone it.
+It means downloading a copy of the repo to your computer,
+so that you can edit the files in it and then upload your changes to GitHub.
 
 I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
 In particular, I assume you know how the `cd` command changes the current working directory.
@@ -102,6 +100,8 @@ and the output will be shown differently than above.
 
 The `.gitignore` file is also there, but `ls` doesn't show file names starting with a dot by default.
 There's also `.git`, which is a folder where git stores its data.
+For example, `.git/config` is a file that contains `https://github.com/username/reponame`,
+among other things.
 To see them too, use `ls -a`, where `-a` is short for "all":
 
 ```diff
