@@ -13,7 +13,6 @@ for file in *.md; do
     cat $file \
         | delete_commit_hashes \
         | aspell -l en list \
-        | tee -a wat \
         | (grep -v -f spellcheck_exclude.txt || true) \
         >> misspelled.txt
 done

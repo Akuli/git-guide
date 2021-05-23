@@ -5,6 +5,7 @@ Lorem
 MacOS
 README
 TODO
+aspell
 cd
 dir
 gitguide
@@ -18,4 +19,5 @@ py
 repo
 reponame
 repos
+sudo
 unstage
