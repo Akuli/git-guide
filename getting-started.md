@@ -103,3 +103,14 @@ $ ls -a
 ```
 
 On Windows, `dir` shows everything by default.
+
+
+## git init
+
+Many other Git instructions recommend `git init` for making a new repo.
+Unlike the `git clone https://github.com/...` command above, `git init` does nothing with github;
+it creates the repo only on your computer.
+Therefore connecting it to GitHub requires more commands to be ran separately.
+
+If you just want to put your code to GitHub, then **don't use `git init`**.
+Just make the repo on GitHub first and then clone it.
