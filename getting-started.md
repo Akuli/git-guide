@@ -36,7 +36,7 @@ Choose the settings like this:
     If you don't know which license to choose from the list,
     have a look at [GitHub's license choosing site](https://choosealicense.com/).
 
-Using a license avoids legal problems that you wouldn't expect to have in the first place:
+Using a license avoids surprising legal problems, and instead, everything works as you would expect:
 - Everyone can use and modify your code (which really should be allowed, since it's public).
 - If someone makes a copy of your project, they can't claim that they wrote it by themselves.
 - If your code destroys something (even though that's unlikely to happen in practice), nobody can sue you.
