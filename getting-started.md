@@ -52,9 +52,11 @@ Also, I'm not responsible for anything I say in this guide, as [the LICENCE of t
 
 ## Cloning the repo
 
-After creating a repo on GitHub, the next step is to clone it.
-It means downloading a copy of the repo to your computer, so that you can edit the files in it.
-We will later run commands to keep your copy and GitHub in sync.
+Now you should have a repo on GitHub, with an URL like `https://github.com/username/reponame`.
+The next step is to downloading a copy of the repo to your computer, so that you can edit the files in it.
+This is called **cloning** the repo.
+Git won't automatically keep the cloned repo in sync with GitHub, and we'll learn to do that later,
+but to make that easier, Git saves the URL to a file when it clones the repo.
 
 I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
 In particular, I assume you know how the `cd` command changes the current working directory.
