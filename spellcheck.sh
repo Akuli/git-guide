@@ -14,7 +14,7 @@ for file in *.md; do
         | delete_commit_hashes \
         | aspell -l en list \
         | (grep -v -f spellcheck_exclude.txt || true) \
-        | sed "s/^/$file:/g" \
+        | sed "s/^/$file: /g" \
         >> misspelled.txt
 done
 
