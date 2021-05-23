@@ -14,14 +14,29 @@ class CommandRunner:
     def __init__(self, tempdir):
         self.working_dir = tempdir / 'working_dir'
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
+        self.git_config = {
+            'core.pager': 'cat',
+            'core.editor': tempdir / 'fake_editor',
+        }
         self.working_dir.mkdir()
 
     def run_command(self, bash_command):
         if bash_command == 'git clone https://github.com/username/reponame':
+            subprocess.run(
+                ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
+                check=True,
+            )
+
+            for name, value in self.git_config.items():
+                subprocess.run(
+                    ['git', 'config', name, value],
+                    cwd=(self.working_dir / 'reponame'),
+                    check=True,
+                )
+
             # Actual 'git clone' output changes depending on whether you clone
             # a directory on your computer or a github repo. We want to show
             # what would happen if you cloned a github repo.
-            subprocess.run(['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'], check=True)
             return '''\
 Cloning into 'reponame'...
 remote: Enumerating objects: 6, done.
@@ -47,40 +62,70 @@ Unpacking objects: 100% (6/6), done.
         #
         # This thing doesn't work on Windows. I'm sorry.
         args = ['bash', '-c', bash_command]
-        output = subprocess.run(
+        response = subprocess.run(
             [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             cwd=self.working_dir,
-        ).stdout
-        output = output.expandtabs(8)
+        )
+
+        if bash_command.startswith('git push'):
+            # fake output that looks like pushing to github, not like pushing
+            # to repo on the same computer
+            response.check_returncode()
+            return '''\
+Username for 'https://github.com': username
+Password for 'https://username@github.com':
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To https://github.com/username/reponame
+   07ee936..b9a428e  main -> main
+'''
+
+        output = response.stdout.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
         output = output.replace(b'\r\n', b'\n')  # no idea why needed
+        output = re.sub(rb'.*\r\x1b\[K', b'', output)  # the weird characters seem to mean "forget prev line"
         return output.decode('utf-8')
 
-    def add_outputs_to_commands(self, regex_match):
+    def add_outputs_to_commands(self, command_string):
         commands = [
             line.lstrip('$').strip()
-            for line in regex_match.group(0).split('\n')
+            for line in command_string.split('\n')
             if line.startswith('$')
         ]
         outputs = [self.run_command(command) for command in commands]
-        commands_and_outputs = '\n'.join(
+        return '\n'.join(
             f"$ {command}\n{output}"
             for command, output in zip(commands, outputs)
         )
-        return f'```sh\n{commands_and_outputs}```\n'
 
 
 with tempfile.TemporaryDirectory() as tempdir_string:
     tempdir = pathlib.Path(tempdir_string)
+    (tempdir / 'fake_editor').write_text('''\
+#!/bin/bash
+echo "add better description to README" > "$1"
+''')
+    (tempdir / 'fake_editor').chmod(0o755)
     # Simulate with github does when you create empty repo
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
-    (tempdir / 'fake_github' / 'reponame' / 'README.md').touch()
+    (tempdir / 'fake_github' / 'reponame' / 'README.md').write_text(
+        "# reponame\nThe description of the repository is here by default\n"
+    )
     (tempdir / 'fake_github' / 'reponame' / 'LICENSE').touch()
     (tempdir / 'fake_github' / 'reponame' / '.gitignore').touch()
     subprocess.run(
-        'git init -q && git add . && git commit -q -m "Initial commit"',
+        '''
+        set -e
+        git init -q
+        git checkout -q -b main
+        git add .
+        git commit -q -m "Initial commit"
+        git config receive.denyCurrentBranch ignore
+        ''',
         shell=True,
         check=True,
         cwd=(tempdir / 'fake_github' / 'reponame'),
@@ -89,8 +134,24 @@ with tempfile.TemporaryDirectory() as tempdir_string:
     (tempdir / 'cloned' / 'reponame').mkdir(parents=True)
     runner = CommandRunner(tempdir)
 
-    for filename in ['getting-started.md']:
+    for filename in ['getting-started.md', 'committing.md']:
         path = pathlib.Path(filename)
         content = path.read_text()
-        content = re.sub(r'```sh\n(([^`].*)?\n)+```\n', runner.add_outputs_to_commands, content)
-        path.write_text(content)
+        old_parts = content.split('```')
+
+        new_parts = []
+        for part in old_parts:
+            if part.startswith(('sh\n', 'diff\n')):  # ```sh or ```diff
+                new_parts.append(part.split('\n')[0] + '\n' + runner.add_outputs_to_commands(part))
+            else:
+                new_parts.append(part)
+                if 'Now open `README.md` in your favorite text editor' in part:
+                    (runner.working_dir / 'README.md').write_text("""\
+# reponame
+This is a better description of this repository. Imagine you just wrote it
+into your text editor.
+
+More text here. Lorem ipsum blah blah blah.
+""")
+
+        path.write_text('```'.join(new_parts))
