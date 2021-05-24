@@ -40,7 +40,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Adding, also known as staging, means choosing what will be included in the next commit.
 This way it's possible to edit several files and commit only some of the changes.
 Adding a file doesn't modify it;
-it just makes Git remember the changes you did and include them in the next commit.
+it just makes Git remember the changes you did.
 
 As the status message suggests, we will use `git add <file>...`.
 Here `<file>` means that you should put a file name there,
