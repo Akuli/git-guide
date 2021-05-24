@@ -17,6 +17,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: |
-          python3 run_commands.py
-          git diff --exit-code
+      - run: python3 run_commands.py
+      - run: git diff --exit-code
