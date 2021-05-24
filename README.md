@@ -14,6 +14,9 @@ Contents:
 Run `python3 run_commands.py` after editing the commands in a `.md` file.
 It will run the commands you wrote and put the output back to the markdown files.
 This way, the commands in markdown files look as if they were written to a terminal.
+If you are like me, you are using an older Git version than GitHub Actions,
+and the output differs from what CI expect it to be;
+in this case, you should make the output match what GitHub Actions wants.
 
 Spell checking:
 
