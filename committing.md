@@ -40,7 +40,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Adding, also known as staging, means choosing what will be included in the next commit.
 This way it's possible to edit several files and commit only some of the changes.
 Adding a file doesn't modify it;
-it just makes Git remember the changes you did and include them in the next commit.
+it just makes Git remember the changes you did.
 
 As the status message suggests, we will use `git add <file>...`.
 Here `<file>` means that you should put a file name there,
@@ -92,7 +92,7 @@ but it may help you discover problems.
 If you notice that something isn't quite right, you can still edit the files,
 and then run `git add` again when you are done.
 Alternatively, if you don't want to commit any changes to `README.md`,
-you can use the `git restore` command in `git status` output to undo the `git add`:
+you can use `git restore` as shown in `git status` output to undo the `git add`:
 
 ```sh
 $ git status
@@ -132,7 +132,7 @@ Changes to be committed:
 Without `--staged`, `git restore` undoes changes that you saved in the editor but didn't `git add` yet.
 This is useful when you realize that you wrote something stupid and you want to start over.
 The same goes for `git diff`: without `--staged`,
-it shows changes that aren't added yet instead of what will be included in the commit.
+instead of showing what will be included in the commit, it shows changes that aren't added yet.
 
 When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`.
 When you commit for the first time, you get an error like this:
