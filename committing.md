@@ -123,7 +123,7 @@ $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
 ```
 
-Now we can commit again:
+Now committing should work:
 
 ```sh
 $ git commit
