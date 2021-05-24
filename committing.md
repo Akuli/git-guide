@@ -93,13 +93,51 @@ but it may help you discover problems.
 If you notice that something isn't quite right,
 you can still edit the bad files, save them, and `git add` them again.
 
-When everything looks good, we can commit:
+When everything looks good, we can commit.
+When you commit for the first time, you get an error like this:
 
 ```sh
 $ git commit
-hint: Waiting for your editor to close the file...
-[main cb3baec] add better description to README
- 1 file changed, 4 insertions(+), 1 deletion(-)
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <>) not allowed
+```
+
+To fix this, run the commands that the error message suggests,
+replacing `Your Name` with your GitHub username
+and `you@example.com` with the email address you used when creating your GitHub account.
+
+```sh
+$ git config --global user.email "you@example.com"
+
+$ git config --global user.name "Your Name"
+```
+
+Now we can commit again:
+
+```sh
+$ git commit
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <>) not allowed
 ```
 
 When you run `git commit`, it will open an editor where you can enter a **commit message**.

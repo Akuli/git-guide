@@ -20,4 +20,5 @@ repo
 reponame
 repos
 sudo
+txt
 unstage

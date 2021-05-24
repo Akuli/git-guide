@@ -58,6 +58,8 @@ Unpacking objects: 100% (6/6), done.
             self.working_dir /= bash_command[3:]
             return ''
 
+        bash_command = bash_command.replace('--global', '')
+
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
         # programs to think so. For example:
@@ -131,7 +133,7 @@ echo "add better description to README" > "$1"
         set -e
         git init -q
         git config user.email "you@example.com"
-        git config user.name "Your Name"
+        git config user.name "yourusername"
         git checkout -q -b main
         git add .
         git commit -q -m "Initial commit"
