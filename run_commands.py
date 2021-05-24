@@ -16,6 +16,8 @@ class CommandRunner:
         self.working_dir = tempdir / 'working_dir'
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
         self.git_config = {
+            'user.name': 'Your Name',
+            'user.email': 'you@example.com',
             'core.pager': 'cat',
             'core.editor': tempdir / 'fake_editor',
         }
