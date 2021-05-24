@@ -37,10 +37,12 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-Adding, also known as staging, means choosing what will be included in your commit.
-Other people won't know what you have added; they will only see the resulting commit.
+Adding, also known as staging, means choosing what will be included in the next commit.
+This way it's possible to edit several files and commit only some of the changes.
+Adding a file doesn't modify it;
+it just makes Git remember the changes you did and include them in the next commit.
 
-As the status message suggests, the next step is to use `git add <file>...`.
+As the status message suggests, we will use `git add <file>...`.
 Here `<file>` means that you should put a file name there,
 and `...` means that you can specify several files if you want.
 We will add only one file, the README.md:
@@ -64,7 +66,7 @@ It is also green, and previously it was red,
 but unfortunately there isn't a good way to display colored command output on GitHub.
 
 Before committing, let's look at what is going to be committed.
-According to `git status`, something changed in `README.md`, but let's see what exactly changed.
+According to `git status`, something changed in `README.md`, but let's see what exactly changed:
 
 ```diff
 $ git diff --staged
@@ -81,19 +83,57 @@ index a93665e..610acc2 100644
 +More text here. Lorem ipsum blah blah blah.
 ```
 
-Here `--staged` displays what we have `git add`ed, i.e. what will be committed.
-Without `--staged`, it shows changes that you have not `git add`ed yet.
-
 The first line of the README is `# reponame`, and it was not changed.
 There was one line after that, `The description ...`, and it was deleted.
 The rest was added when editing the file in the editor.
 
 Diffing is optional, and it does not affect the output of `git status`,
 but it may help you discover problems.
-If you notice that something isn't quite right,
-you can still edit the bad files, save them, and `git add` them again.
+If you notice that something isn't quite right, you can still edit the files,
+and then run `git add` again when you are done.
+Alternatively, if you don't want to commit any changes to `README.md`,
+you can use the `git restore` command in `git status` output to undo the `git add`:
 
-When everything looks good, we can commit.
+```sh
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   README.md
+
+$ git restore --staged README.md
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add README.md
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   README.md
+
+```
+
+Without `--staged`, `git restore` undoes changes that you saved in the editor but didn't `git add` yet.
+This is useful when you realize that you wrote something stupid and you want to start over.
+The same goes for `git diff`: without `--staged`,
+it shows changes that aren't added yet instead of what will be included in the commit.
+
+When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`.
 When you commit for the first time, you get an error like this:
 
 ```sh
