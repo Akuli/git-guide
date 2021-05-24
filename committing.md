@@ -103,6 +103,7 @@ Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
         modified:   README.md
 
+
 $ git restore --staged README.md
 
 $ git status
