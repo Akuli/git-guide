@@ -131,7 +131,7 @@ Changes to be committed:
 Without `--staged`, `git restore` undoes changes that you saved in the editor but didn't `git add` yet.
 This is useful when you realize that you wrote something stupid and you want to start over.
 The same goes for `git diff`: without `--staged`,
-it shows changes that aren't added yet instead of what will be included in the commit.
+instead of showing what will be included in the commit, it shows changes that aren't added yet.
 
 When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`.
 When you commit for the first time, you get an error like this:
