@@ -16,8 +16,6 @@ class CommandRunner:
         self.working_dir = tempdir / 'working_dir'
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
         self.git_config = {
-            'user.name': 'Your Name',
-            'user.email': 'you@example.com',
             'core.pager': 'cat',
             'core.editor': tempdir / 'fake_editor',
         }
@@ -135,6 +133,8 @@ echo "add better description to README" > "$1"
         '''
         set -e
         git init -q
+        git config user.email "you@example.com"
+        git config user.name "Your Name"
         git checkout -q -b main
         git add .
         git commit -q -m "Initial commit"
