@@ -98,6 +98,7 @@ When you commit for the first time, you get an error like this:
 
 ```sh
 $ git commit
+Author identity unknown
 
 *** Please tell me who you are.
 
@@ -126,18 +127,9 @@ Now we can commit again:
 
 ```sh
 $ git commit
-
-*** Please tell me who you are.
-
-Run
-
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
-
-fatal: empty ident name (for <>) not allowed
+hint: Waiting for your editor to close the file...
+[main cb3baec] add better description to README
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 ```
 
 When you run `git commit`, it will open an editor where you can enter a **commit message**.
