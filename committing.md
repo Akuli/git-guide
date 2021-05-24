@@ -31,8 +31,7 @@ Your branch is up to date with 'origin/main'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
+  (use "git restore <file>..." to discard changes in working directory)
         modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
@@ -54,8 +53,7 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
         modified:   README.md
 
 ```
@@ -69,7 +67,7 @@ Before committing, let's look at what is going to be committed.
 According to `git status`, something changed in `README.md`, but let's see what exactly changed.
 
 ```diff
-$ git diff --cached
+$ git diff --staged
 diff --git a/README.md b/README.md
 index a93665e..610acc2 100644
 --- a/README.md
@@ -83,8 +81,8 @@ index a93665e..610acc2 100644
 +More text here. Lorem ipsum blah blah blah.
 ```
 
-Here `--cached` displays what we have `git add`ed, i.e. what will be committed.
-Without `--cached`, it shows changes that you have not `git add`ed yet.
+Here `--staged` displays what we have `git add`ed, i.e. what will be committed.
+Without `--staged`, it shows changes that you have not `git add`ed yet.
 
 The first line of the README is `# reponame`, and it was not changed.
 There was one line after that, `The description ...`, and it was deleted.
@@ -95,10 +93,41 @@ but it may help you discover problems.
 If you notice that something isn't quite right,
 you can still edit the bad files, save them, and `git add` them again.
 
-When everything looks good, we can commit:
+When everything looks good, we can commit.
+When you commit for the first time, you get an error like this:
 
 ```sh
 $ git commit
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <>) not allowed
+```
+
+To fix this, run the commands that the error message suggests,
+replacing `Your Name` with your GitHub username
+and `you@example.com` with the email address you used when creating your GitHub account.
+
+```sh
+$ git config --global user.email "you@example.com"
+
+$ git config --global user.name "Your Name"
+```
+
+Now committing should work:
+
+```sh
+$ git commit
+hint: Waiting for your editor to close the file...
 [main cb3baec] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 ```

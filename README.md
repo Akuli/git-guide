@@ -11,11 +11,14 @@ Contents:
 
 ## Developing
 
-Run `python3 run_commands.py` after editing the commands in a `.md` file.
-It will run the commands you wrote and put the output back to the markdown files.
-This way, the commands in markdown files look as if they were written to a terminal.
+GitHub Actions does the following checks:
+- Runs every command starting with `$` in the markdown files,
+    and ensures that the markdown file contains the exact output of the command.
+    Edit `run_commands.py` if this check fails and you don't want to change the markdown files.
+- Spell checks all markdown files.
+    If the spell check complains about a word that you know you spelled correctly,
+    add the word to `spellcheck_exclude.txt`.
 
-Spell checking:
-
-    sudo apt install aspell
-    ./spellcheck.sh
+You can also try running these checks on your computer by finding the commands from `.github/workflows/`,
+but don't complain to me if that doesn't work;
+when working on the checks, I assume they will run only on GitHub Actions.
