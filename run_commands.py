@@ -58,6 +58,7 @@ Unpacking objects: 100% (6/6), done.
             self.working_dir /= bash_command[3:]
             return ''
 
+        # For example:  git config --global user.name "Your Name"
         bash_command = bash_command.replace('--global', '')
 
         # Many programs display their output differently when they think the
