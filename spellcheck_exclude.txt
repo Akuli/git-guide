@@ -7,10 +7,12 @@ README
 TODO
 aspell
 cd
+config
 dir
 gitguide
 github
 gitignore
+ident
 ing
 init
 ipsum
