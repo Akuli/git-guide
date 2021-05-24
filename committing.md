@@ -92,7 +92,7 @@ but it may help you discover problems.
 If you notice that something isn't quite right, you can still edit the files,
 and then run `git add` again when you are done.
 Alternatively, if you don't want to commit any changes to `README.md`,
-you can use the `git restore` command in `git status` output to undo the `git add`:
+you can use `git restore` as shown in `git status` output to undo the `git add`:
 
 ```sh
 $ git status
