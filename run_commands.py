@@ -6,10 +6,6 @@ import sys
 import tempfile
 
 
-if sys.platform == 'win32':
-    raise RuntimeError("Windows is not supported yet. Sorry.")
-
-
 class CommandRunner:
 
     def __init__(self, tempdir):
@@ -18,6 +14,9 @@ class CommandRunner:
         self.git_config = {
             'core.pager': 'cat',
             'core.editor': tempdir / 'fake_editor',
+            # Ensure we get same error as with freshly installed git
+            'user.email': '',
+            'user.name': '',
         }
         self.working_dir.mkdir()
 
@@ -70,8 +69,6 @@ Unpacking objects: 100% (6/6), done.
         # The pty module creates pseudo-TTYs, which are essentially fake
         # terminals. But for some reason, the output still goes to the real
         # terminal, so I have to do it in a subprocess and capture its output.
-        #
-        # This thing doesn't work on Windows. I'm sorry.
         args = ['bash', '-c', bash_command]
         response = subprocess.run(
             [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
