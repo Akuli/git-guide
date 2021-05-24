@@ -97,6 +97,7 @@ When everything looks good, we can commit:
 
 ```sh
 $ git commit
+hint: Waiting for your editor to close the file...
 [main cb3baec] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 ```
