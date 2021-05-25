@@ -71,7 +71,7 @@ According to `git status`, something changed in `README.md`, but let's see what 
 ```diff
 $ git diff --staged
 diff --git a/README.md b/README.md
-index a93665e..610acc2 100644
+index e008dfa..c31289b 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,2 +1,5 @@
@@ -161,7 +161,7 @@ and `you@example.com` with the email address you used when creating your GitHub 
 ```sh
 $ git config --global user.email "you@example.com"
 
-$ git config --global user.name "Your Name"
+$ git config --global user.name "yourusername"
 ```
 
 Now committing should work:
@@ -169,7 +169,7 @@ Now committing should work:
 ```sh
 $ git commit
 hint: Waiting for your editor to close the file...
-[main cb3baec] add better description to README
+[main 5bf1f4e] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 ```
 
@@ -207,9 +207,91 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   094eb39..cb3baec  main -> main
+   1f95680..5bf1f4e  main -> main
 ```
 
 Git will ask for your GitHub username and password.
 You won't see the password as you type it in, and that's completely normal.
 After pushing, you should immediately your changes on GitHub.
+
+
+## Looking at previous commits
+
+Run `git log` to get a list of all previous commits.
+
+```sh
+$ git log
+commit 5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f (HEAD -> main, origin/main, origin/HEAD)
+Author: yourusername <you@example.com>
+Date: Sun May 23 15:31:25 2021 +0300
+
+    add better description to README
+
+commit 1f956800248ad1d577039a92f05beee9e05c1a0f
+Author: yourusername <you@example.com>
+Date: Sun May 23 15:34:50 2021 +0300
+
+    Initial commit
+```
+
+As you can see, the latest commit is on top, and older commits are below it.
+If you have many commits, specify `--oneline` so you can fit more commits on the screen at once:
+
+```sh
+$ git log --oneline
+5bf1f4e (HEAD -> main, origin/main, origin/HEAD) add better description to README
+1f95680 Initial commit
+```
+
+Here `Initial commit` is what GitHub creates when you make a new repo,
+and `add better description to README` is the commit we just created.
+
+Each commit has a unique **commit hash**, sometimes also known as commit ID or SHA.
+For example, the hash of our latest commit is `5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f`.
+The hashes are often abbreviated by taking a few characters from the beginning,
+so `5bf1f4e` and `5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f` refer to the same commit.
+
+Use `git show` to show the code changes of a commit:
+
+```diff
+$ git show 5bf1f4e
+commit 5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f (HEAD -> main, origin/main, origin/HEAD)
+Author: yourusername <you@example.com>
+Date: Sun May 23 15:31:25 2021 +0300
+
+    add better description to README
+
+diff --git a/README.md b/README.md
+index e008dfa..c31289b 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,5 @@
+ # reponame
+-The description of the repository is here by default
++This is a better description of this repository. Imagine you just wrote it
++into your text editor.
++
++More text here. Lorem ipsum blah blah blah.
+```
+
+
+## Commands in older versions of git
+
+If you find that the `git status` output suggests different commands than in this tutorial,
+it's likely because you have an old version of git.
+You don't need to update it; just use the commands that your `git status` output suggests
+instead of the corresponding commands shown in this tutorial.
+
+For example, if I `git add` a file on my computer and then run `git status`,
+it suggests this instead of `git restore --staged`:
+
+```
+  (use "git rm --cached <file>..." to unstage)
+```
+
+So on new versions of git, `git restore --staged` and `git rm --cached` do the same thing,
+and on my older version of git, only `git rm --cached` works.
+There's also a third way to do this, suggested by even older versions of git.
+
+In short, the commands that `git status` suggests will always work,
+but the output may depend on the git version.

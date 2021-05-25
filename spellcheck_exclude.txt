@@ -4,6 +4,7 @@ KiB
 Lorem
 MacOS
 README
+SHA
 TODO
 aspell
 cd
@@ -17,6 +18,7 @@ ing
 init
 ipsum
 md
+oneline
 py
 repo
 reponame
@@ -24,3 +26,4 @@ repos
 sudo
 txt
 unstage
+yourusername
