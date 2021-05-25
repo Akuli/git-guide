@@ -17,6 +17,9 @@ Your branch is up to date with 'origin/main'.
 nothing to commit, working tree clean
 ```
 
+If you get an error saying `fatal: not a git repository`,
+you forgot to `cd` to the cloned repo as shown [here](getting-started.md#cloning-the-repo).
+
 We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
 
