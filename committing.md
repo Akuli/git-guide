@@ -217,7 +217,7 @@ After pushing, you should immediately your changes on GitHub.
 
 ## Looking at previous commits
 
-Run `git log` to get a list of all commits you have made so far.
+Run `git log` to get a list of all previous commits.
 
 ```sh
 $ git log
@@ -244,11 +244,11 @@ $ git log --oneline
 ```
 
 Here `Initial commit` is what GitHub creates when you make a new repo,
-and "add better description to README" is the commit we just created.
+and `add better description to README` is the commit we just created.
 
 Each commit has a unique **commit hash**, sometimes also known as commit ID or SHA.
 For example, the hash of our latest commit is `5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f`.
-The hashes are often abbreviated by taking just the first 7 characters,
+The hashes are often abbreviated by taking a few characters from the beginning,
 so `5bf1f4e` and `5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f` refer to the same commit.
 
 Use `git show` to show the code changes of a commit:
@@ -291,7 +291,7 @@ it suggests this instead of `git restore --staged`:
 
 So on new versions of git, `git restore --staged` and `git rm --cached` do the same thing,
 and on my older version of git, only `git rm --cached` works.
-I have also seen a third way to do this, suggested by even older versions of git.
+There's also a third way to do this, suggested by even older versions of git.
 
 In short, the commands that `git status` suggests will always work,
-but the correct commands sometimes depend on the git version.
+but the output may depend on the git version.

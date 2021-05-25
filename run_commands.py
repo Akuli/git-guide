@@ -73,10 +73,12 @@ class CommandRunner:
         return self.get_fake_commit(commit_hash).full_hash[:len(commit_hash)]
 
     def handle_commit_hash_input(self, regex_match):
-        for actual_hash, fake_commit in self.fake_commits_by_hash.items():
-            if fake_commit.full_hash.startswith(regex_match.group(0)):
-                return actual_hash
-        raise RuntimeError
+        [actual_hash] = [
+            actual_hash
+            for actual_hash, fake_commit in self.fake_commits_by_hash.items()
+            if fake_commit.full_hash.startswith(regex_match.group(0))
+        ]
+        return actual_hash
 
     def handle_git_log_output(self, regex_match):
         full_hash, stuff_after_full_hash, author = regex_match.groups()
