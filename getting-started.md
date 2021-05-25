@@ -68,7 +68,7 @@ such as `C:\Users\username` on Windows, or `/home/username` on Linux, or `/Users
 Then clone the repository like this, replacing `username` and `reponame` with the names of your GitHub account and the repo.
 You can also copy/paste the `https://github.com/...` part from the address bar of your web browser.
 
-```sh
+```diff
 $ git clone https://github.com/username/reponame
 Cloning into 'reponame'...
 remote: Enumerating objects: 6, done.
@@ -88,7 +88,7 @@ If you accidentally cloned it to the wrong place, just move it like you would mo
 
 At first, only the LICENSE and the README are in the cloned repo:
 
-```sh
+```diff
 $ ls
 LICENSE  README.md
 ```
@@ -100,7 +100,7 @@ The `.gitignore` file is also there, but `ls` doesn't show file names starting w
 There's also `.git`, which is a folder where git stores its data.
 To see them too, use `ls -a`, where `-a` is short for "all":
 
-```sh
+```diff
 $ ls -a
 .  ..  .git  .gitignore  LICENSE  README.md
 ```

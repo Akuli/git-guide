@@ -240,7 +240,7 @@ echo "add better description to README" > "$1"
 
         new_parts = []
         for part in old_parts:
-            if part.startswith(('sh\n', 'diff\n')):  # ```sh or ```diff
+            if part.startswith('diff\n'):  # ```diff
                 new_parts.append(part.split('\n')[0] + '\n' + runner.add_outputs_to_commands(part))
             else:
                 new_parts.append(part)

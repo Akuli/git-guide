@@ -9,7 +9,7 @@ and added one line to `run_commands.py`.
 Before doing anything else, let's run `git status` just to see what's going on.
 It doesn't show much yet, but its output will change as we make a commit.
 
-```sh
+```diff
 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -24,7 +24,7 @@ Now open `README.md` in your favorite text editor and add some text to it.
 Remember to save it in the editor.
 Then run `git status` again:
 
-```sh
+```diff
 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -47,7 +47,7 @@ Here `<file>` means that you should put a file name there,
 and `...` means that you can specify several files if you want.
 We will add only one file, the README.md:
 
-```sh
+```diff
 $ git add README.md
 
 $ git status
@@ -94,7 +94,7 @@ and then run `git add` again when you are done.
 Alternatively, if you don't want to commit any changes to `README.md`,
 you can use `git restore` as shown in `git status` output to undo the `git add`:
 
-```sh
+```diff
 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -137,7 +137,7 @@ instead of showing what will be included in the commit, it shows changes that ar
 When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`.
 When you commit for the first time, you get an error like this:
 
-```sh
+```diff
 $ git commit
 Author identity unknown
 
@@ -158,7 +158,7 @@ To fix this, run the commands that the error message suggests,
 replacing `Your Name` with your GitHub username
 and `you@example.com` with the email address you used when creating your GitHub account.
 
-```sh
+```diff
 $ git config --global user.email "you@example.com"
 
 $ git config --global user.name "yourusername"
@@ -166,7 +166,7 @@ $ git config --global user.name "yourusername"
 
 Now committing should work:
 
-```sh
+```diff
 $ git commit
 hint: Waiting for your editor to close the file...
 [main 5bf1f4e] add better description to README
@@ -180,7 +180,7 @@ Press Ctrl+X to exit the editor.
 
 Now the file no longer shows up as modified in `git status`, because we committed the change:
 
-```sh
+```diff
 $ git status
 On branch main
 Your branch is ahead of 'origin/main' by 1 commit.
@@ -198,7 +198,7 @@ At this point you can create more commits if you want,
 but the commits are only on your computer.
 Run `git push` to upload the commits to GitHub:
 
-```sh
+```diff
 $ git push
 Username for 'https://github.com': username
 Password for 'https://username@github.com':
@@ -219,7 +219,7 @@ After pushing, you should immediately your changes on GitHub.
 
 Run `git log` to get a list of all previous commits.
 
-```sh
+```diff
 $ git log
 commit 5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f (HEAD -> main, origin/main, origin/HEAD)
 Author: yourusername <you@example.com>
@@ -237,7 +237,7 @@ Date: Sun May 23 15:34:50 2021 +0300
 As you can see, the latest commit is on top, and older commits are below it.
 If you have many commits, specify `--oneline` so you can fit more commits on the screen at once:
 
-```sh
+```diff
 $ git log --oneline
 5bf1f4e (HEAD -> main, origin/main, origin/HEAD) add better description to README
 1f95680 Initial commit
