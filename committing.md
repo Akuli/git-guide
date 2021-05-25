@@ -213,3 +213,25 @@ To https://github.com/username/reponame
 Git will ask for your GitHub username and password.
 You won't see the password as you type it in, and that's completely normal.
 After pushing, you should immediately your changes on GitHub.
+
+
+## Commands in older versions of git
+
+If you find that the `git status` output suggests different commands than in this tutorial,
+it's likely because you have an old version of git.
+You don't need to update it; just use the commands that your `git status` output suggests
+instead of the corresponding commands shown in this tutorial.
+
+For example, if I `git add` a file on my computer and then run `git status`,
+it suggests this instead of `git restore --staged`:
+
+```
+  (use "git rm --cached <file>..." to unstage)
+```
+
+So on new versions of git, `git restore --staged` and `git rm --cached` do the same thing,
+and on my older version of git, only `git rm --cached` works.
+I have also seen a third way to do this, suggested by even older versions of git.
+
+In short, the commands that `git status` suggests will always work,
+but the correct commands sometimes depend on the git version.
