@@ -3,7 +3,7 @@
 Suppose you are working on a calculator program.
 You start working on a new multiplication feature,
 and you have already [committed and pushed](committing.md) several times.
-Your multiplication work is far from done, and the code is still WIP;
+The code is still WIP (Work In Progress, far from done);
 it errors when you try to run it, for example.
 Then someone discovers a bug, and you want to fix it right away.
 But now you have a problem: you can't work on the bug
