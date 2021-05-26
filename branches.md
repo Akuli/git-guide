@@ -301,6 +301,14 @@ Let's go back to the multiplication branch.
 ```diff
 $ git checkout multiplication
 Switched to branch 'multiplication'
+
+$ git log --oneline --graph --all
+* a713ead (main) fix subtraction bug
+| * 9900601 (HEAD -> multiplication) multiplication code, not working yet
+|/  
+* 78b197b create calculator.py
+* 5bf1f4e (origin/main, origin/HEAD) add better description to README
+* 1f95680 Initial commit
 ```
 
 Now let's fix the multiplication bug by changing the last line:
@@ -335,34 +343,35 @@ $ git commit -m "fix multiplication bug"
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 $ git log --oneline --graph --all
-* a713ead (main) fix subtraction bug
-| * 6f43004 (HEAD -> multiplication) fix multiplication bug
-| * 9900601 multiplication code, not working yet
+* 6f43004 (HEAD -> multiplication) fix multiplication bug
+* 9900601 multiplication code, not working yet
+| * a713ead (main) fix subtraction bug
 |/  
 * 78b197b create calculator.py
 * 5bf1f4e (origin/main, origin/HEAD) add better description to README
 * 1f95680 Initial commit
 ```
 
-Now the multiplication fix shows up below the subtraction fix,
-even though we just created the multiplication fix.
+Now the subtraction fix `a713ead` shows up below the first multiplication commit `9900601`,
+even though the multiplication commit is older.
 In other words, the latest commit is not always first in the output of our `--graph` command.
 
-To understand why this is, imagine what would happen if the output was always sorted by time.
-Then it would be something like this: (not real output, but modified by hand from the previous output):
+If you really want to, you can ask git to sort by commit time by adding `--date-order`:
 
-```
-  * 6f43004 (HEAD -> multiplication) fix multiplication bug
-.-|-- * a713ead (main) fix subtraction bug
-| * 9900601 multiplication code, not working yet
+```diff
+$ git log --oneline --graph --all --date-order
+* 6f43004 (HEAD -> multiplication) fix multiplication bug
+| * a713ead (main) fix subtraction bug
+* | 9900601 multiplication code, not working yet
 |/  
 * 78b197b create calculator.py
+* 5bf1f4e (origin/main, origin/HEAD) add better description to README
+* 1f95680 Initial commit
 ```
 
-As you can see, it just looks messy if you want to force it to be sorted by time.
-
-In my experience, this isn't a problem in practice.
-I don't usually care about which of two commits on different branches was created first;
+As you can see, it just looks messier this way, which is probably why this is not the default.
+I don't use `--date-order` because I don't actually care about
+which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
 and how `9900601` and `a713ead` are both based on `78b197b`, for example.
 
@@ -416,6 +425,9 @@ In GitHub, there should be a menu where you can choose a branch and it says `mai
 You should now see `multiplication` branch in that menu,
 and if you click it and then open `calculator.py` in GitHub, you should see the multiplication code.
 
+The `git push` output contains a link for creating a pull request. We will use it later.
+(TODO: write about pull requests)
+
 
 ## Merges and merge conflicts
 
@@ -424,9 +436,9 @@ the code on `main` can subtract correctly, and the code on `multiplication` can 
 
 ```diff
 $ git log --oneline --graph --all
-* a713ead (main) fix subtraction bug
-| * 6f43004 (HEAD -> multiplication, origin/multiplication) fix multiplication bug
-| * 9900601 multiplication code, not working yet
+* 6f43004 (HEAD -> multiplication, origin/multiplication) fix multiplication bug
+* 9900601 multiplication code, not working yet
+| * a713ead (main) fix subtraction bug
 |/  
 * 78b197b create calculator.py
 * 5bf1f4e (origin/main, origin/HEAD) add better description to README

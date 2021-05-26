@@ -4,6 +4,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 
 
 # Git output includes time stamps and commit hashes that are different every time this script runs
@@ -145,6 +146,11 @@ class CommandRunner:
         # For example:  git config --global user.name "yourusername"
         bash_command = bash_command.replace('--global', '')
 
+        # Make sure commit timestamps differ. Otherwise the output order of
+        # 'git log --oneline --graph --all' can vary randomly.
+        if bash_command.startswith('git commit'):
+            time.sleep(1)
+
         # For commands that contain commit hashes
         bash_command = re.sub(r'\b[0-9a-f]{7}\b', self.handle_commit_hash_input, bash_command)
 
@@ -160,14 +166,12 @@ class CommandRunner:
         # terminals. But for some reason, the output still goes to the real
         # terminal, so I have to do it in a subprocess and capture its output.
         args = ['bash', '-c', bash_command]
-        response = subprocess.run(
+        output = subprocess.run(
             [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             cwd=self.working_dir,
-        )
-
-        output = response.stdout
+        ).stdout
         output = output.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
         output = output.replace(b'\r\n', b'\n')  # no idea why needed
