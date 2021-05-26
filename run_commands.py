@@ -76,12 +76,17 @@ class CommandRunner:
         return self.get_fake_commit(commit_hash).full_hash[:len(commit_hash)]
 
     def handle_commit_hash_input(self, regex_match):
-        [actual_hash] = [
+        matches = [
             actual_hash
             for actual_hash, fake_commit in self.fake_commits_by_hash.items()
             if fake_commit.full_hash.startswith(regex_match.group(0))
         ]
-        return actual_hash
+        if matches:
+            [actual_hash] = matches
+            return actual_hash
+
+        print("WARNING lol", regex_match)
+        return regex_match.group(0)
 
     def handle_git_log_output(self, regex_match):
         full_hash, stuff_after_full_hash, author = regex_match.groups()
@@ -119,7 +124,7 @@ class CommandRunner:
         return command_output
 
     def run_command(self, bash_command):
-        #print("  ", bash_command)
+        print("  ", bash_command)
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -143,8 +148,8 @@ class CommandRunner:
 
         # Make sure commit timestamps differ. Otherwise the output order of
         # 'git log --oneline --graph --all' can vary randomly.
-        if bash_command.startswith('git commit'):
-            time.sleep(1)
+#        if bash_command.startswith('git commit'):
+#            time.sleep(1)
 
         # For commands that contain commit hashes
         bash_command = re.sub(r'\b[0-9a-f]{7}\b', self.handle_commit_hash_input, bash_command)
