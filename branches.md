@@ -178,7 +178,7 @@ elif operation == "*":
     print(first_number * second_unmber)
 ```
 
-The new multiplication code is buggy, but let's try it and commit the result.
+The new multiplication code is buggy, but let's try it and commit it anyway.
 We need to quote `*` because it is a special character on the terminal;
 it is good to know how that works, but I won't explain it here because I want to focus on git.
 
