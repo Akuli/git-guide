@@ -91,8 +91,8 @@ class CommandRunner:
 
     # Git commit hashes are different every time this script runs. Maybe they
     # include some kind of UUID or system time, idk. But we want consistent output.
-    def substitute_changing_info(self, git_output):
-        git_output = re.sub(
+    def substitute_changing_info(self, command_output):
+        command_output = re.sub(
             (
                 # To replace time stamps with fake commits, we need to also
                 # know commit hash, because two different commits can have the
@@ -102,14 +102,18 @@ class CommandRunner:
                 r'Date: .*\n'
             ),
             self.handle_git_log_output,
-            git_output,
+            command_output,
         )
-        git_output = re.sub(
+        command_output = re.sub(
             r'\b([0-9a-f]{7}|[0-9a-f]{40})\b',
             self.handle_commit_hash_output,
-            git_output,
+            command_output,
         )
-        return git_output
+
+        # Convert to relative paths
+        command_output = command_output.replace(str(self.working_dir) + "/", "")
+
+        return command_output
 
     def run_command(self, bash_command, old_output):
         if bash_command == 'git clone https://github.com/username/reponame':
