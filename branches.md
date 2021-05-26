@@ -422,7 +422,7 @@ and `git push` without anything else after it will work next time.
 This is branch-specific though, so you need to do the `--set-upstream` thing once for each branch.
 
 In GitHub, there should be a menu where you can choose a branch and it says `main` by default.
-You should now see `multiplication` branch in that menu,
+You should now see a `multiplication` branch in that menu,
 and if you click it and then open `calculator.py` in GitHub, you should see the multiplication code.
 
 The `git push` output contains a link for creating a pull request. We will use it later.
