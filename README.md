@@ -7,6 +7,7 @@ The goal for this guide is to not suck.
 Contents:
 - [Getting started](getting-started.md): installing Git, making and cloning a repo
 - [Committing](committing.md): add, commit, push, status, diff
+- [Branches](branches.md): add, commit, push, status, diff
 
 
 ## Developing

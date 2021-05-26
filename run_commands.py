@@ -45,7 +45,7 @@ class CommandRunner:
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
         self.git_config = {
             'core.pager': 'cat',
-            'core.editor': tempdir / 'fake_editor',
+            'core.editor': 'true',
             # Ensure we get same error as with freshly installed git
             'user.email': '',
             'user.name': '',
@@ -198,14 +198,53 @@ To https://github.com/username/reponame
             for command, output in zip(commands, outputs)
         )
 
+    def get_branch(self):
+        git_status = subprocess.check_output(
+            ['git', 'status'], cwd=self.working_dir
+        ).decode('ascii')
+        assert git_status.startswith('On branch ')
+        return git_status.split('\n')[0].replace('On branch ', '', 1)
+
+    def edit_file(self, instructions, new_content):
+        append_match = re.fullmatch(r'Add to end of (.*) \(on branch (.*)\)', instructions)
+        if append_match is not None:
+            filename, branch = append_match.groups()
+            assert branch == self.get_branch(), (instructions, self.get_branch())
+
+            path = pathlib.Path(self.working_dir / append_match.group(1))
+            with path.open("a") as file:
+                file.write(new_content)
+            return
+
+        last_line_match = re.fullmatch(r'Last line of (.*) \(on branch (.*)\)', instructions)
+        if last_line_match is not None:
+            filename, branch = last_line_match.groups()
+            assert branch == self.get_branch()
+            path = pathlib.Path(self.working_dir / last_line_match.group(1))
+            staying_content = ''.join(path.read_text().splitlines(True)[:-1])
+            path.write_text(staying_content + new_content)
+            return
+
+        content_match = (
+            re.fullmatch(r'Write this to (.*)', instructions)
+            or re.fullmatch(r'Edit (.*) so that it looks like this', instructions)
+        )
+        if content_match is not None:
+            pathlib.Path(self.working_dir / content_match.group(1)).write_text(new_content)
+            return
+
+        raise ValueError(f"bad instructions: {instructions}")
+
+
+def get_markdown_filenames_from_readme():
+    full_content = pathlib.Path('README.md').read_text()
+    match = re.search(r'\nContents:\n((?:- \[.*\]\(.*\): .*\n)+)', full_content)
+    assert match is not None
+    return [line.split('(')[1].split(')')[0] for line in match.group(1).splitlines()]
+
 
 with tempfile.TemporaryDirectory() as tempdir_string:
     tempdir = pathlib.Path(tempdir_string)
-    (tempdir / 'fake_editor').write_text('''\
-#!/bin/bash
-echo "add better description to README" > "$1"
-''')
-    (tempdir / 'fake_editor').chmod(0o755)
     # Simulate with github does when you create empty repo
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
     (tempdir / 'fake_github' / 'reponame' / 'README.md').write_text(
@@ -232,7 +271,7 @@ echo "add better description to README" > "$1"
     (tempdir / 'cloned' / 'reponame').mkdir(parents=True)
     runner = CommandRunner(tempdir)
 
-    for filename in ['getting-started.md', 'committing.md']:
+    for filename in get_markdown_filenames_from_readme():
         print("Running commands from", filename)
         path = pathlib.Path(filename)
         content = path.read_text()
@@ -244,7 +283,11 @@ echo "add better description to README" > "$1"
                 new_parts.append(part.split('\n')[0] + '\n' + runner.add_outputs_to_commands(part))
             else:
                 new_parts.append(part)
-                if 'Now open `README.md` in your favorite text editor' in part:
+                if part.startswith('python\n# '):  # python file
+                    literally_python, instructions_line, content = part.split('\n', maxsplit=2)
+                    runner.edit_file(instructions_line.lstrip('# '), content)
+                # TODO: get rid of this hard-coding
+                elif 'Now open `README.md` in your favorite text editor' in part:
                     (runner.working_dir / 'README.md').write_text("""\
 # reponame
 This is a better description of this repository. Imagine you just wrote it
