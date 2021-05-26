@@ -57,7 +57,6 @@ Your branch is up to date with 'origin/main'.
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-
         calculator.py
 
 nothing added to commit but untracked files present (use "git add" to track)
@@ -69,8 +68,7 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
         new file:   calculator.py
 
 
@@ -467,7 +465,6 @@ You have unmerged paths.
 
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
-
         both modified:   calculator.py
 
 no changes added to commit (use "git add" and/or "git commit -a")
@@ -546,7 +543,6 @@ You have unmerged paths.
 
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
-
         both modified:   calculator.py
 
 no changes added to commit (use "git add" and/or "git commit -a")
@@ -568,7 +564,6 @@ All conflicts fixed but you are still merging.
   (use "git commit" to conclude merge)
 
 Changes to be committed:
-
         modified:   calculator.py
 
 ```
@@ -581,10 +576,11 @@ just close the editor by pressing Ctrl+X and you are done.
 
 ```diff
 $ git commit
-[main c8e61ef] Merge branch 'multiplication' into main
+hint: Waiting for your editor to close the file...
+[main c8e61ef] Merge branch 'multiplication'
 
 $ git log --oneline --graph --all
-*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication'
 |\  
 | * 6f43004 (origin/multiplication, multiplication) fix multiplication bug
 | * 9900601 multiplication code, not working yet

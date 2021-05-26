@@ -34,8 +34,7 @@ Your branch is up to date with 'origin/main'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
+  (use "git restore <file>..." to discard changes in working directory)
         modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
@@ -59,8 +58,7 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
         modified:   README.md
 
 ```
@@ -105,26 +103,20 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
         modified:   README.md
 
 
 $ git restore --staged README.md
-git: 'restore' is not a git command. See 'git --help'.
-
-The most similar command is
-        remote
 
 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
 
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
         modified:   README.md
-
 
 $ git add README.md
 
@@ -133,8 +125,7 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
         modified:   README.md
 
 ```
@@ -148,6 +139,7 @@ When you have added the changes you want and checked with `git diff --staged`, y
 
 ```diff
 $ git commit -m "add better description to README"
+Author identity unknown
 
 *** Please tell me who you are.
 
