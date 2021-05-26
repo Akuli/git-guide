@@ -102,7 +102,7 @@ We already saw `--oneline` [last time](committing.md#looking-at-previous-commits
 I will explain `--graph` and `--all` soon.
 
 By default, there is only one branch. In new GitHub repos, it's called `main`.
-Earlier GitHub's name for the default branch was `master`,
+GitHub's name for the default branch used to be `master`,
 and many projects still have a branch named `master` instead of a `main` branch.
 
 Seeing `main` next to `78b197b` means that `78b197b` is the latest commit on `main`.
