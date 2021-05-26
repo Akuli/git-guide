@@ -598,7 +598,7 @@ $ git log --oneline --graph --all
 * 1f95680 Initial commit
 ```
 
-The default commit message, `Merge branch 'multiplication' into main`, is very recognizable:
+The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
 
@@ -611,7 +611,7 @@ Let's start with `git branch -D`:
 
 ```diff
 $ git log --oneline --graph --all
-*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication'
 |\  
 | * 6f43004 (origin/multiplication, multiplication) fix multiplication bug
 | * 9900601 multiplication code, not working yet
@@ -625,7 +625,7 @@ $ git branch -D multiplication
 Deleted branch multiplication (was 6f43004).
 
 $ git log --oneline --graph --all
-*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication'
 |\  
 | * 6f43004 (origin/multiplication) fix multiplication bug
 | * 9900601 multiplication code, not working yet
@@ -645,7 +645,7 @@ To https://github.com/username/reponame
  - [deleted]         multiplication
 
 $ git log --oneline --graph --all
-*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication'
 |\  
 | * 6f43004 fix multiplication bug
 | * 9900601 multiplication code, not working yet
