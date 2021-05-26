@@ -111,7 +111,7 @@ On Windows, `dir` shows everything by default.
 ## git init
 
 Many other Git instructions recommend `git init` for making a new repo.
-Unlike the `git clone https://github.com/...` command above, `git init` does nothing with github;
+Unlike the `git clone https://github.com/...` command above, `git init` does nothing with GitHub;
 it creates the repo only on your computer.
 Therefore connecting it to GitHub requires running more commands afterwards.
 
