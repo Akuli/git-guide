@@ -600,3 +600,28 @@ $ git log --oneline --graph --all
 
 The default commit message, `Merge branch 'multiplication' into main`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
+
+
+## Deleting a branch
+
+Because we have now merged `multiplication` into `main`,
+we no longer need the `multiplication` branch and we can delete it.
+
+Let's start with `git branch -D`:
+
+```diff
+$ git log --oneline --graph --all
+$ git branch -D multiplication
+$ git log --oneline --graph --all
+```
+
+We can see that `origin/multiplication` wasn't deleted, so the branch is still on GitHub.
+Let's delete it from GitHub too:
+
+```diff
+$ git push --delete origin foo
+$ git log --oneline --graph --all
+```
+
+For whatever reason, you need to specify `origin` in the `git push` command.
+As usual, `origin` means GitHub.
