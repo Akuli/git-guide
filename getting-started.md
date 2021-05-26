@@ -85,8 +85,11 @@ So `$` means "type the rest of this line to the terminal", and you should get th
 The `cd` command doesn't output anything.
 
 As you can see by the `cd` command, `git clone` created a new folder.
-This folder is a clone of the GitHub repo, and that's where your code will be.
-If you accidentally cloned it to the wrong place, just move it like you would move any other folder.
+I will refer to it as "the cloned repo".
+It's just like any other folder; for example,
+if you accidentally cloned to the wrong place, just move the folder.
+We will later run commands that sync the contents of the cloned repo with GitHub,
+and therefore your code should go into the cloned repo folder.
 
 At first, only the LICENSE and the README are in the cloned repo:
 
