@@ -214,7 +214,7 @@ $ git log --oneline --graph --all
 * 1f95680 Initial commit
 ```
 
-Notice how the `main` branch was left behind when we committed;
+Note how the `main` branch was left behind when we committed;
 our latest commit is only on the `multiplication` branch, because we did `git checkout multiplication` before committing.
 
 Let's leave the multiplication branch for now...
