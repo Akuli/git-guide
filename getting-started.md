@@ -53,7 +53,8 @@ Also, I'm not responsible for anything I say in this guide, as [the LICENCE of t
 ## Cloning the repo
 
 After creating a repo on GitHub, the next step is to clone it.
-It means downloading a copy of the repo to your computer, so that you can edit the files in it.
+It means downloading a copy of the repo to your computer,
+so that you can edit the files in it and then upload your changes to GitHub.
 
 I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
 In particular, I assume you know how the `cd` command changes the current working directory.
@@ -78,13 +79,17 @@ Unpacking objects: 100% (6/6), done.
 $ cd reponame
 ```
 
-Here `$` means "type the rest of this line to the terminal",
-and lines not starting with `$` are output from the commands.
+In the above example, lines starting with `$` are the commands that you should type to the terminal,
+and other lines are output from those commands.
+So `$` means "type the rest of this line to the terminal", and you should get the same output.
 The `cd` command doesn't output anything.
 
 As you can see by the `cd` command, `git clone` created a new folder.
-This folder is a clone of the GitHub repo, and that's where your code will be.
-If you accidentally cloned it to the wrong place, just move it like you would move any other folder.
+I will refer to it as "the cloned repo".
+It's just like any other folder; for example,
+if you accidentally cloned to the wrong place, just move the folder.
+We will later run commands that sync the contents of the cloned repo with GitHub,
+and therefore your code should go into the cloned repo folder.
 
 At first, only the LICENSE and the README are in the cloned repo:
 
@@ -98,6 +103,8 @@ and the output will be shown differently than above.
 
 The `.gitignore` file is also there, but `ls` doesn't show file names starting with a dot by default.
 There's also `.git`, which is a folder where git stores its data.
+For example, `.git/config` is a file that contains `https://github.com/username/reponame`,
+among other things.
 To see them too, use `ls -a`, where `-a` is short for "all":
 
 ```diff
