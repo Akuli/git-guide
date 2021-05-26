@@ -131,11 +131,6 @@ $ git log --oneline --graph --all
 Here `multiplication` is a branch name; you can name a branch however you want.
 The latest commit on the `multiplication` branch is `78b197b`, same as on `main`.
 
-In the output of the last command,
-`HEAD -> multiplication` means that we are now on the `multiplication` branch,
-and having `main` next to it means that
-`78b197b` is the latest commit on the `multiplication` branch and the `main` branch.
-
 We can go back to the `main` branch with `git checkout`, but without `-b`;
 the `-b` means that a new branch is created.
 
