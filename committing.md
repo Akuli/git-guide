@@ -137,11 +137,10 @@ This is useful when you realize that you wrote something stupid and you want to 
 The same goes for `git diff`: without `--staged`,
 instead of showing what will be included in the commit, it shows changes that aren't added yet.
 
-When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`.
-When you commit for the first time, you get an error like this:
+When you have added the changes you want and checked with `git diff --staged`, you are ready to `git commit`, like this:
 
 ```diff
-$ git commit
+$ git commit -m "add better description to README"
 Author identity unknown
 
 *** Please tell me who you are.
@@ -157,6 +156,7 @@ Omit --global to set the identity only in this repository.
 fatal: empty ident name (for <>) not allowed
 ```
 
+This error happens when you try to commit for the first time.
 To fix this, run the commands that the error message suggests,
 replacing `Your Name` with your GitHub username
 and `you@example.com` with the email address you used when creating your GitHub account.
@@ -170,16 +170,14 @@ $ git config --global user.name "yourusername"
 Now committing should work:
 
 ```diff
-$ git commit
-hint: Waiting for your editor to close the file...
+$ git commit -m "add better description to README"
 [main 5bf1f4e] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 ```
 
-When you run `git commit`, it will open an editor where you can enter a **commit message**.
+The text after `-m` is a **commit message**.
 Enter something descriptive, such as "add better description to README" in this case;
 finding something from a long list of commits really sucks if the message of every commit is "files edited".
-Press Ctrl+X to exit the editor.
 
 Now the file no longer shows up as modified in `git status`, because we committed the change:
 

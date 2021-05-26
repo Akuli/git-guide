@@ -4,6 +4,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 
 
 # Git output includes time stamps and commit hashes that are different every time this script runs
@@ -45,7 +46,7 @@ class CommandRunner:
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
         self.git_config = {
             'core.pager': 'cat',
-            'core.editor': tempdir / 'fake_editor',
+            'core.editor': 'true',  # Don't change commit message (for merge commits)
             # Ensure we get same error as with freshly installed git
             'user.email': '',
             'user.name': '',
@@ -91,8 +92,8 @@ class CommandRunner:
 
     # Git commit hashes are different every time this script runs. Maybe they
     # include some kind of UUID or system time, idk. But we want consistent output.
-    def substitute_changing_info(self, git_output):
-        git_output = re.sub(
+    def substitute_changing_info(self, command_output):
+        command_output = re.sub(
             (
                 # To replace time stamps with fake commits, we need to also
                 # know commit hash, because two different commits can have the
@@ -102,16 +103,20 @@ class CommandRunner:
                 r'Date: .*\n'
             ),
             self.handle_git_log_output,
-            git_output,
+            command_output,
         )
-        git_output = re.sub(
+        command_output = re.sub(
             r'\b([0-9a-f]{7}|[0-9a-f]{40})\b',
             self.handle_commit_hash_output,
-            git_output,
+            command_output,
         )
-        return git_output
 
-    def run_command(self, bash_command):
+        # Convert to relative paths
+        command_output = command_output.replace(str(self.working_dir) + "/", "")
+
+        return command_output
+
+    def run_command(self, bash_command, old_output):
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -124,23 +129,27 @@ class CommandRunner:
                     cwd=(self.working_dir / 'reponame'),
                     check=True,
                 )
-
-            # Actual 'git clone' output changes depending on whether you clone
-            # a directory on your computer or a github repo. We want to show
-            # what would happen if you cloned a github repo.
-            return '''\
-Cloning into 'reponame'...
-remote: Enumerating objects: 6, done.
-remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 6
-Unpacking objects: 100% (6/6), done.
-'''
+            return old_output   # pushing to same computer wouldn't look realistic
 
         if bash_command.startswith('cd '):
             self.working_dir /= bash_command[3:]
-            return ''
+            return ''  # No output
+
+        if bash_command.startswith('git push'):
+            subprocess.run(
+                ['bash', '-c', bash_command],
+                cwd=self.working_dir,
+                check=('fatal:' not in old_output),
+            )
+            return old_output   # pushing to same computer wouldn't look realistic
 
         # For example:  git config --global user.name "yourusername"
         bash_command = bash_command.replace('--global', '')
+
+        # Make sure commit timestamps differ. Otherwise the output order of
+        # 'git log --oneline --graph --all' can vary randomly.
+        if bash_command.startswith('git commit'):
+            time.sleep(1)
 
         # For commands that contain commit hashes
         bash_command = re.sub(r'\b[0-9a-f]{7}\b', self.handle_commit_hash_input, bash_command)
@@ -157,29 +166,12 @@ Unpacking objects: 100% (6/6), done.
         # terminals. But for some reason, the output still goes to the real
         # terminal, so I have to do it in a subprocess and capture its output.
         args = ['bash', '-c', bash_command]
-        response = subprocess.run(
+        output = subprocess.run(
             [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             cwd=self.working_dir,
-        )
-
-        if bash_command.startswith('git push'):
-            # fake output that looks like pushing to github, not like pushing
-            # to repo on the same computer
-            response.check_returncode()
-            output = b'''\
-Username for 'https://github.com': username
-Password for 'https://username@github.com':
-Enumerating objects: 1, done.
-Counting objects: 100% (1/1), done.
-Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
-Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/username/reponame
-''' + response.stdout.splitlines(keepends=True)[-1]
-        else:
-            output = response.stdout
-
+        ).stdout
         output = output.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
         output = output.replace(b'\r\n', b'\n')  # no idea why needed
@@ -187,25 +179,67 @@ To https://github.com/username/reponame
         return self.substitute_changing_info(output.decode('utf-8'))
 
     def add_outputs_to_commands(self, command_string):
-        commands = [
-            line.lstrip('$').strip()
-            for line in command_string.split('\n')
-            if line.startswith('$')
-        ]
-        outputs = [self.run_command(command) for command in commands]
+        commands_and_outputs = []
+        while command_string:
+            match = re.match(r'\$ (.*)\n((([^$\n].*)?)\n)*', command_string)
+            assert match is not None, command_string
+            command = match.group(1)
+            output = match.group(0).split('\n', maxsplit=1)[1].rstrip('\n') + '\n'
+            commands_and_outputs.append((command, output))
+            command_string = command_string[match.end():]
+
         return '\n'.join(
-            f"$ {command}\n{output}"
-            for command, output in zip(commands, outputs)
+            f"$ {command}\n{self.run_command(command, old_output)}"
+            for command, old_output in commands_and_outputs
         )
+
+    def get_branch(self):
+        git_status = subprocess.check_output(
+            ['git', 'status'], cwd=self.working_dir
+        ).decode('ascii')
+        assert git_status.startswith('On branch ')
+        return git_status.split('\n')[0].replace('On branch ', '', 1)
+
+    def edit_file(self, instructions, new_content):
+        append_match = re.fullmatch(r'Add to end of (.*) \(on branch (.*)\)', instructions)
+        if append_match is not None:
+            filename, branch = append_match.groups()
+            assert branch == self.get_branch(), (instructions, self.get_branch())
+
+            path = pathlib.Path(self.working_dir / append_match.group(1))
+            with path.open("a") as file:
+                file.write(new_content)
+            return
+
+        last_line_match = re.fullmatch(r'Last line of (.*) \(on branch (.*)\)', instructions)
+        if last_line_match is not None:
+            filename, branch = last_line_match.groups()
+            assert branch == self.get_branch()
+            path = pathlib.Path(self.working_dir / last_line_match.group(1))
+            staying_content = ''.join(path.read_text().splitlines(True)[:-1])
+            path.write_text(staying_content + new_content)
+            return
+
+        content_match = (
+            re.fullmatch(r'Write this to (.*)', instructions)
+            or re.fullmatch(r'Edit (.*) so that it looks like this', instructions)
+        )
+        if content_match is not None:
+            pathlib.Path(self.working_dir / content_match.group(1)).write_text(new_content)
+            return
+
+        raise ValueError(f"bad instructions: {instructions}")
+
+
+def get_markdown_filenames_from_readme():
+    full_content = pathlib.Path('README.md').read_text()
+    match = re.search(r'\nContents:\n((?:- \[.*\]\(.*\): .*\n)+)', full_content)
+    assert match is not None
+    return [line.split('(')[1].split(')')[0] for line in match.group(1).splitlines()]
 
 
 with tempfile.TemporaryDirectory() as tempdir_string:
     tempdir = pathlib.Path(tempdir_string)
-    (tempdir / 'fake_editor').write_text('''\
-#!/bin/bash
-echo "add better description to README" > "$1"
-''')
-    (tempdir / 'fake_editor').chmod(0o755)
     # Simulate with github does when you create empty repo
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
     (tempdir / 'fake_github' / 'reponame' / 'README.md').write_text(
@@ -232,7 +266,7 @@ echo "add better description to README" > "$1"
     (tempdir / 'cloned' / 'reponame').mkdir(parents=True)
     runner = CommandRunner(tempdir)
 
-    for filename in ['getting-started.md', 'committing.md']:
+    for filename in get_markdown_filenames_from_readme():
         print("Running commands from", filename)
         path = pathlib.Path(filename)
         content = path.read_text()
@@ -241,10 +275,14 @@ echo "add better description to README" > "$1"
         new_parts = []
         for part in old_parts:
             if part.startswith('diff\n'):  # ```diff
-                new_parts.append(part.split('\n')[0] + '\n' + runner.add_outputs_to_commands(part))
+                new_parts.append('diff\n' + runner.add_outputs_to_commands(part[5:]))
             else:
                 new_parts.append(part)
-                if 'Now open `README.md` in your favorite text editor' in part:
+                if part.startswith('python\n# '):  # python file
+                    literally_python, instructions_line, content = part.split('\n', maxsplit=2)
+                    runner.edit_file(instructions_line.lstrip('# '), content)
+                # TODO: get rid of this hard-coding
+                elif 'Now open `README.md` in your favorite text editor' in part:
                     (runner.working_dir / 'README.md').write_text("""\
 # reponame
 This is a better description of this repository. Imagine you just wrote it
