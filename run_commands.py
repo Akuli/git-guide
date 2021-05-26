@@ -46,7 +46,7 @@ class CommandRunner:
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
         self.git_config = {
             'core.pager': 'cat',
-            'core.editor': 'true',
+            'core.editor': 'true',  # Don't change commit message (for merge commits)
             # Ensure we get same error as with freshly installed git
             'user.email': '',
             'user.name': '',
