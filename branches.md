@@ -43,8 +43,8 @@ Like this, for example (use `py` instead of `python3` on Windows):
 $ python3 calculator.py 1 + 2
 3
 
-$ python3 calculator.py 1 - 2
-3
+$ python3 calculator.py 7 - 3
+10
 ```
 
 The subtraction doesn't work; this is the bug that we will fix later.
@@ -529,8 +529,8 @@ elif operation == "*":
 Let's check whether we combined it correctly:
 
 ```diff
-$ python3 calculator.py 1 - 2
--1
+$ python3 calculator.py 7 - 3
+4
 
 $ python3 calculator.py 2 "*" 3
 6
