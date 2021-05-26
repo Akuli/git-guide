@@ -611,16 +611,49 @@ Let's start with `git branch -D`:
 
 ```diff
 $ git log --oneline --graph --all
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+|\  
+| * 6f43004 (origin/multiplication, multiplication) fix multiplication bug
+| * 9900601 multiplication code, not working yet
+* | a713ead fix subtraction bug
+|/  
+* 78b197b create calculator.py
+* 5bf1f4e (origin/main, origin/HEAD) add better description to README
+* 1f95680 Initial commit
+
 $ git branch -D multiplication
+Deleted branch multiplication (was 6f43004).
+
 $ git log --oneline --graph --all
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+|\  
+| * 6f43004 (origin/multiplication) fix multiplication bug
+| * 9900601 multiplication code, not working yet
+* | a713ead fix subtraction bug
+|/  
+* 78b197b create calculator.py
+* 5bf1f4e (origin/main, origin/HEAD) add better description to README
+* 1f95680 Initial commit
 ```
 
 We can see that `origin/multiplication` wasn't deleted, so the branch is still on GitHub.
 Let's delete it from GitHub too:
 
 ```diff
-$ git push --delete origin foo
+$ git push --delete origin multiplication
+To https://github.com/username/reponame
+ - [deleted]         multiplication
+
 $ git log --oneline --graph --all
+*   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
+|\  
+| * 6f43004 fix multiplication bug
+| * 9900601 multiplication code, not working yet
+* | a713ead fix subtraction bug
+|/  
+* 78b197b create calculator.py
+* 5bf1f4e (origin/main, origin/HEAD) add better description to README
+* 1f95680 Initial commit
 ```
 
 For whatever reason, you need to specify `origin` in the `git push` command.
