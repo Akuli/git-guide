@@ -101,7 +101,7 @@ $ git log --oneline --graph --all
 ```
 
 We already saw `--oneline` [last time](committing.md#looking-at-previous-commits).
-The meanings of `--graph` and `--all` will become obvious soon.
+I will explain `--graph` and `--all` soon.
 
 By default, there is only one branch. In new GitHub repos, it's called `main`.
 Earlier GitHub's name for the default branch was `master`,
@@ -133,8 +133,13 @@ $ git log --oneline --graph --all
 Here `multiplication` is a branch name; you can name a branch however you want.
 The latest commit on the `multiplication` branch is `78b197b`, same as on `main`.
 
+In the output of the last command,
+`HEAD -> multiplication` means that we are now on the `multiplication branch`,
+and having `main` next to it means that
+`78b197b` is the latest commit on the `multiplication` branch and the `main` branch.
+
 We can go back to the `main` branch with `git checkout`, but without `-b`;
-the `-b` means that the the branch will be created.
+the `-b` means that a new branch is created.
 
 ```diff
 $ git checkout main
@@ -212,7 +217,7 @@ $ git log --oneline --graph --all
 ```
 
 Notice how the `main` branch was left behind when we committed;
-our commit is only on the `multiplication` branch, because we did `git checkout multiplication`.
+our latest commit is only on the `multiplication` branch, because we did `git checkout multiplication`.
 
 Let's leave the multiplication branch for now...
 
@@ -288,10 +293,11 @@ $ git log --oneline --graph
 * 1f95680 Initial commit
 ```
 
-I guess this might be useful when you want to ignore lots of unrelated branches, but I always use `--all`.
+I guess this might be useful if you have many unrelated branches and you want to ignore them,
+but I always use `--all`.
 
 
-## Think "is based on" instead of "is newer than"
+## Think about "is based on" instead of "is newer than"
 
 Let's go back to the multiplication branch.
 ```diff
@@ -331,9 +337,9 @@ $ git commit -m "fix multiplication bug"
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 $ git log --oneline --graph --all
-* 6f43004 (HEAD -> multiplication) fix multiplication bug
-* 9900601 multiplication code, not working yet
-| * a713ead (main) fix subtraction bug
+* a713ead (main) fix subtraction bug
+| * 6f43004 (HEAD -> multiplication) fix multiplication bug
+| * 9900601 multiplication code, not working yet
 |/  
 * 78b197b create calculator.py
 * 5bf1f4e (origin/main, origin/HEAD) add better description to README
@@ -342,9 +348,9 @@ $ git log --oneline --graph --all
 
 Now the multiplication fix shows up below the subtraction fix,
 even though we just created the multiplication fix.
-In other words, the output of `git log` with `--graph` is not always so that the latest commit is first.
+In other words, the latest commit is not always first in the output of our `--graph` command.
 
-To understand why this is, imagine what would happen if the output was always sorted by date.
+To understand why this is, imagine what would happen if the output was always sorted by time.
 Then it would be something like this: (not real output, but modified by hand from the previous output):
 
 ```
@@ -355,7 +361,7 @@ Then it would be something like this: (not real output, but modified by hand fro
 * 78b197b create calculator.py
 ```
 
-As you can see, it just ends up looking messy if you want to force it to be sorted by time.
+As you can see, it just looks messy if you want to force it to be sorted by time.
 
 In my experience, this isn't a problem in practice.
 I don't usually care about which of two commits on different branches was created first;
@@ -370,30 +376,59 @@ For example, we are currently on the `multiplication` branch,
 so `git push` will push that branch to GitHub.
 
 ```diff
-$ git push
-Username for 'https://github.com': username
-Password for 'https://username@github.com':
-Enumerating objects: 1, done.
-Counting objects: 100% (1/1), done.
-Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
-Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/username/reponame
+$ git status
+On branch multiplication
+nothing to commit, working tree clean
 
+$ git push
+fatal: The current branch branches has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin multiplication
 ```
 
-On GitHub, there should be a menu
+This error message is confusing,
+but you can copy/paste the command it suggests and run that instead.
+
+```diff
+$ git push --set-upstream origin multiplication
+Username for 'https://github.com': username
+Password for 'https://username@github.com':
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 4 local objects.
+remote:
+remote: Create a pull request for 'multiplication' on GitHub by visiting:
+remote:      https://github.com/username/reponame/pull/new/multiplication
+remote:
+To https://github.com/username/reponame
+ * [new branch]      multiplication -> multiplication
+Branch 'multiplication' set up to track remote branch 'multiplication' from 'origin'.
+```
+
+Now Git will remember that you already ran the command it suggested,
+and `git push` without anything else after it will work next time.
+This is branch-specific though, so you need to do the `--set-upstream` thing once for each branch.
+
+In GitHub, there should be a menu where you can choose a branch and it says `main` by default.
+You should now see `multiplication` branch in that menu,
+and if you click it and then open `calculator.py` in GitHub, you should see the multiplication code.
 
 
 ## Merges and merge conflicts
 
 Now we have two versions of the calculator program:
-the code on `main` can subtract correctly, and the code on `multiplication` can multiply correctly.
+the code on `main` can subtract correctly, and the code on `multiplication` can multiply.
 
 ```diff
 $ git log --oneline --graph --all
-* 6f43004 (HEAD -> multiplication) fix multiplication bug
-* 9900601 multiplication code, not working yet
-| * a713ead (main) fix subtraction bug
+* a713ead (main) fix subtraction bug
+| * 6f43004 (HEAD -> multiplication, origin/multiplication) fix multiplication bug
+| * 9900601 multiplication code, not working yet
 |/  
 * 78b197b create calculator.py
 * 5bf1f4e (origin/main, origin/HEAD) add better description to README
@@ -441,11 +476,11 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Git tried to combine the changes (`Auto-merging calculator.py`),
 but it couldn't do it (`Automatic merge failed`)
 because the two branches contain conflicting changes (`CONFLICT`).
-In these cases, you need to help (`fix conflicts`).
+In these cases, git needs your help.
 
 Open `calculator.py` in your editor. You should see this:
 
-[comment]: # (Indented instead of triple backtick to prevent editor thinking this file has merge conflicts)
+[comment]: # (Indented instead of triple backtick to prevent my editor thinking this file has merge conflicts)
 
     import sys
 
@@ -467,7 +502,7 @@ Open `calculator.py` in your editor. You should see this:
 The code on main (current branch, aka `HEAD`) is between `<<<<<<<` and `=======`.
 That's the correct subtraction code.
 The code on `multiplication` branch is between `=======` and `>>>>>>>`.
-Now you have to combine it all together so that it all works:
+Now you have to combine it all together:
 you need to include the `*` code and make sure that the subtraction code actually subtracts.
 Like this:
 
@@ -485,6 +520,16 @@ elif operation == "-":
     print(first_number - second_number)
 elif operation == "*":
     print(first_number * second_number)
+```
+
+Let's check whether we combined it correctly:
+
+```diff
+$ python3 calculator.py 1 - 2
+-1
+
+$ python3 calculator.py 2 "*" 3
+6
 ```
 
 Let's ask `git status` what we should do next:
@@ -541,7 +586,7 @@ $ git commit
 $ git log --oneline --graph --all
 *   c8e61ef (HEAD -> main) Merge branch 'multiplication' into main
 |\  
-| * 6f43004 (multiplication) fix multiplication bug
+| * 6f43004 (origin/multiplication, multiplication) fix multiplication bug
 | * 9900601 multiplication code, not working yet
 * | a713ead fix subtraction bug
 |/  

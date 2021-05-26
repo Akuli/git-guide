@@ -111,7 +111,7 @@ class CommandRunner:
         )
         return git_output
 
-    def run_command(self, bash_command):
+    def run_command(self, bash_command, old_output):
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -124,20 +124,19 @@ class CommandRunner:
                     cwd=(self.working_dir / 'reponame'),
                     check=True,
                 )
-
-            # Actual 'git clone' output changes depending on whether you clone
-            # a directory on your computer or a github repo. We want to show
-            # what would happen if you cloned a github repo.
-            return '''\
-Cloning into 'reponame'...
-remote: Enumerating objects: 6, done.
-remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 6
-Unpacking objects: 100% (6/6), done.
-'''
+            return old_output   # pushing to same computer wouldn't look realistic
 
         if bash_command.startswith('cd '):
             self.working_dir /= bash_command[3:]
-            return ''
+            return ''  # No output
+
+        if bash_command.startswith('git push'):
+            subprocess.run(
+                ['bash', '-c', bash_command],
+                cwd=self.working_dir,
+                check=('fatal:' not in old_output),
+            )
+            return old_output   # pushing to same computer wouldn't look realistic
 
         # For example:  git config --global user.name "yourusername"
         bash_command = bash_command.replace('--global', '')
@@ -164,22 +163,7 @@ Unpacking objects: 100% (6/6), done.
             cwd=self.working_dir,
         )
 
-        if bash_command.startswith('git push'):
-            # fake output that looks like pushing to github, not like pushing
-            # to repo on the same computer
-            response.check_returncode()
-            output = b'''\
-Username for 'https://github.com': username
-Password for 'https://username@github.com':
-Enumerating objects: 1, done.
-Counting objects: 100% (1/1), done.
-Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
-Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/username/reponame
-''' + response.stdout.splitlines(keepends=True)[-1]
-        else:
-            output = response.stdout
-
+        output = response.stdout
         output = output.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
         output = output.replace(b'\r\n', b'\n')  # no idea why needed
@@ -187,15 +171,18 @@ To https://github.com/username/reponame
         return self.substitute_changing_info(output.decode('utf-8'))
 
     def add_outputs_to_commands(self, command_string):
-        commands = [
-            line.lstrip('$').strip()
-            for line in command_string.split('\n')
-            if line.startswith('$')
-        ]
-        outputs = [self.run_command(command) for command in commands]
+        commands_and_outputs = []
+        while command_string:
+            match = re.match(r'\$ (.*)\n((([^$\n].*)?)\n)*', command_string)
+            assert match is not None, command_string
+            command = match.group(1)
+            output = match.group(0).split('\n', maxsplit=1)[1].rstrip('\n') + '\n'
+            commands_and_outputs.append((command, output))
+            command_string = command_string[match.end():]
+
         return '\n'.join(
-            f"$ {command}\n{output}"
-            for command, output in zip(commands, outputs)
+            f"$ {command}\n{self.run_command(command, old_output)}"
+            for command, old_output in commands_and_outputs
         )
 
     def get_branch(self):
@@ -280,7 +267,7 @@ with tempfile.TemporaryDirectory() as tempdir_string:
         new_parts = []
         for part in old_parts:
             if part.startswith('diff\n'):  # ```diff
-                new_parts.append(part.split('\n')[0] + '\n' + runner.add_outputs_to_commands(part))
+                new_parts.append('diff\n' + runner.add_outputs_to_commands(part[5:]))
             else:
                 new_parts.append(part)
                 if part.startswith('python\n# '):  # python file
