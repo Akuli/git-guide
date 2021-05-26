@@ -37,4 +37,5 @@ sys
 txt
 unmerged
 unstage
+untracked
 yourusername
