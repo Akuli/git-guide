@@ -1,4 +1,42 @@
 <!DOCTYPE html>
+<%!
+    import atexit
+    import pathlib
+    import re
+    import shutil
+    import tempfile
+    import textwrap
+    from run_commands import create_runner
+
+    # This code runs only once, we use the same runner for everything
+    runner = create_runner()
+
+    def run_git_commands(input_string):
+        should_be_empty, *commands_and_outputs = re.split(
+            r'^\$ ', textwrap.dedent(input_string), flags=re.MULTILINE
+        )
+        assert not should_be_empty.strip(), "missing $ at start of commands"
+
+        result = ""
+        for command_and_output in commands_and_outputs:
+            command, hard_coded_output = command_and_output.split('\n', maxsplit=1)
+            if hard_coded_output.strip():
+                # Run, but discard actual output
+                runner.run_command(command)
+                output = hard_coded_output
+            else:
+                output = runner.run_command(command)
+                assert output is not None, command
+
+            result += f'$ {command}\n{output}\n'
+
+        return result
+%>
+
+<%def name="runcommands()">
+    <pre>${run_git_commands(capture(caller.body)) | h}</pre>
+</%def>
+
 <html>
     <head>
     </head>

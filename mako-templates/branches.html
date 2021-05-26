@@ -1,0 +1,366 @@
+<%inherit file="base.html"/>
+<%namespace file="base.html" import="runcommands"/>
+
+<h1>Branches</h1>
+
+<p>Suppose you are working on a calculator program.
+You start working on a new multiplication feature,
+and you have already [committed and pushed](committing.md) several times.
+The code is still WIP (Work In Progress, far from done);
+it errors when you try to run it, for example.
+Then someone discovers a bug, and you want to fix it right away.
+But now you have a problem: you can't work on the bug
+because you are in the middle of working on multiplication and the code is still WIP.
+
+<p>To prevent this situation, you can make a new **branch** when you start working on multiplication,
+and then put all your commits to the new multiplication branch.
+Commits on the new branch don't affect the rest of your project,
+and you can start fixing the bug at any time.
+
+<p>Next we go through this process in practice.
+
+
+<h2>The setup</h2>
+
+<p>Suppose that <code>calculator.py</code> contains the following Python program:
+
+```python
+# Write this to calculator.py
+import sys
+
+first_number = int(sys.argv[1])
+operation = sys.argv[2]
+second_number = int(sys.argv[3])
+
+if operation == "+":
+    print(first_number + second_number)
+elif operation == "-":
+    print(first_number + second_number)
+```
+
+<p>In case you are not familiar with Python code, this program is meant to be called from command line,
+and it uses 3 command line arguments to do a calculation.
+Like this, for example (use <code>py</code> instead of <code>python3</code> on Windows):
+
+<%self:runcommands>
+$ python3 calculator.py 1 + 2
+$ python3 calculator.py 7 - 3
+</%self:runcommands>
+
+<p>The subtraction doesn't work; this is the bug that we will fix later.
+Let's [commit](committing.md) the code:
+
+<%self:runcommands>
+$ git status
+$ git add calculator.py
+$ git status
+$ git commit -m "create calculator.py"
+$ git status
+</%self:runcommands>
+
+
+<h2>Branch basics</h2>
+
+<p>When I work with branches, I constantly use the following command to check what's going on,
+similarly to <code>git status</code>:
+
+<%self:runcommands>
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>We already saw <code>--oneline</code> [last time](committing.md#looking-at-previous-commits).
+I will explain <code>--graph</code> and <code>--all</code> soon.
+
+<p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.
+GitHub's name for the default branch used to be <code>master</code>,
+and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
+
+<p>Seeing <code>main</code> next to <code>78b197b</code> means that <code>78b197b</code> is the latest commit on <code>main</code>.
+Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
+so <code>5bf1f4e</code> next to it means that the latest commit we pushed is <code>5bf1f4e</code>.
+
+<p>There is also a notion of **current branch**, which is often called <code>HEAD</code>.
+Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
+
+<p>Let's make a new branch:
+
+<%self:runcommands>
+$ git checkout -b multiplication
+$ git status
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
+The latest commit on the <code>multiplication</code> branch is <code>78b197b</code>, same as on <code>main</code>.
+
+<p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
+the <code>-b</code> means that a new branch is created.
+
+<%self:runcommands>
+$ git checkout main
+$ git status
+$ git log --oneline --graph --all
+$ git checkout multiplication
+$ git status
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>On the <code>multiplication</code> branch, let's create the multiplication code:
+
+```python
+# Add to end of calculator.py (on branch multiplication)
+elif operation == "*":
+    print(first_number * second_unmber)
+```
+
+<p>The new multiplication code is buggy, but let's try it and commit it anyway.
+We need to quote <code>*</code> because it is a special character on the terminal;
+it is good to know how that works, but I won't explain it here because I want to focus on git.
+
+<%self:runcommands>
+$ python3 calculator.py 2 "*" 3
+$ git add calculator.py
+$ git diff --cached
+$ git commit -m "multiplication code, not working yet"
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Note how the <code>main</code> branch was left behind when we committed;
+our latest commit is only on the <code>multiplication</code> branch, because we did <code>git checkout multiplication</code> before committing.
+
+<p>Let's leave the multiplication branch for now...
+
+<%self:runcommands>
+$ git checkout main
+</%self:runcommands>
+
+<p>...and fix the subtraction bug by changing just the last line:
+
+```python
+# Last line of calculator.py (on branch main)
+    print(first_number - second_number)
+```
+
+<p>Let's commit the fix:
+
+<%self:runcommands>
+$ git add calculator.py
+$ git diff --cached
+$ git commit -m "fix subtraction bug"
+$ git status
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Now you can see what the <code>--graph</code> does: it shows how commits are based on other commits,
+drawing a Y-shaped graph at left in this case.
+
+<p>Without <code>--all</code>, git hides some branches.
+For example, if you are on <code>main</code>, you won't see the <code>multiplication</code> branch:
+
+<%self:runcommands>
+$ git status
+$ git log --oneline --graph
+</%self:runcommands>
+
+<p>I guess this might be useful if you have many unrelated branches and you want to ignore them,
+but I always use <code>--all</code>.
+
+
+<h2>Think about "is based on" instead of "is newer than"</h2>
+
+<p>Let's go back to the multiplication branch.
+<%self:runcommands>
+$ git checkout multiplication
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Now let's fix the multiplication bug by changing the last line:
+
+```python
+# Last line of calculator.py (on branch multiplication)
+    print(first_number * second_number)
+```
+
+<p>Let's try it out and then commit the result:
+
+<%self:runcommands>
+$ python3 calculator.py 2 "*" 3
+$ git add calculator.py
+$ git diff --cached
+$ git commit -m "fix multiplication bug"
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Now the subtraction fix <code>a713ead</code> shows up below the first multiplication commit <code>9900601</code>,
+even though the multiplication commit is older.
+In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
+
+<p>If you really want to, you can ask git to sort by commit time by adding <code>--date-order</code>:
+
+<%self:runcommands>
+$ git log --oneline --graph --all --date-order
+</%self:runcommands>
+
+<p>As you can see, it just looks messier this way, which is probably why this is not the default.
+I don't use <code>--date-order</code> because I don't actually care about
+which of two commits on different branches is newer and which is older;
+I just want to see what commits each branch contains,
+and how <code>9900601</code> and <code>a713ead</code> are both based on <code>78b197b</code>, for example.
+
+
+<h2>Pushing a branch</h2>
+
+<p>Run <code>git push</code> to upload the current branch to GitHub.
+For example, we are currently on the <code>multiplication</code> branch,
+so <code>git push</code> will push that branch to GitHub.
+
+<%self:runcommands>
+$ git status
+$ git push
+</%self:runcommands>
+
+<p>This error message is confusing,
+but you can copy/paste the command it suggests and run that instead.
+
+<%self:runcommands>
+$ git push --set-upstream origin multiplication
+</%self:runcommands>
+
+<p>Now Git will remember that you already ran the command it suggested,
+and <code>git push</code> without anything else after it will work next time.
+This is branch-specific though, so you need to do the <code>--set-upstream</code> thing once for each branch.
+
+<p>In GitHub, there should be a menu where you can choose a branch and it says <code>main</code> by default.
+You should now see a <code>multiplication</code> branch in that menu,
+and if you click it and then open <code>calculator.py</code>, you should see the multiplication code.
+
+<p>The <code>git push</code> output contains a link for creating a pull request. We will use it later.
+(TODO: write about pull requests)
+
+
+<h2>Merges and merge conflicts</h2>
+
+<p>Now we have two versions of the calculator program:
+the code on <code>main</code> can subtract correctly, and the code on <code>multiplication</code> can multiply.
+
+<%self:runcommands>
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>Next we want to combine the changes from the <code>multiplication</code> branch into the <code>main</code> branch
+so that on <code>main</code>, subtraction and multiplication both work, and we no longer need the <code>multiplication</code> branch.
+This is called **merging** the multiplication branch into <code>main</code>.
+
+<p>Before merging, you need to go to the branch where you want the result to be:
+
+<%self:runcommands>
+$ git checkout main
+</%self:runcommands>
+
+<p>Now we can merge.
+
+<%self:runcommands>
+$ git merge multiplication
+$ git status
+</%self:runcommands>
+
+<p>Git tried to combine the changes (`Auto-merging calculator.py`),
+but it couldn't do it (`Automatic merge failed`)
+because the two branches contain conflicting changes (`CONFLICT`).
+In these cases, git needs your help.
+
+<p>Open <code>calculator.py</code> in your editor. You should see this:
+
+[comment]: # (Indented instead of triple backtick to prevent my editor thinking this file has merge conflicts)
+
+    import sys
+
+    first_number = int(sys.argv[1])
+    operation = sys.argv[2]
+    second_number = int(sys.argv[3])
+
+    if operation == "+":
+        print(first_number + second_number)
+    elif operation == "-":
+    <<<<<<< HEAD
+        print(first_number - second_number)
+    =======
+        print(first_number + second_number)
+    elif operation == "*":
+        print(first_number * second_number)
+    >>>>>>> multiplication
+
+<p>The code on main (current branch, aka <code>HEAD</code>) is between <code><<<<<<<</code> and <code>=======</code>.
+That's the correct subtraction code.
+The code on <code>multiplication</code> branch is between <code>=======</code> and <code>>>>>>>></code>.
+Now you have to combine it all together:
+you need to include the <code>*</code> code and make sure that the subtraction code actually subtracts.
+Like this:
+
+```python
+# Edit calculator.py so that it looks like this
+import sys
+
+first_number = int(sys.argv[1])
+operation = sys.argv[2]
+second_number = int(sys.argv[3])
+
+if operation == "+":
+    print(first_number + second_number)
+elif operation == "-":
+    print(first_number - second_number)
+elif operation == "*":
+    print(first_number * second_number)
+```
+
+<p>Let's check whether we combined it correctly:
+
+<%self:runcommands>
+$ python3 calculator.py 7 - 3
+$ python3 calculator.py 2 "*" 3
+</%self:runcommands>
+
+<p>Let's ask <code>git status</code> what we should do next:
+
+<%self:runcommands>
+$ git status
+</%self:runcommands>
+
+<p>The relevant part is <code>(use "git add <file>..." to mark resolution)</code>,
+which means that once the conflicts are fixed, we should <code>git add</code> the file.
+Let's do that:
+
+<%self:runcommands>
+$ git add calculator.py
+$ git status
+$ git commit
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>The default commit message, <code>Merge branch 'multiplication'</code>, is very recognizable:
+when people see it in git logs, they immediately know what that commit does.
+
+
+<h2>Deleting a branch</h2>
+
+<p>Because we have now merged <code>multiplication</code> into <code>main</code>,
+we no longer need the <code>multiplication</code> branch and we can delete it.
+
+<p>Let's start with <code>git branch -D</code>:
+
+<%self:runcommands>
+$ git log --oneline --graph --all
+$ git branch -D multiplication
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>We can see that <code>origin/multiplication</code> wasn't deleted, so the branch is still on GitHub.
+Let's delete it from GitHub too:
+
+<%self:runcommands>
+$ git push --delete origin multiplication
+$ git log --oneline --graph --all
+</%self:runcommands>
+
+<p>For whatever reason, you need to specify <code>origin</code> in the <code>git push</code> command.
+As usual, <code>origin</code> means GitHub.

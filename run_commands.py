@@ -119,6 +119,7 @@ class CommandRunner:
         return command_output
 
     def run_command(self, bash_command):
+        #print("  ", bash_command)
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -176,7 +177,7 @@ class CommandRunner:
         commands_and_outputs = []
         while command_string:
             match = re.match(r'\$ (.*)\n((([^$\n].*)?)\n)*', command_string)
-            assert match is not None, command_string
+            assert match is not None, ("bad command: " + command_string)
             command = match.group(1)
             output = match.group(0).split('\n', maxsplit=1)[1].rstrip('\n') + '\n'
             commands_and_outputs.append((command, output))
@@ -225,13 +226,6 @@ class CommandRunner:
         raise ValueError(f"bad instructions: {instructions}")
 
 
-def get_markdown_filenames_from_readme():
-    full_content = pathlib.Path('README.md').read_text()
-    match = re.search(r'\nContents:\n((?:- \[.*\]\(.*\): .*\n)+)', full_content)
-    assert match is not None
-    return [line.split('(')[1].split(')')[0] for line in match.group(1).splitlines()]
-
-
 def create_runner():
     tempdir = pathlib.Path(tempfile.mkdtemp())
     atexit.register(lambda: shutil.rmtree(tempdir))
@@ -261,32 +255,17 @@ def create_runner():
     return CommandRunner(tempdir)
 
 
-if __name__ == '__main__':
-    runner = create_runner()
-
-    for filename in get_markdown_filenames_from_readme():
-        print("Running commands from", filename)
-        path = pathlib.Path(filename)
-        content = path.read_text()
-        old_parts = content.split('```')
-
-        new_parts = []
-        for part in old_parts:
-            if part.startswith('diff\n'):  # ```diff
-                new_parts.append('diff\n' + runner.add_outputs_to_commands(part[5:]))
-            else:
-                new_parts.append(part)
-                if part.startswith('python\n# '):  # python file
-                    literally_python, instructions_line, content = part.split('\n', maxsplit=2)
-                    runner.edit_file(instructions_line.lstrip('# '), content)
-                # TODO: get rid of this hard-coding
-                elif 'Now open `README.md` in your favorite text editor' in part:
-                    (runner.working_dir / 'README.md').write_text("""\
-# reponame
-This is a better description of this repository. Imagine you just wrote it
-into your text editor.
-
-More text here. Lorem ipsum blah blah blah.
-""")
-
-        path.write_text('```'.join(new_parts))
+#                new_parts.append(part)
+#                if part.startswith('python\n# '):  # python file
+#                    literally_python, instructions_line, content = part.split('\n', maxsplit=2)
+#                    runner.edit_file(instructions_line.lstrip('# '), content)
+#                # TODO: get rid of this hard-coding
+#                elif 'Now open `README.md` in your favorite text editor' in part:
+#                    (runner.working_dir / 'README.md').write_text("""\
+## reponame
+#This is a better description of this repository. Imagine you just wrote it
+#into your text editor.
+#
+#More text here. Lorem ipsum blah blah blah.
+#""")
+#
