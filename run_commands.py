@@ -1,6 +1,8 @@
+import atexit
 import collections
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -116,7 +118,7 @@ class CommandRunner:
 
         return command_output
 
-    def run_command(self, bash_command, old_output):
+    def run_command(self, bash_command):
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -129,19 +131,11 @@ class CommandRunner:
                     cwd=(self.working_dir / 'reponame'),
                     check=True,
                 )
-            return old_output   # pushing to same computer wouldn't look realistic
+            return None  # not used
 
         if bash_command.startswith('cd '):
             self.working_dir /= bash_command[3:]
             return ''  # No output
-
-        if bash_command.startswith('git push'):
-            subprocess.run(
-                ['bash', '-c', bash_command],
-                cwd=self.working_dir,
-                check=('fatal:' not in old_output),
-            )
-            return old_output   # pushing to same computer wouldn't look realistic
 
         # For example:  git config --global user.name "yourusername"
         bash_command = bash_command.replace('--global', '')
@@ -189,7 +183,7 @@ class CommandRunner:
             command_string = command_string[match.end():]
 
         return '\n'.join(
-            f"$ {command}\n{self.run_command(command, old_output)}"
+            f"$ {command}\n{self.run_command(command) or old_outp}"
             for command, old_output in commands_and_outputs
         )
 
@@ -238,8 +232,10 @@ def get_markdown_filenames_from_readme():
     return [line.split('(')[1].split(')')[0] for line in match.group(1).splitlines()]
 
 
-with tempfile.TemporaryDirectory() as tempdir_string:
-    tempdir = pathlib.Path(tempdir_string)
+def create_runner():
+    tempdir = pathlib.Path(tempfile.mkdtemp())
+    atexit.register(lambda: shutil.rmtree(tempdir))
+
     # Simulate with github does when you create empty repo
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
     (tempdir / 'fake_github' / 'reponame' / 'README.md').write_text(
@@ -262,9 +258,11 @@ with tempfile.TemporaryDirectory() as tempdir_string:
         check=True,
         cwd=(tempdir / 'fake_github' / 'reponame'),
     )
+    return CommandRunner(tempdir)
 
-    (tempdir / 'cloned' / 'reponame').mkdir(parents=True)
-    runner = CommandRunner(tempdir)
+
+if __name__ == '__main__':
+    runner = create_runner()
 
     for filename in get_markdown_filenames_from_readme():
         print("Running commands from", filename)

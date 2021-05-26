@@ -12,14 +12,24 @@ Contents:
 
 ## Developing
 
-GitHub Actions does the following checks:
-- Runs every command starting with `$` in the markdown files,
-    and ensures that the markdown file contains the exact output of the command.
-    Edit `run_commands.py` if this check fails and you don't want to change the markdown files.
-- Spell checks all markdown files.
-    If the spell check complains about a word that you know you spelled correctly,
-    add the word to `spellcheck_exclude.txt`.
+```
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install mako
+$ python3 build.py
+```
 
-You can also try running these checks on your computer by finding the commands from `.github/workflows/`,
-but don't complain to me if that doesn't work;
-when working on the checks, I assume they will run only on GitHub Actions.
+This creates `html` files inside `build/`. Open them with your browser.
+
+If you are using a Linux distro that has `apt`, you can use `loop.sh` to
+automatically run `build.py` when something changes,
+although you will still need to refresh in the browser:
+
+```
+$ sudo apt install inotify-tools
+./loop.sh
+```
+
+GitHub Actions spell checks all markdown files when you make a pull request.
+If the spell check complains about a word that you know you spelled correctly,
+add the word to `spellcheck_exclude.txt`.
