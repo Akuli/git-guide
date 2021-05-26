@@ -173,7 +173,7 @@ elif operation == "*":
     print(first_number * second_unmber)
 ```
 
-The new multiplication code is buggy, but let's try it and commit the result.
+The new multiplication code is buggy, but let's try it and commit it anyway.
 We need to quote `*` because it is a special character on the terminal;
 it is good to know how that works, but I won't explain it here because I want to focus on git.
 
@@ -209,8 +209,8 @@ $ git log --oneline --graph --all
 * 1f95680 Initial commit
 ```
 
-Notice how the `main` branch was left behind when we committed;
-our latest commit is only on the `multiplication` branch, because we did `git checkout multiplication`.
+Note how the `main` branch was left behind when we committed;
+our latest commit is only on the `multiplication` branch, because we did `git checkout multiplication` before committing.
 
 Let's leave the multiplication branch for now...
 
@@ -417,8 +417,8 @@ and `git push` without anything else after it will work next time.
 This is branch-specific though, so you need to do the `--set-upstream` thing once for each branch.
 
 In GitHub, there should be a menu where you can choose a branch and it says `main` by default.
-You should now see `multiplication` branch in that menu,
-and if you click it and then open `calculator.py` in GitHub, you should see the multiplication code.
+You should now see a `multiplication` branch in that menu,
+and if you click it and then open `calculator.py`, you should see the multiplication code.
 
 The `git push` output contains a link for creating a pull request. We will use it later.
 (TODO: write about pull requests)
