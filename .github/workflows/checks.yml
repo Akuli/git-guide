@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: cat /etc/apt/sources.list
+      - run: head -100 /etc/apt/sources.list.d/*
       - run: sudo apt -y install linkchecker
       - uses: actions/setup-python@v2
       - run: pip install -r requirements.txt
