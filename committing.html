@@ -156,8 +156,8 @@ This way it's possible to edit several files and commit only some of the changes
 Adding a file doesn't modify it;
 it just makes Git remember the changes you did.
 
-<p>As the status message suggests, we will use <code>git add <file>...</code>.
-Here <code><file></code> means that you should put a file name there,
+<p>As the status message suggests, we will use <code>git add &lt;file&gt;...</code>.
+Here <code>&lt;file&gt;</code> means that you should put a file name there,
 and <code>...</code> means that you can specify several files if you want.
 We will add only one file, the README.md:
 
@@ -269,7 +269,7 @@ $ git config --global user.name &#34;yourusername&#34;
 
 
     <pre>$ git commit -m &#34;add better description to README&#34;
-[main cdfc755] add better description to README
+[main feb58b5] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -310,7 +310,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   6a718d6..cdfc755  main -&gt; main
+   7cdd5f7..feb58b5  main -&gt; main
 
 </pre>
 
@@ -326,15 +326,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre>$ git log
-commit cdfc7550452e5ca67c8d1ae47352b28208eeb78a (HEAD -&gt; main, origin/main, origin/HEAD)
+commit feb58b51fc9a5d765ad47b8a7c229424e3192977 (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-commit 6a718d69b4c86335f06565e92d61017083af8add
+commit 7cdd5f7629fba64415e4200d3e1a170d53efb53c
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 18:21:21 2021 +0000
+Date:   Thu May 27 18:42:39 2021 +0000
 
     Initial commit
 
@@ -349,22 +349,22 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre>$ git log --oneline
-cdfc755 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
-6a718d6 Initial commit
+feb58b5 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
+7cdd5f7 Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>cdfc7550452e5ca67c8d1ae47352b28208eeb78a</code>.
+For example, the hash of our latest commit is <code>feb58b51fc9a5d765ad47b8a7c229424e3192977</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>cdfc755</code> and <code>cdfc7550452e5ca67c8d1ae47352b28208eeb78a</code> refer to the same commit.
+so <code>feb58b5</code> and <code>feb58b51fc9a5d765ad47b8a7c229424e3192977</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre>$ git show cdfc755
-commit cdfc7550452e5ca67c8d1ae47352b28208eeb78a (HEAD -&gt; main, origin/main, origin/HEAD)
+    <pre>$ git show feb58b5
+commit feb58b51fc9a5d765ad47b8a7c229424e3192977 (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
