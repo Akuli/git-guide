@@ -27,7 +27,7 @@ although you will still need to refresh in the browser:
 
 ```
 $ sudo apt install inotify-tools
-./loop.sh
+$ ./loop.sh
 ```
 
 GitHub Actions spell checks all markdown files when you make a pull request.
