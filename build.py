@@ -1,4 +1,5 @@
 import atexit
+import html
 import os
 import pathlib
 import re
@@ -122,6 +123,10 @@ def create_runner():
     return CommandRunner(tempdir)
 
 
+def _handle_code(match):
+    return '<code>' + html.escape(match.group(0).strip('`'), quote=False) + '</code>'
+
+
 def build():
     try:
         shutil.rmtree("build")
@@ -129,11 +134,13 @@ def build():
         pass
     os.mkdir("build")
 
-    lookup = TemplateLookup(directories=['./mako-templates'])
+    lookup = TemplateLookup()
+    for path in pathlib.Path("mako-templates").glob("*.html"):
+        html_string = re.sub(r'`(.+?)`', _handle_code, path.read_text())
+        lookup.put_string(path.name, html_string)
 
     for filename, title, description in pagelist:
         template = lookup.get_template(filename)
-
         path = pathlib.Path("build") / filename
         print("Writing", path)
         path.write_text(template.render(filename=filename, title=title), encoding='utf-8')

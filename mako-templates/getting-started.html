@@ -22,8 +22,8 @@ Go to <a href="https://github.com/">github.com</a> and click the "New" button ne
 Choose the settings like this:
 
 <ul><li>
-Repository name: Most people prefer all lowercase, with words separated by <code>-</code> or not at all.
-For example, <code>git-guide</code> or <code>gitguide</code> instead of <code>Git Guide</code>.
+Repository name: Most people prefer all lowercase, with words separated by `-` or not at all.
+For example, `git-guide` or `gitguide` instead of `Git Guide`.
 </li><li>
 Public or private: Usually you should choose public. Making your code publicly available is a good thing.
 </li><li>
@@ -35,7 +35,7 @@ If you forget to add a README, you can always add it later.
 </li><li>
 If your repo is going to contain code written in some programming language, check "Add .gitignore",
 and choose the programming language from the list.
-I will explain more about the <code>.gitignore</code> file later.
+I will explain more about the `.gitignore` file later.
 (TODO: explain it and add link here)
 </li><li>
 If you are making a public repository and you don't know what a license is, <strong>please check "Choose a license"</strong>.
@@ -71,17 +71,17 @@ It means downloading a copy of the repo to your computer,
 so that you can edit the files in it and then upload your changes to GitHub.
 
 <p>I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
-In particular, I assume you know how the <code>cd</code> command changes the current working directory.
-I will also use <code>dir</code> (Windows) or <code>ls</code> (e.g. Linux and MacOS) to show what's in the current working directory,
+In particular, I assume you know how the `cd` command changes the current working directory.
+I will also use `dir` (Windows) or `ls` (e.g. Linux and MacOS) to show what's in the current working directory,
 but you can instead look at the directory with any file manager program.
 
-<p>Start by <code>cd</code>-ing to where you want to clone the repository.
+<p>Start by `cd`-ing to where you want to clone the repository.
 This step is optional, and if you don't do it,
 then the repository will be cloned to whatever current working directory the terminal starts in,
-such as <code>C:\Users\username</code> on Windows, or <code>/home/username</code> on Linux, or <code>/Users/username</code> on MacOS.
+such as `C:\Users\username` on Windows, or `/home/username` on Linux, or `/Users/username` on MacOS.
 
-<p>Then clone the repository like this, replacing <code>username</code> and <code>reponame</code> with the names of your GitHub account and the repo.
-You can also copy/paste the <code>https://github.com/...</code> part from the address bar of your web browser.
+<p>Then clone the repository like this, replacing `username` and `reponame` with the names of your GitHub account and the repo.
+You can also copy/paste the `https://github.com/...` part from the address bar of your web browser.
 
 <%self:runcommands>
 $ git clone https://github.com/username/reponame
@@ -92,12 +92,12 @@ Unpacking objects: 100% (6/6), done.
 $ cd reponame
 </%self:runcommands>
 
-<p>In the above example, lines starting with <code>$</code> are the commands that you should type to the terminal,
+<p>In the above example, lines starting with `$` are the commands that you should type to the terminal,
 and other lines are output from those commands.
-So <code>$</code> means "type the rest of this line to the terminal", and you should get the same output.
-The <code>cd</code> command doesn't output anything.
+So `$` means "type the rest of this line to the terminal", and you should get the same output.
+The `cd` command doesn't output anything.
 
-<p>As you can see by the <code>cd</code> command, <code>git clone</code> created a new folder.
+<p>As you can see by the `cd` command, `git clone` created a new folder.
 I will refer to it as "the cloned repo".
 It's just like any other folder; for example,
 if you accidentally cloned to the wrong place, just move the folder.
@@ -110,28 +110,28 @@ and therefore your code should go into the cloned repo folder.
 $ ls
 </%self:runcommands>
 
-<p>If you are using Windows, you will need <code>dir</code> instead of <code>ls</code>,
+<p>If you are using Windows, you will need `dir` instead of `ls`,
 and the output will be shown differently than above.
 
-<p>The <code>.gitignore</code> file is also there, but <code>ls</code> doesn't show file names starting with a dot by default.
-There's also <code>.git</code>, which is a folder where git stores its data.
-For example, <code>.git/config</code> is a file that contains <code>https://github.com/username/reponame</code>,
+<p>The `.gitignore` file is also there, but `ls` doesn't show file names starting with a dot by default.
+There's also `.git`, which is a folder where git stores its data.
+For example, `.git/config` is a file that contains `https://github.com/username/reponame`,
 among other things.
-To see them too, use <code>ls -a</code>, where <code>-a</code> is short for "all":
+To see them too, use `ls -a`, where `-a` is short for "all":
 
 <%self:runcommands>
 $ ls -a
 </%self:runcommands>
 
-<p>On Windows, <code>dir</code> shows everything by default.
+<p>On Windows, `dir` shows everything by default.
 
 
 <h2>git init</h2>
 
-<p>Many other Git instructions recommend <code>git init</code> for making a new repo.
-Unlike the <code>git clone https://github.com/...</code> command above, <code>git init</code> does nothing with GitHub;
+<p>Many other Git instructions recommend `git init` for making a new repo.
+Unlike the `git clone https://github.com/...` command above, `git init` does nothing with GitHub;
 it creates the repo only on your computer.
 Therefore connecting it to GitHub requires running more commands afterwards.
 
-<p>If you just want to put your code to GitHub, then <strong>don't use <code>git init</code></strong>.
+<p>If you just want to put your code to GitHub, then <strong>don't use `git init`</strong>.
 Just make the repo on GitHub first and then clone it.

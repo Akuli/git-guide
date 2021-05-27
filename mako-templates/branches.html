@@ -37,7 +37,7 @@ elif operation == "-":
 
 <p>In case you are not familiar with Python code, this program is meant to be called from command line,
 and it uses 3 command line arguments to do a calculation.
-Like this, for example (use <code>py</code> instead of <code>python3</code> on Windows):
+Like this, for example (use `py` instead of `python3` on Windows):
 
 <%self:runcommands>
 $ python3 calculator.py 1 + 2
@@ -59,26 +59,26 @@ $ git status
 <h2>Branch basics</h2>
 
 <p>When I work with branches, I constantly use the following command to check what's going on,
-similarly to <code>git status</code>:
+similarly to `git status`:
 
 <%self:runcommands>
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>We already saw <code>--oneline</code> <a href="committing.html#looking-at-previous-commits">last time</a>.
-I will explain <code>--graph</code> and <code>--all</code> soon.
+<p>We already saw `--oneline` <a href="committing.html#looking-at-previous-commits">last time</a>.
+I will explain `--graph` and `--all` soon.
 
-<p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.
-GitHub's name for the default branch used to be <code>master</code>,
-and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
+<p>By default, there is only one branch. In new GitHub repos, it's called `main`.
+GitHub's name for the default branch used to be `master`,
+and many projects still have a branch named `master` instead of a `main` branch.
 
-<p>Seeing <code>main</code> next to <code>${commit("main")}</code> means that
-<code>${commit("main")}</code> is the latest commit on <code>main</code>.
-Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>${commit("origin/main")}</code> next to it means that the latest commit we pushed is <code>${commit("origin/main")}</code>.
+<p>Seeing `main` next to `${commit("main")}` means that
+`${commit("main")}` is the latest commit on `main`.
+Here `origin` means GitHub and `origin/main` is GitHub's main branch,
+so `${commit("origin/main")}` next to it means that the latest commit we pushed is `${commit("origin/main")}`.
 
-<p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
-Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
+<p>There is also a notion of <strong>current branch</strong>, which is often called `HEAD`.
+Above we see `(HEAD -> main)`, which means that now the current branch is `main`.
 
 <p>Let's make a new branch:
 
@@ -88,11 +88,11 @@ $ git status
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>${commit("multiplication")}</code>, same as on <code>main</code>.
+<p>Here `multiplication` is a branch name; you can name a branch however you want.
+The latest commit on the `multiplication` branch is `${commit("multiplication")}`, same as on `main`.
 
-<p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
-the <code>-b</code> means that a new branch is created.
+<p>We can go back to the `main` branch with `git checkout`, but without `-b`;
+the `-b` means that a new branch is created.
 
 <%self:runcommands>
 $ git checkout main
@@ -103,7 +103,7 @@ $ git status
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>On the <code>multiplication</code> branch, let's create the multiplication code:
+<p>On the `multiplication` branch, let's create the multiplication code:
 
 <%self:code lang="python" append="calculator.py">
 elif operation == "*":
@@ -111,7 +111,7 @@ elif operation == "*":
 </%self:code>
 
 <p>The new multiplication code is buggy, but let's try it and commit it anyway.
-We need to quote <code>*</code> because it is a special character on the terminal;
+We need to quote `*` because it is a special character on the terminal;
 it is good to know how that works, but I won't explain it here because I want to focus on git.
 
 <%self:runcommands>
@@ -122,8 +122,8 @@ $ git commit -m "multiplication code, not working yet"
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Note how the <code>main</code> branch was left behind when we committed;
-our latest commit is only on the <code>multiplication</code> branch, because we did <code>git checkout multiplication</code> before committing.
+<p>Note how the `main` branch was left behind when we committed;
+our latest commit is only on the `multiplication` branch, because we did `git checkout multiplication` before committing.
 
 <p>Let's leave the multiplication branch for now...
 
@@ -147,11 +147,11 @@ $ git status
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Now you can see what the <code>--graph</code> does: it shows how commits are based on other commits,
+<p>Now you can see what the `--graph` does: it shows how commits are based on other commits,
 drawing a Y-shaped graph at left in this case.
 
-<p>Without <code>--all</code>, git hides some branches.
-For example, if you are on <code>main</code>, you won't see the <code>multiplication</code> branch:
+<p>Without `--all`, git hides some branches.
+For example, if you are on `main`, you won't see the `multiplication` branch:
 
 <%self:runcommands>
 $ git status
@@ -159,7 +159,7 @@ $ git log --oneline --graph
 </%self:runcommands>
 
 <p>I guess this might be useful if you have many unrelated branches and you want to ignore them,
-but I always use <code>--all</code>.
+but I always use `--all`.
 
 
 <h2>Think about "is based on" instead of "is newer than"</h2>
@@ -186,30 +186,30 @@ $ git commit -m "fix multiplication bug"
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Now the subtraction fix <code>${commit("main")}</code> shows up
-below the first multiplication commit <code>${commit("multiplication^")}</code>,
+<p>Now the subtraction fix `${commit("main")}` shows up
+below the first multiplication commit `${commit("multiplication^")}`,
 even though the multiplication commit is older.
-In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
+In other words, the latest commit is not always first in the output of our `--graph` command.
 
-<p>If you really want to, you can ask git to sort by commit time by adding <code>--date-order</code>:
+<p>If you really want to, you can ask git to sort by commit time by adding `--date-order`:
 
 <%self:runcommands>
 $ git log --oneline --graph --all --date-order
 </%self:runcommands>
 
 <p>As you can see, it just looks messier this way, which is probably why this is not the default.
-I don't use <code>--date-order</code> because I don't actually care about
+I don't use `--date-order` because I don't actually care about
 which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
-and how <code>${commit("main")}</code> and <code>${commit("multiplication^")}</code>
-are both based on <code>${commit("main^")}</code>, for example.
+and how `${commit("main")}` and `${commit("multiplication^")}`
+are both based on `${commit("main^")}`, for example.
 
 
 <h2>Pushing a branch</h2>
 
-<p>Run <code>git push</code> to upload the current branch to GitHub.
-For example, we are currently on the <code>multiplication</code> branch,
-so <code>git push</code> will push that branch to GitHub.
+<p>Run `git push` to upload the current branch to GitHub.
+For example, we are currently on the `multiplication` branch,
+so `git push` will push that branch to GitHub.
 
 <%self:runcommands>
 $ git status
@@ -240,29 +240,29 @@ Branch 'multiplication' set up to track remote branch 'multiplication' from 'ori
 </%self:runcommands>
 
 <p>Now Git will remember that you already ran the command it suggested,
-and <code>git push</code> without anything else after it will work next time.
-This is branch-specific though, so you need to do the <code>--set-upstream</code> thing once for each branch.
+and `git push` without anything else after it will work next time.
+This is branch-specific though, so you need to do the `--set-upstream` thing once for each branch.
 
-<p>In GitHub, there should be a menu where you can choose a branch and it says <code>main</code> by default.
-You should now see a <code>multiplication</code> branch in that menu,
-and if you click it and then open <code>calculator.py</code>, you should see the multiplication code.
+<p>In GitHub, there should be a menu where you can choose a branch and it says `main` by default.
+You should now see a `multiplication` branch in that menu,
+and if you click it and then open `calculator.py`, you should see the multiplication code.
 
-<p>The <code>git push</code> output contains a link for creating a pull request. We will use it later.
+<p>The `git push` output contains a link for creating a pull request. We will use it later.
 (TODO: write about pull requests)
 
 
 <h2>Merges and merge conflicts</h2>
 
 <p>Now we have two versions of the calculator program:
-the code on <code>main</code> can subtract correctly, and the code on <code>multiplication</code> can multiply.
+the code on `main` can subtract correctly, and the code on `multiplication` can multiply.
 
 <%self:runcommands>
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Next we want to combine the changes from the <code>multiplication</code> branch into the <code>main</code> branch
-so that on <code>main</code>, subtraction and multiplication both work, and we no longer need the <code>multiplication</code> branch.
-This is called <strong>merging</strong> the multiplication branch into <code>main</code>.
+<p>Next we want to combine the changes from the `multiplication` branch into the `main` branch
+so that on `main`, subtraction and multiplication both work, and we no longer need the `multiplication` branch.
+This is called <strong>merging</strong> the multiplication branch into `main`.
 
 <p>Before merging, you need to go to the branch where you want the result to be:
 
@@ -277,20 +277,20 @@ $ git merge multiplication
 $ git status
 </%self:runcommands>
 
-<p>Git tried to combine the changes (<code>Auto-merging calculator.py</code>),
-but it couldn't do it (<code>Automatic merge failed</code>)
-because the two branches contain conflicting changes (<code>CONFLICT</code>).
+<p>Git tried to combine the changes (`Auto-merging calculator.py`),
+but it couldn't do it (`Automatic merge failed`)
+because the two branches contain conflicting changes (`CONFLICT`).
 In these cases, git needs your help.
 
-<p>Open <code>calculator.py</code> in your editor. You should see this:
+<p>Open `calculator.py` in your editor. You should see this:
 
 <%self:code lang="python" read="calculator.py" />
 
-<p>The code on main (current branch, aka <code>HEAD</code>) is between <code><<<<<<<</code> and <code>=======</code>.
+<p>The code on main (current branch, aka `HEAD`) is between `<<<<<<<` and `=======`.
 That's the correct subtraction code.
-The code on <code>multiplication</code> branch is between <code>=======</code> and <code>>>>>>>></code>.
+The code on `multiplication` branch is between `=======` and `>>>>>>>`.
 Now you have to combine it all together:
-you need to include the <code>*</code> code and make sure that the subtraction code actually subtracts.
+you need to include the `*` code and make sure that the subtraction code actually subtracts.
 Like this:
 
 <%self:code lang="python" write="calculator.py">
@@ -315,14 +315,14 @@ $ python3 calculator.py 7 - 3
 $ python3 calculator.py 2 "*" 3
 </%self:runcommands>
 
-<p>Let's ask <code>git status</code> what we should do next:
+<p>Let's ask `git status` what we should do next:
 
 <%self:runcommands>
 $ git status
 </%self:runcommands>
 
-<p>The relevant part is <code>(use "git add <file>..." to mark resolution)</code>,
-which means that once the conflicts are fixed, we should <code>git add</code> the file.
+<p>The relevant part is `(use "git add <file>..." to mark resolution)`,
+which means that once the conflicts are fixed, we should `git add` the file.
 Let's do that:
 
 <%self:runcommands>
@@ -332,16 +332,16 @@ $ git commit
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>The default commit message, <code>Merge branch 'multiplication'</code>, is very recognizable:
+<p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
 
 <h2>Deleting a branch</h2>
 
-<p>Because we have now merged <code>multiplication</code> into <code>main</code>,
-we no longer need the <code>multiplication</code> branch and we can delete it.
+<p>Because we have now merged `multiplication` into `main`,
+we no longer need the `multiplication` branch and we can delete it.
 
-<p>Let's start with <code>git branch -D</code>:
+<p>Let's start with `git branch -D`:
 
 <%self:runcommands>
 $ git log --oneline --graph --all
@@ -349,7 +349,7 @@ $ git branch -D multiplication
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>We can see that <code>origin/multiplication</code> wasn't deleted, so the branch is still on GitHub.
+<p>We can see that `origin/multiplication` wasn't deleted, so the branch is still on GitHub.
 Let's delete it from GitHub too:
 
 <%self:runcommands>
@@ -359,5 +359,5 @@ To https://github.com/username/reponame
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>For whatever reason, you need to specify <code>origin</code> in the <code>git push</code> command.
-As usual, <code>origin</code> means GitHub.
+<p>For whatever reason, you need to specify `origin` in the `git push` command.
+As usual, `origin` means GitHub.
