@@ -6,5 +6,5 @@ set -e
 while true
 do
     env/bin/python build.py || true
-    inotifywait -e CLOSE_WRITE *.py mako-templates/*.html
+    inotifywait -e CLOSE_WRITE $(git ls-files)
 done
