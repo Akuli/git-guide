@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+<html>
+    <head>
+        <title>Branches</title>
+        <style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments .hll { background-color: #ffffcc }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+    </head>
+    <body>
+        <h1>Branches</h1>
+        
+
+
+<p>Suppose you are working on a calculator program.
+You start working on a new multiplication feature,
+and you have already <a href="committing.html">committed and pushed</a> several times.
+The code is still WIP (Work In Progress, far from done);
+it errors when you try to run it, for example.
+Then someone discovers a bug, and you want to fix it right away.
+But now you have a problem: you can't work on the bug
+because you are in the middle of working on multiplication and the code is still WIP.
+
+<p>To prevent this situation, you can make a new <strong>branch</strong> when you start working on multiplication,
+and then put all your commits to the new multiplication branch.
+Commits on the new branch don't affect the rest of your project,
+and you can start fixing the bug at any time.
+
+<p>Next we go through this process in practice.
+
+
+<h2>The setup</h2>
+
+<p>We will work on the following code.
+
+
+    <div class="code-container">
+        
+
+                <span>Create calculator.py with this content:</span>
+            
+
+        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+<p>In case you are not familiar with Python code, this program is meant to be called from command line,
+and it uses 3 command line arguments to do a calculation.
+Like this, for example (use <code>py</code> instead of <code>python3</code> on Windows):
+
+
+    <pre>$ python3 calculator.py 1 + 2
+3
+
+$ python3 calculator.py 7 - 3
+10
+
+</pre>
+
+
+<p>The subtraction doesn't work; this is the bug that we will fix later.
+Let's <a href="committing.html">commit</a> the code:
+
+
+    <pre>$ git status
+On branch main
+Your branch is up to date with &#39;origin/main&#39;.
+
+Untracked files:
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
+        calculator.py
+
+nothing added to commit but untracked files present (use &#34;git add&#34; to track)
+
+$ git add calculator.py
+
+$ git status
+On branch main
+Your branch is up to date with &#39;origin/main&#39;.
+
+Changes to be committed:
+  (use &#34;git restore --staged &lt;file&gt;...&#34; to unstage)
+        new file:   calculator.py
+
+
+$ git commit -m &#34;create calculator.py&#34;
+[main ae414d9] create calculator.py
+ 1 file changed, 10 insertions(+)
+ create mode 100644 calculator.py
+
+$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 1 commit.
+  (use &#34;git push&#34; to publish your local commits)
+
+nothing to commit, working tree clean
+
+</pre>
+
+
+
+<h2>Branch basics</h2>
+
+<p>When I work with branches, I constantly use the following command to check what's going on,
+similarly to <code>git status</code>:
+
+
+    <pre>$ git log --oneline --graph --all
+* ae414d9 (HEAD -&gt; main) create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>We already saw <code>--oneline</code> <a href="committing.html#looking-at-previous-commits">last time</a>.
+I will explain <code>--graph</code> and <code>--all</code> soon.
+
+<p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.
+GitHub's name for the default branch used to be <code>master</code>,
+and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
+
+<p>Seeing <code>main</code> next to <code>ae414d9</code> means that
+<code>ae414d9</code> is the latest commit on <code>main</code>.
+Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
+so <code>29e0ab7</code> next to it means that the latest commit we pushed is <code>29e0ab7</code>.
+
+<p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
+Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
+
+<p>Let's make a new branch:
+
+
+    <pre>$ git checkout -b multiplication
+Switched to a new branch &#39;multiplication&#39;
+
+$ git status
+On branch multiplication
+nothing to commit, working tree clean
+
+$ git log --oneline --graph --all
+* ae414d9 (HEAD -&gt; multiplication, main) create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
+The latest commit on the <code>multiplication</code> branch is <code>ae414d9</code>, same as on <code>main</code>.
+
+<p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
+the <code>-b</code> means that a new branch is created.
+
+
+    <pre>$ git checkout main
+Switched to branch &#39;main&#39;
+Your branch is ahead of &#39;origin/main&#39; by 1 commit.
+  (use &#34;git push&#34; to publish your local commits)
+
+$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 1 commit.
+  (use &#34;git push&#34; to publish your local commits)
+
+nothing to commit, working tree clean
+
+$ git log --oneline --graph --all
+* ae414d9 (HEAD -&gt; main, multiplication) create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+$ git checkout multiplication
+Switched to branch &#39;multiplication&#39;
+
+$ git status
+On branch multiplication
+nothing to commit, working tree clean
+
+$ git log --oneline --graph --all
+* ae414d9 (HEAD -&gt; multiplication, main) create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>On the <code>multiplication</code> branch, let's create the multiplication code:
+
+
+    <div class="code-container">
+        
+
+            <span>Add to end of calculator.py:</span>
+            
+
+        <div class="pygments"><pre><span></span><span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_unmber</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+<p>The new multiplication code is buggy, but let's try it and commit it anyway.
+We need to quote <code>*</code> because it is a special character on the terminal;
+it is good to know how that works, but I won't explain it here because I want to focus on git.
+
+
+    <pre>$ python3 calculator.py 2 &#34;*&#34; 3
+Traceback (most recent call last):
+  File &#34;/tmp/tmpkx5mxkfz/working_dir/reponame/calculator.py&#34;, line 12, in &lt;module&gt;
+    print(first_number * second_unmber)
+NameError: name &#39;second_unmber&#39; is not defined
+
+$ git add calculator.py
+
+$ git diff --cached
+diff --git a/calculator.py b/calculator.py
+index 4b57a5f..eabc67c 100644
+--- a/calculator.py
++++ b/calculator.py
+@@ -8,3 +8,5 @@ if operation == &#34;+&#34;:
+     print(first_number + second_number)
+ elif operation == &#34;-&#34;:
+     print(first_number + second_number)
++elif operation == &#34;*&#34;:
++    print(first_number * second_unmber)
+
+$ git commit -m &#34;multiplication code, not working yet&#34;
+[multiplication 56d41c3] multiplication code, not working yet
+ 1 file changed, 2 insertions(+)
+
+$ git log --oneline --graph --all
+* 56d41c3 (HEAD -&gt; multiplication) multiplication code, not working yet
+* ae414d9 (main) create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Note how the <code>main</code> branch was left behind when we committed;
+our latest commit is only on the <code>multiplication</code> branch, because we did <code>git checkout multiplication</code> before committing.
+
+<p>Let's leave the multiplication branch for now...
+
+
+    <pre>$ git checkout main
+Switched to branch &#39;main&#39;
+Your branch is ahead of &#39;origin/main&#39; by 1 commit.
+  (use &#34;git push&#34; to publish your local commits)
+
+</pre>
+
+
+<p>...and fix the subtraction bug by changing just the last line:
+
+
+    <div class="code-container">
+        
+
+            <span>Replace last line of calculator.py with this:</span>
+            
+
+        <div class="pygments"><pre><span></span>    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+<p>Let's commit the fix:
+
+
+    <pre>$ git add calculator.py
+
+$ git diff --cached
+diff --git a/calculator.py b/calculator.py
+index 4b57a5f..28264b8 100644
+--- a/calculator.py
++++ b/calculator.py
+@@ -7,4 +7,4 @@ second_number = int(sys.argv[3])
+ if operation == &#34;+&#34;:
+     print(first_number + second_number)
+ elif operation == &#34;-&#34;:
+-    print(first_number + second_number)
++    print(first_number - second_number)
+
+$ git commit -m &#34;fix subtraction bug&#34;
+[main e11f48c] fix subtraction bug
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+nothing to commit, working tree clean
+
+$ git log --oneline --graph --all
+* e11f48c (HEAD -&gt; main) fix subtraction bug
+| * 56d41c3 (multiplication) multiplication code, not working yet
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Now you can see what the <code>--graph</code> does: it shows how commits are based on other commits,
+drawing a Y-shaped graph at left in this case.
+
+<p>Without <code>--all</code>, git hides some branches.
+For example, if you are on <code>main</code>, you won't see the <code>multiplication</code> branch:
+
+
+    <pre>$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+nothing to commit, working tree clean
+
+$ git log --oneline --graph
+* e11f48c (HEAD -&gt; main) fix subtraction bug
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>I guess this might be useful if you have many unrelated branches and you want to ignore them,
+but I always use <code>--all</code>.
+
+
+<h2>Think about "is based on" instead of "is newer than"</h2>
+
+<p>Let's go back to the multiplication branch.
+
+    <pre>$ git checkout multiplication
+Switched to branch &#39;multiplication&#39;
+
+$ git log --oneline --graph --all
+* e11f48c (main) fix subtraction bug
+| * 56d41c3 (HEAD -&gt; multiplication) multiplication code, not working yet
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Now let's fix the multiplication bug by changing the last line:
+
+
+    <div class="code-container">
+        
+
+            <span>Replace last line of calculator.py with this:</span>
+            
+
+        <div class="pygments"><pre><span></span>    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+<p>Let's try it out and then commit the result:
+
+
+    <pre>$ python3 calculator.py 2 &#34;*&#34; 3
+6
+
+$ git add calculator.py
+
+$ git diff --cached
+diff --git a/calculator.py b/calculator.py
+index eabc67c..56a6f0e 100644
+--- a/calculator.py
++++ b/calculator.py
+@@ -9,4 +9,4 @@ if operation == &#34;+&#34;:
+ elif operation == &#34;-&#34;:
+     print(first_number + second_number)
+ elif operation == &#34;*&#34;:
+-    print(first_number * second_unmber)
++    print(first_number * second_number)
+
+$ git commit -m &#34;fix multiplication bug&#34;
+[multiplication f40b81e] fix multiplication bug
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git log --oneline --graph --all
+* e11f48c (main) fix subtraction bug
+| * f40b81e (HEAD -&gt; multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Now the subtraction fix <code>e11f48c</code> shows up
+below the first multiplication commit <code>56d41c3</code>,
+even though the multiplication commit is older.
+In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
+
+<p>If you really want to, you can ask git to sort by commit time by adding <code>--date-order</code>:
+
+
+    <pre>$ git log --oneline --graph --all --date-order
+* e11f48c (main) fix subtraction bug
+| * f40b81e (HEAD -&gt; multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>As you can see, it just looks messier this way, which is probably why this is not the default.
+I don't use <code>--date-order</code> because I don't actually care about
+which of two commits on different branches is newer and which is older;
+I just want to see what commits each branch contains,
+and how <code>e11f48c</code> and <code>56d41c3</code>
+are both based on <code>ae414d9</code>, for example.
+
+
+<h2>Pushing a branch</h2>
+
+<p>Run <code>git push</code> to upload the current branch to GitHub.
+For example, we are currently on the <code>multiplication</code> branch,
+so <code>git push</code> will push that branch to GitHub.
+
+
+    <pre>$ git status
+On branch multiplication
+nothing to commit, working tree clean
+
+$ git push
+fatal: The current branch multiplication has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin multiplication
+
+
+</pre>
+
+
+<p>This error message is confusing,
+but just copy/paste the command it suggests and run it.
+
+
+    <pre>$ git push --set-upstream origin multiplication
+Username for &#39;https://github.com&#39;: username
+Password for &#39;https://username@github.com&#39;:
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 4 local objects.
+remote:
+remote: Create a pull request for &#39;multiplication&#39; on GitHub by visiting:
+remote:      https://github.com/username/reponame/pull/new/multiplication
+remote:
+To https://github.com/username/reponame
+ * [new branch]      multiplication -&gt; multiplication
+Branch &#39;multiplication&#39; set up to track remote branch &#39;multiplication&#39; from &#39;origin&#39;.
+
+</pre>
+
+
+<p>Now Git will remember that you already ran the command it suggested,
+and <code>git push</code> without anything else after it will work next time.
+This is branch-specific though, so you need to do the <code>--set-upstream</code> thing once for each branch.
+
+<p>In GitHub, there should be a menu where you can choose a branch and it says <code>main</code> by default.
+You should now see a <code>multiplication</code> branch in that menu,
+and if you click it and then open <code>calculator.py</code>, you should see the multiplication code.
+
+<p>The <code>git push</code> output contains a link for creating a pull request. We will use it later.
+(TODO: write about pull requests)
+
+
+<h2>Merges and merge conflicts</h2>
+
+<p>Now we have two versions of the calculator program:
+the code on <code>main</code> can subtract correctly, and the code on <code>multiplication</code> can multiply.
+
+
+    <pre>$ git log --oneline --graph --all
+* e11f48c (main) fix subtraction bug
+| * f40b81e (HEAD -&gt; multiplication, origin/multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>Next we want to combine the changes from the <code>multiplication</code> branch into the <code>main</code> branch
+so that on <code>main</code>, subtraction and multiplication both work, and we no longer need the <code>multiplication</code> branch.
+This is called <strong>merging</strong> the multiplication branch into <code>main</code>.
+
+<p>Before merging, you need to go to the branch where you want the result to be:
+
+
+    <pre>$ git checkout main
+Switched to branch &#39;main&#39;
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+</pre>
+
+
+<p>Now we can merge.
+
+
+    <pre>$ git merge multiplication
+Auto-merging calculator.py
+CONFLICT (content): Merge conflict in calculator.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run &#34;git commit&#34;)
+  (use &#34;git merge --abort&#34; to abort the merge)
+
+Unmerged paths:
+  (use &#34;git add &lt;file&gt;...&#34; to mark resolution)
+        both modified:   calculator.py
+
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+
+</pre>
+
+
+<p>Git tried to combine the changes (<code>Auto-merging calculator.py</code>),
+but it couldn't do it (<code>Automatic merge failed</code>)
+because the two branches contain conflicting changes (<code>CONFLICT</code>).
+In these cases, git needs your help.
+
+<p>Open <code>calculator.py</code> in your editor. You should see this:
+
+
+    <div class="code-container">
+        
+
+            
+
+        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="o">=======</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">multiplication</span>
+</pre></div>
+
+    </div>
+
+
+<p>The code on main (current branch, aka <code>HEAD</code>) is between <code><<<<<<<</code> and <code>=======</code>.
+That's the correct subtraction code.
+The code on <code>multiplication</code> branch is between <code>=======</code> and <code>>>>>>>></code>.
+Now you have to combine it all together:
+you need to include the <code>*</code> code and make sure that the subtraction code actually subtracts.
+Like this:
+
+
+    <div class="code-container">
+        
+
+                <span>Change the content of calculator.py to this:</span>
+            
+
+        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+<p>Let's check whether we combined it correctly:
+
+
+    <pre>$ python3 calculator.py 7 - 3
+4
+
+$ python3 calculator.py 2 &#34;*&#34; 3
+6
+
+</pre>
+
+
+<p>Let's ask <code>git status</code> what we should do next:
+
+
+    <pre>$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run &#34;git commit&#34;)
+  (use &#34;git merge --abort&#34; to abort the merge)
+
+Unmerged paths:
+  (use &#34;git add &lt;file&gt;...&#34; to mark resolution)
+        both modified:   calculator.py
+
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+
+</pre>
+
+
+<p>The relevant part is <code>(use "git add <file>..." to mark resolution)</code>,
+which means that once the conflicts are fixed, we should <code>git add</code> the file.
+Let's do that:
+
+
+    <pre>$ git add calculator.py
+
+$ git status
+On branch main
+Your branch is ahead of &#39;origin/main&#39; by 2 commits.
+  (use &#34;git push&#34; to publish your local commits)
+
+All conflicts fixed but you are still merging.
+  (use &#34;git commit&#34; to conclude merge)
+
+Changes to be committed:
+        modified:   calculator.py
+
+
+$ git commit
+hint: Waiting for your editor to close the file...
+[main 1d2dc45] Merge branch &#39;multiplication&#39;
+
+$ git log --oneline --graph --all
+*   1d2dc45 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+|\  
+| * f40b81e (origin/multiplication, multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+* | e11f48c fix subtraction bug
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>The default commit message, <code>Merge branch 'multiplication'</code>, is very recognizable:
+when people see it in git logs, they immediately know what that commit does.
+
+
+<h2>Deleting a branch</h2>
+
+<p>Because we have now merged <code>multiplication</code> into <code>main</code>,
+we no longer need the <code>multiplication</code> branch and we can delete it.
+
+<p>Let's start with <code>git branch -D</code>:
+
+
+    <pre>$ git log --oneline --graph --all
+*   1d2dc45 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+|\  
+| * f40b81e (origin/multiplication, multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+* | e11f48c fix subtraction bug
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+$ git branch -D multiplication
+Deleted branch multiplication (was f40b81e).
+
+$ git log --oneline --graph --all
+*   1d2dc45 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+|\  
+| * f40b81e (origin/multiplication) fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+* | e11f48c fix subtraction bug
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>We can see that <code>origin/multiplication</code> wasn't deleted, so the branch is still on GitHub.
+Let's delete it from GitHub too:
+
+
+    <pre>$ git push --delete origin multiplication
+To https://github.com/username/reponame
+ - [deleted]         multiplication
+
+$ git log --oneline --graph --all
+*   1d2dc45 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+|\  
+| * f40b81e fix multiplication bug
+| * 56d41c3 multiplication code, not working yet
+* | e11f48c fix subtraction bug
+|/  
+* ae414d9 create calculator.py
+* 29e0ab7 (origin/main, origin/HEAD) add better description to README
+* ba38bb1 Initial commit
+
+</pre>
+
+
+<p>For whatever reason, you need to specify <code>origin</code> in the <code>git push</code> command.
+As usual, <code>origin</code> means GitHub.
+
+
+            <hr />
+            <a href="index.html">Back to front page</a>
+    </body>
+</html>
