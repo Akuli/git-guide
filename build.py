@@ -6,7 +6,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import time
 
 from mako.lookup import TemplateLookup
 
@@ -32,9 +31,17 @@ class CommandRunner:
             'user.name': '',
         }
         self.working_dir.mkdir()
+        self.fake_time = 1622133500  # seconds since epoch
 
     def run_command(self, bash_command):
         print("  ", bash_command)
+
+        # Make sure commit timestamps differ. Otherwise the output order of
+        # 'git log --oneline --graph --all' can vary randomly.
+        #
+        # Using a prime number helps make the commit times seemingly random.
+        self.fake_time += 7
+
         if bash_command == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
@@ -56,11 +63,6 @@ class CommandRunner:
         # For example:  git config --global user.name "yourusername"
         bash_command = bash_command.replace('--global', '')
 
-        # Make sure commit timestamps differ. Otherwise the output order of
-        # 'git log --oneline --graph --all' can vary randomly.
-#        if bash_command.startswith('git commit'):
-#            time.sleep(1)
-
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
         # programs to think so. For example:
@@ -78,6 +80,11 @@ class CommandRunner:
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             cwd=self.working_dir,
+            env={
+                **os.environ,
+                'GIT_AUTHOR_DATE': f'{self.fake_time} +0200',
+                'GIT_COMMITTER_DATE': f'{self.fake_time} +0200',
+            },
         ).stdout
         output = output.expandtabs(8)
         output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
