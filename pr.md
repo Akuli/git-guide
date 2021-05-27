@@ -13,6 +13,7 @@ Thus the command for cloning should look like this:
 ```
 $ git clone https://github.com/YOURusername/reponame
 ```
+
 Once this is done, you can finally start editing the code. Make all the changes you need, and when you're done with it (with preferably the final code working),
 it's time to send it back to the github - to your forked copy of the repo. This is done in three steps. First step is to add the file you've just edited. If you are
 unsure which file it was, simply navigate to your cloned repo folder in git cmd command line (cd *repofolder*) and use command 'git status', which will return all

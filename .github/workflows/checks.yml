@@ -12,10 +12,12 @@ jobs:
       - run: sudo apt -y install aspell
       - run: ./spellcheck.sh
 
-  run_commands:
+  build_and_linkchecker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: python3 run_commands.py
-      - run: git diff --exit-code
+      - run: pip install -r requirements.txt
+      - run: python3 build.py
+      - run: pip install git+https://github.com/linkchecker/linkchecker.git
+      - run: linkchecker build/*.html
