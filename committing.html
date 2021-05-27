@@ -1215,7 +1215,7 @@ nothing to commit, working tree clean
 
 
 <p>If you get an error saying <code>fatal: not a git repository</code>,
-you forgot to <code>cd</code> to the cloned repo as shown <a href="getting-started.html#cloning-the-repo">here</a>.
+you forgot to <code>cd</code> to the cloned repo as shown <a href="getting-started.html#cloning">here</a>.
 
 <p>We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
@@ -1374,7 +1374,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main e817133] add better description to README
+[main 8b64873] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -1415,7 +1415,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   fe59cc3..e817133  main -&gt; main
+   2d0ccef..8b64873  main -&gt; main
 
 </pre>
 
@@ -1431,15 +1431,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-commit e81713305f5d3bcb56c42610d4ad0c2369d01a9c (HEAD -&gt; main, origin/main, origin/HEAD)
+commit 8b64873c781fe0c298a22b231158a27ca9ceb424 (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-commit fe59cc302f934c0c5fd1842035f9829b9ff79d1d
+commit 2d0ccef7d5e7fa1a52666d9d8d8d0d0e48f62ac4
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 19:12:54 2021 +0000
+Date:   Thu May 27 21:20:28 2021 +0000
 
     Initial commit
 
@@ -1454,22 +1454,22 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-e817133 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
-fe59cc3 Initial commit
+8b64873 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
+2d0ccef Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>e81713305f5d3bcb56c42610d4ad0c2369d01a9c</code>.
+For example, the hash of our latest commit is <code>8b64873c781fe0c298a22b231158a27ca9ceb424</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>e817133</code> and <code>e81713305f5d3bcb56c42610d4ad0c2369d01a9c</code> refer to the same commit.
+so <code>8b64873</code> and <code>8b64873c781fe0c298a22b231158a27ca9ceb424</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show e817133</span>
-commit e81713305f5d3bcb56c42610d4ad0c2369d01a9c (HEAD -&gt; main, origin/main, origin/HEAD)
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 8b64873</span>
+commit 8b64873c781fe0c298a22b231158a27ca9ceb424 (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
