@@ -4,11 +4,16 @@
     import re
     import subprocess
     import textwrap
-    from build import create_runner
+
+    from ansi2html import Ansi2HTMLConverter
+    import colorama
     from pygments import highlight, lexers, formatters
+
+    from build import create_runner
 
     runner = create_runner()   # Runs only once, same runner reused
     pygments_formatter = formatters.HtmlFormatter(cssclass="pygments")
+    ansi_converter = Ansi2HTMLConverter()
 
     def run_git_commands(input_string):
         should_be_empty, *commands_and_outputs = re.split(
@@ -27,9 +32,10 @@
                 output = runner.run_command(command)
                 assert output is not None, command
 
-            result += f'$ {command}\n{output}\n'
+            command_line = colorama.Style.BRIGHT + '$ ' + colorama.Fore.CYAN + command + colorama.Style.RESET_ALL
+            result += command_line + '\n' + output + '\n'
 
-        return result
+        return ansi_converter.convert(result, full=False)
 %>
 
 <%def name="commit(git_ref, long=False)"><%
@@ -41,7 +47,7 @@
 %></%def>
 
 <%def name="runcommands()">
-    <pre>${run_git_commands(capture(caller.body)) | h}</pre>
+    <pre>${run_git_commands(capture(caller.body))}</pre>
 </%def>
 
 <%def name="code(lang='text', write=None, append=None, replacelastline=None, read=None)">
@@ -87,6 +93,7 @@
     <head>
         <title>${title}</title>
         <style>${pygments_formatter.get_style_defs()}</style>
+        ${ansi_converter.produce_headers()}
     </head>
     <body>
         <h1>${title}</h1>

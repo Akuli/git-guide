@@ -76,7 +76,7 @@ class CommandRunner:
         # terminals. But for some reason, the output still goes to the real
         # terminal, so I have to do it in a subprocess and capture its output.
         args = ['bash', '-c', bash_command]
-        output = subprocess.run(
+        return subprocess.run(
             [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -86,12 +86,7 @@ class CommandRunner:
                 'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
                 'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
             },
-        ).stdout
-        output = output.expandtabs(8)
-        output = re.sub(rb"\x1b\[[0-9;]*m", b"", output)  # https://superuser.com/a/380778
-        output = output.replace(b'\r\n', b'\n')  # no idea why needed
-        output = re.sub(rb'.*\r\x1b\[K', b'', output)  # the weird characters seem to mean "forget prev line"
-        return output.decode('utf-8')
+        ).stdout.decode('utf-8').expandtabs(8).replace('\r\n', '\n')
 
 
 def create_runner():
