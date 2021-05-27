@@ -1374,7 +1374,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main fc14ada] add better description to README
+[main e817133] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -1415,7 +1415,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   c85a071..fc14ada  main -&gt; main
+   fe59cc3..e817133  main -&gt; main
 
 </pre>
 
@@ -1431,15 +1431,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-commit fc14ada0f1ac2b2c186d16b5b04836be570813eb (HEAD -&gt; main, origin/main, origin/HEAD)
+commit e81713305f5d3bcb56c42610d4ad0c2369d01a9c (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-commit c85a071f2dd0fe4753f3553ac06eef40f73464fc
+commit fe59cc302f934c0c5fd1842035f9829b9ff79d1d
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 19:04:47 2021 +0000
+Date:   Thu May 27 19:12:54 2021 +0000
 
     Initial commit
 
@@ -1454,22 +1454,22 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-fc14ada (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
-c85a071 Initial commit
+e817133 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
+fe59cc3 Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>fc14ada0f1ac2b2c186d16b5b04836be570813eb</code>.
+For example, the hash of our latest commit is <code>e81713305f5d3bcb56c42610d4ad0c2369d01a9c</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>fc14ada</code> and <code>fc14ada0f1ac2b2c186d16b5b04836be570813eb</code> refer to the same commit.
+so <code>e817133</code> and <code>e81713305f5d3bcb56c42610d4ad0c2369d01a9c</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show fc14ada</span>
-commit fc14ada0f1ac2b2c186d16b5b04836be570813eb (HEAD -&gt; main, origin/main, origin/HEAD)
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show e817133</span>
+commit e81713305f5d3bcb56c42610d4ad0c2369d01a9c (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 

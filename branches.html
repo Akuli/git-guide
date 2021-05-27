@@ -1278,7 +1278,7 @@ Changes to be committed:
 
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "create calculator.py"</span>
-[main 81fa420] create calculator.py
+[main a4910c4] create calculator.py
  1 file changed, 10 insertions(+)
  create mode 100644 calculator.py
 
@@ -1300,9 +1300,9 @@ similarly to <code>git status</code>:
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 81fa420 (HEAD -&gt; main) create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 (HEAD -&gt; main) create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1314,10 +1314,10 @@ I will explain <code>--graph</code> and <code>--all</code> soon.
 GitHub's name for the default branch used to be <code>master</code>,
 and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
 
-<p>Seeing <code>main</code> next to <code>81fa420</code> means that
-<code>81fa420</code> is the latest commit on <code>main</code>.
+<p>Seeing <code>main</code> next to <code>a4910c4</code> means that
+<code>a4910c4</code> is the latest commit on <code>main</code>.
 Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>fc14ada</code> next to it means that the latest commit we pushed is <code>fc14ada</code>.
+so <code>e817133</code> next to it means that the latest commit we pushed is <code>e817133</code>.
 
 <p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
 Above we see <code>(HEAD -&gt; main)</code>, which means that now the current branch is <code>main</code>.
@@ -1333,15 +1333,15 @@ On branch multiplication
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 81fa420 (HEAD -&gt; multiplication, main) create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 (HEAD -&gt; multiplication, main) create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
 
 <p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>81fa420</code>, same as on <code>main</code>.
+The latest commit on the <code>multiplication</code> branch is <code>a4910c4</code>, same as on <code>main</code>.
 
 <p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
 the <code>-b</code> means that a new branch is created.
@@ -1360,9 +1360,9 @@ Your branch is ahead of 'origin/main' by 1 commit.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 81fa420 (HEAD -&gt; main, multiplication) create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 (HEAD -&gt; main, multiplication) create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout multiplication</span>
 Switched to branch 'multiplication'
@@ -1372,9 +1372,9 @@ On branch multiplication
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 81fa420 (HEAD -&gt; multiplication, main) create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 (HEAD -&gt; multiplication, main) create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1402,7 +1402,7 @@ it is good to know how that works, but I won't explain it here because I want to
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 2 "*" 3</span>
 Traceback (most recent call last):
-  File "/tmp/tmp1gipkcez/working_dir/reponame/calculator.py", line 12, in &lt;module&gt;
+  File "/tmp/tmph8chhkka/working_dir/reponame/calculator.py", line 12, in &lt;module&gt;
     print(first_number * second_unmber)
 NameError: name 'second_unmber' is not defined
 
@@ -1421,14 +1421,14 @@ index 4b57a5f..eabc67c 100644
 +    print(first_number * second_unmber)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "multiplication code, not working yet"</span>
-[multiplication 115db06] multiplication code, not working yet
+[multiplication aa3d172] multiplication code, not working yet
  1 file changed, 2 insertions(+)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 115db06 (HEAD -&gt; multiplication) multiplication code, not working yet
-* 81fa420 (main) create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* aa3d172 (HEAD -&gt; multiplication) multiplication code, not working yet
+* a4910c4 (main) create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1480,7 +1480,7 @@ index 4b57a5f..28264b8 100644
 +    print(first_number - second_number)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix subtraction bug"</span>
-[main 82b5553] fix subtraction bug
+[main 573cb08] fix subtraction bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
@@ -1491,12 +1491,12 @@ Your branch is ahead of 'origin/main' by 2 commits.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 82b5553 (HEAD -&gt; main) fix subtraction bug
-| * 115db06 (multiplication) multiplication code, not working yet
+* 573cb08 (HEAD -&gt; main) fix subtraction bug
+| * aa3d172 (multiplication) multiplication code, not working yet
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1516,10 +1516,10 @@ Your branch is ahead of 'origin/main' by 2 commits.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph</span>
-* 82b5553 (HEAD -&gt; main) fix subtraction bug
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* 573cb08 (HEAD -&gt; main) fix subtraction bug
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1536,12 +1536,12 @@ but I always use <code>--all</code>.
 Switched to branch 'multiplication'
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 82b5553 (main) fix subtraction bug
-| * 115db06 (HEAD -&gt; multiplication) multiplication code, not working yet
+* 573cb08 (main) fix subtraction bug
+| * aa3d172 (HEAD -&gt; multiplication) multiplication code, not working yet
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1582,23 +1582,23 @@ index eabc67c..56a6f0e 100644
 +    print(first_number * second_number)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix multiplication bug"</span>
-[multiplication 4900453] fix multiplication bug
+[multiplication 8feefe5] fix multiplication bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 4900453 (HEAD -&gt; multiplication) fix multiplication bug
-* 115db06 multiplication code, not working yet
-| * 82b5553 (main) fix subtraction bug
+* 8feefe5 (HEAD -&gt; multiplication) fix multiplication bug
+* aa3d172 multiplication code, not working yet
+| * 573cb08 (main) fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
 
-<p>Now the subtraction fix <code>82b5553</code> shows up
-below the first multiplication commit <code>115db06</code>,
+<p>Now the subtraction fix <code>573cb08</code> shows up
+below the first multiplication commit <code>aa3d172</code>,
 even though the multiplication commit is older.
 In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
 
@@ -1606,13 +1606,13 @@ In other words, the latest commit is not always first in the output of our <code
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all --date-order</span>
-* 4900453 (HEAD -&gt; multiplication) fix multiplication bug
-| * 82b5553 (main) fix subtraction bug
-* | 115db06 multiplication code, not working yet
+* 8feefe5 (HEAD -&gt; multiplication) fix multiplication bug
+| * 573cb08 (main) fix subtraction bug
+* | aa3d172 multiplication code, not working yet
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1621,8 +1621,8 @@ In other words, the latest commit is not always first in the output of our <code
 I don't use <code>--date-order</code> because I don't actually care about
 which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
-and how <code>82b5553</code> and <code>115db06</code>
-are both based on <code>81fa420</code>, for example.
+and how <code>573cb08</code> and <code>aa3d172</code>
+are both based on <code>a4910c4</code>, for example.
 
 
 <h2>Pushing a branch</h2>
@@ -1690,13 +1690,13 @@ the code on <code>main</code> can subtract correctly, and the code on <code>mult
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* 4900453 (HEAD -&gt; multiplication, origin/multiplication) fix multiplication bug
-* 115db06 multiplication code, not working yet
-| * 82b5553 (main) fix subtraction bug
+* 8feefe5 (HEAD -&gt; multiplication, origin/multiplication) fix multiplication bug
+* aa3d172 multiplication code, not working yet
+| * 573cb08 (main) fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1861,18 +1861,18 @@ Changes to be committed:
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit</span>
 hint: Waiting for your editor to close the file...
-[main 33e7b46] Merge branch 'multiplication'
+[main dd744eb] Merge branch 'multiplication'
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-*   33e7b46 (HEAD -&gt; main) Merge branch 'multiplication'
+*   dd744eb (HEAD -&gt; main) Merge branch 'multiplication'
 |\  
-| * 4900453 (origin/multiplication, multiplication) fix multiplication bug
-| * 115db06 multiplication code, not working yet
-* | 82b5553 fix subtraction bug
+| * 8feefe5 (origin/multiplication, multiplication) fix multiplication bug
+| * aa3d172 multiplication code, not working yet
+* | 573cb08 fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1890,29 +1890,29 @@ we no longer need the <code>multiplication</code> branch and we can delete it.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-*   33e7b46 (HEAD -&gt; main) Merge branch 'multiplication'
+*   dd744eb (HEAD -&gt; main) Merge branch 'multiplication'
 |\  
-| * 4900453 (origin/multiplication, multiplication) fix multiplication bug
-| * 115db06 multiplication code, not working yet
-* | 82b5553 fix subtraction bug
+| * 8feefe5 (origin/multiplication, multiplication) fix multiplication bug
+| * aa3d172 multiplication code, not working yet
+* | 573cb08 fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git branch -D multiplication</span>
-Deleted branch multiplication (was 4900453).
+Deleted branch multiplication (was 8feefe5).
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-*   33e7b46 (HEAD -&gt; main) Merge branch 'multiplication'
+*   dd744eb (HEAD -&gt; main) Merge branch 'multiplication'
 |\  
-| * 4900453 (origin/multiplication) fix multiplication bug
-| * 115db06 multiplication code, not working yet
-* | 82b5553 fix subtraction bug
+| * 8feefe5 (origin/multiplication) fix multiplication bug
+| * aa3d172 multiplication code, not working yet
+* | 573cb08 fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
@@ -1926,15 +1926,15 @@ To https://github.com/username/reponame
  - [deleted]         multiplication
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-*   33e7b46 (HEAD -&gt; main) Merge branch 'multiplication'
+*   dd744eb (HEAD -&gt; main) Merge branch 'multiplication'
 |\  
-| * 4900453 fix multiplication bug
-| * 115db06 multiplication code, not working yet
-* | 82b5553 fix subtraction bug
+| * 8feefe5 fix multiplication bug
+| * aa3d172 multiplication code, not working yet
+* | 573cb08 fix subtraction bug
 |/  
-* 81fa420 create calculator.py
-* fc14ada (origin/main, origin/HEAD) add better description to README
-* c85a071 Initial commit
+* a4910c4 create calculator.py
+* e817133 (origin/main, origin/HEAD) add better description to README
+* fe59cc3 Initial commit
 
 </pre>
 
