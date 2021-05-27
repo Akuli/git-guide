@@ -8,11 +8,8 @@
     import subprocess
     import tempfile
     import textwrap
-
-    from run_commands import create_runner
-
+    from build import create_runner
     from pygments import highlight, lexers, formatters
-
 
     # This code runs only once, we use the same runner for everything
     runner = create_runner()
@@ -97,8 +94,10 @@
 
 <html>
     <head>
+        <title>${title}</title>
     </head>
     <body>
+        <h1>${title}</h1>
         ${self.body()}
 
         % if filename != 'index.html':
