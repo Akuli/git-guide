@@ -1,5 +1,5 @@
 <%inherit file="base.html"/>
-<%namespace file="base.html" import="runcommands"/>
+<%namespace file="base.html" import="*" />
 
 <h1>Branches</h1>
 
@@ -74,9 +74,10 @@ I will explain <code>--graph</code> and <code>--all</code> soon.
 GitHub's name for the default branch used to be <code>master</code>,
 and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
 
-<p>Seeing <code>main</code> next to <code>78b197b</code> means that <code>78b197b</code> is the latest commit on <code>main</code>.
+<p>Seeing <code>main</code> next to <code>${commit("main")}</code> means that
+<code>${commit("main")}</code> is the latest commit on <code>main</code>.
 Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>5bf1f4e</code> next to it means that the latest commit we pushed is <code>5bf1f4e</code>.
+so <code>${commit("origin/main")}</code> next to it means that the latest commit we pushed is <code>${commit("origin/main")}</code>.
 
 <p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
 Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
@@ -90,7 +91,7 @@ $ git log --oneline --graph --all
 </%self:runcommands>
 
 <p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>78b197b</code>, same as on <code>main</code>.
+The latest commit on the <code>multiplication</code> branch is <code>${commit("multiplication")}</code>, same as on <code>main</code>.
 
 <p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
 the <code>-b</code> means that a new branch is created.
@@ -187,7 +188,8 @@ $ git commit -m "fix multiplication bug"
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>Now the subtraction fix <code>a713ead</code> shows up below the first multiplication commit <code>9900601</code>,
+<p>Now the subtraction fix <code>${commit("main")}</code> shows up
+below the first multiplication commit <code>${commit("multiplication^")}</code>,
 even though the multiplication commit is older.
 In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
 
@@ -201,7 +203,8 @@ $ git log --oneline --graph --all --date-order
 I don't use <code>--date-order</code> because I don't actually care about
 which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
-and how <code>9900601</code> and <code>a713ead</code> are both based on <code>78b197b</code>, for example.
+and how <code>${commit("main")}</code> and <code>${commit("multiplication^")}</code>
+are both based on <code>${commit("main^")}</code>, for example.
 
 
 <h2>Pushing a branch</h2>
@@ -216,10 +219,26 @@ $ git push
 </%self:runcommands>
 
 <p>This error message is confusing,
-but you can copy/paste the command it suggests and run that instead.
+but just copy/paste the command it suggests and run it.
 
 <%self:runcommands>
 $ git push --set-upstream origin multiplication
+Username for 'https://github.com': username
+Password for 'https://username@github.com':
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 4 local objects.
+remote:
+remote: Create a pull request for 'multiplication' on GitHub by visiting:
+remote:      https://github.com/username/reponame/pull/new/multiplication
+remote:
+To https://github.com/username/reponame
+ * [new branch]      multiplication -> multiplication
+Branch 'multiplication' set up to track remote branch 'multiplication' from 'origin'.
 </%self:runcommands>
 
 <p>Now Git will remember that you already ran the command it suggested,
@@ -260,31 +279,14 @@ $ git merge multiplication
 $ git status
 </%self:runcommands>
 
-<p>Git tried to combine the changes (`Auto-merging calculator.py`),
-but it couldn't do it (`Automatic merge failed`)
-because the two branches contain conflicting changes (`CONFLICT`).
+<p>Git tried to combine the changes (<code>Auto-merging calculator.py</code>),
+but it couldn't do it (<code>Automatic merge failed</code>)
+because the two branches contain conflicting changes (<code>CONFLICT</code>).
 In these cases, git needs your help.
 
 <p>Open <code>calculator.py</code> in your editor. You should see this:
 
-[comment]: # (Indented instead of triple backtick to prevent my editor thinking this file has merge conflicts)
-
-    import sys
-
-    first_number = int(sys.argv[1])
-    operation = sys.argv[2]
-    second_number = int(sys.argv[3])
-
-    if operation == "+":
-        print(first_number + second_number)
-    elif operation == "-":
-    <<<<<<< HEAD
-        print(first_number - second_number)
-    =======
-        print(first_number + second_number)
-    elif operation == "*":
-        print(first_number * second_number)
-    >>>>>>> multiplication
+<%self:code lang="python" read="calculator.py" />
 
 <p>The code on main (current branch, aka <code>HEAD</code>) is between <code><<<<<<<</code> and <code>=======</code>.
 That's the correct subtraction code.
@@ -354,6 +356,8 @@ Let's delete it from GitHub too:
 
 <%self:runcommands>
 $ git push --delete origin multiplication
+To https://github.com/username/reponame
+ - [deleted]         multiplication
 $ git log --oneline --graph --all
 </%self:runcommands>
 

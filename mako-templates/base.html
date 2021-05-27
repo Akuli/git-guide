@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <%!
     import atexit
+    import collections
     import pathlib
-    from pygments import highlight, lexers, formatters
     import re
     import shutil
+    import subprocess
     import tempfile
     import textwrap
+
     from run_commands import create_runner
+
+    from pygments import highlight, lexers, formatters
+
 
     # This code runs only once, we use the same runner for everything
     runner = create_runner()
@@ -32,28 +37,61 @@
             result += f'$ {command}\n{output}\n'
 
         return result
+
 %>
+
+<%def name="commit(git_ref, long=False)"><%
+    result = subprocess.check_output(
+        ['git', 'rev-parse', git_ref],
+        cwd=runner.working_dir,
+    ).decode('ascii').strip()
+    return result if long else result[:7]
+%></%def>
 
 <%def name="runcommands()">
     <pre>${run_git_commands(capture(caller.body)) | h}</pre>
 </%def>
 
-<%def name="code(lang='text', write=None, append=None, replacelastline=None)">
+<%def name="code(lang='text', write=None, append=None, replacelastline=None, read=None)">
     <div class="code-container">
+        <% code = capture(caller.body).lstrip("\n") %>
+
         % if write is not None:
             % if (runner.working_dir / write).exists():
                 <span>Change the content of ${write} to this:</span>
             % else:
                 <span>Create ${write} with this content:</span>
             % endif
-            <% (runner.working_dir / write).write_text(capture(caller.body)) %>
+            <% (runner.working_dir / write).write_text(code) %>
+        % elif append is not None:
+            <span>Add to end of ${append}:</span>
+            <%
+                with (runner.working_dir / append).open("a") as file:
+                    file.write(code)
+            %>
+        % elif replacelastline is not None:
+            <span>Replace last line of ${replacelastline} with this:</span>
+            <%
+                assert code.endswith("\n") and code.count("\n") == 1
+
+                with (runner.working_dir / replacelastline).open("r") as file:
+                    lines = file.readlines()
+                lines[-1] = code
+                with (runner.working_dir / replacelastline).open("w") as file:
+                    file.writelines(lines)
+            %>
+        % elif read is not None:
+            <%
+                assert not code.strip()
+                code = (runner.working_dir / read).read_text()
+            %>
         % endif
 
         <!--
         TODO: figure out why code no highlight
         TODO: pygments.lexers.get_lexer_by_name
         -->
-        ${highlight(capture(caller.body), lexers.Python3Lexer(), formatters.HtmlFormatter())}
+        ${highlight(code, lexers.Python3Lexer(), formatters.HtmlFormatter())}
     </div>
 </%def>
 
