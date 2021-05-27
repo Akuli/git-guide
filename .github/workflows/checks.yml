@@ -12,10 +12,9 @@ jobs:
       - run: sudo apt -y install aspell
       - run: ./spellcheck.sh
 
-  run_commands:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: python3 run_commands.py
-      - run: git diff --exit-code
+      - run: python3 build.py
