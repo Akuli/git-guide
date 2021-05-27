@@ -83,8 +83,8 @@ class CommandRunner:
             cwd=self.working_dir,
             env={
                 **os.environ,
-                'GIT_AUTHOR_DATE': f'{self.fake_time} +0200',
-                'GIT_COMMITTER_DATE': f'{self.fake_time} +0200',
+                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
+                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
             },
         ).stdout
         output = output.expandtabs(8)
