@@ -1249,7 +1249,7 @@ Your branch is up to date with 'origin/main'.
 Changes not staged for commit:
   (use "git add &lt;file&gt;..." to update what will be committed)
   (use "git restore &lt;file&gt;..." to discard changes in working directory)
-        modified:   README.md
+        <span class="ansi31">modified:   README.md</span>
 
 no changes added to commit (use "git add" and/or "git commit -a")
 
@@ -1275,21 +1275,21 @@ Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
-        modified:   README.md
+        <span class="ansi32">modified:   README.md</span>
 
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
-diff --git a/README.md b/README.md
-index a93665e..610acc2 100644
---- a/README.md
-+++ b/README.md
-@@ -1,2 +1,5 @@
+<span class="ansi1">diff --git a/README.md b/README.md</span>
+<span class="ansi1">index a93665e..610acc2 100644</span>
+<span class="ansi1">--- a/README.md</span>
+<span class="ansi1">+++ b/README.md</span>
+<span class="ansi36">@@ -1,2 +1,5 @@</span>
  # reponame
--The description of the repository is here by default
-+This is a better description of this repository. Imagine you just wrote it
-+into your text editor.
-+
-+More text here. Lorem ipsum blah blah blah.
+<span class="ansi31">-The description of the repository is here by default</span>
+<span class="ansi32">+</span><span class="ansi32">This is a better description of this repository. Imagine you just wrote it</span>
+<span class="ansi32">+</span><span class="ansi32">into your text editor.</span>
+<span class="ansi32">+</span>
+<span class="ansi32">+</span><span class="ansi32">More text here. Lorem ipsum blah blah blah.</span>
 
 </pre>
 
@@ -1312,7 +1312,7 @@ Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
-        modified:   README.md
+        <span class="ansi32">modified:   README.md</span>
 
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git restore --staged README.md</span>
@@ -1324,7 +1324,7 @@ Your branch is up to date with 'origin/main'.
 Changes not staged for commit:
   (use "git add &lt;file&gt;..." to update what will be committed)
   (use "git restore &lt;file&gt;..." to discard changes in working directory)
-        modified:   README.md
+        <span class="ansi31">modified:   README.md</span>
 
 no changes added to commit (use "git add" and/or "git commit -a")
 
@@ -1336,7 +1336,7 @@ Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
-        modified:   README.md
+        <span class="ansi32">modified:   README.md</span>
 
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
@@ -1374,7 +1374,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main 8b64873] add better description to README
+[main 9690ee6] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -1415,7 +1415,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   2d0ccef..8b64873  main -&gt; main
+   7fed3fc..9690ee6  main -&gt; main
 
 </pre>
 
@@ -1431,15 +1431,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-commit 8b64873c781fe0c298a22b231158a27ca9ceb424 (HEAD -&gt; main, origin/main, origin/HEAD)
+<span class="ansi33">commit 9690ee6d571c33e3b369146b530fe9a878422649</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-commit 2d0ccef7d5e7fa1a52666d9d8d8d0d0e48f62ac4
+<span class="ansi33">commit 7fed3fc0568a9a84165196ecd87d82581ebf38be</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 21:20:28 2021 +0000
+Date:   Thu May 27 22:00:55 2021 +0000
 
     Initial commit
 
@@ -1454,38 +1454,38 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-8b64873 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
-2d0ccef Initial commit
+<span class="ansi33">9690ee6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">7fed3fc</span> Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>8b64873c781fe0c298a22b231158a27ca9ceb424</code>.
+For example, the hash of our latest commit is <code>9690ee6d571c33e3b369146b530fe9a878422649</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>8b64873</code> and <code>8b64873c781fe0c298a22b231158a27ca9ceb424</code> refer to the same commit.
+so <code>9690ee6</code> and <code>9690ee6d571c33e3b369146b530fe9a878422649</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 8b64873</span>
-commit 8b64873c781fe0c298a22b231158a27ca9ceb424 (HEAD -&gt; main, origin/main, origin/HEAD)
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 9690ee6</span>
+<span class="ansi33">commit 9690ee6d571c33e3b369146b530fe9a878422649</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-diff --git a/README.md b/README.md
-index a93665e..610acc2 100644
---- a/README.md
-+++ b/README.md
-@@ -1,2 +1,5 @@
+<span class="ansi1">diff --git a/README.md b/README.md</span>
+<span class="ansi1">index a93665e..610acc2 100644</span>
+<span class="ansi1">--- a/README.md</span>
+<span class="ansi1">+++ b/README.md</span>
+<span class="ansi36">@@ -1,2 +1,5 @@</span>
  # reponame
--The description of the repository is here by default
-+This is a better description of this repository. Imagine you just wrote it
-+into your text editor.
-+
-+More text here. Lorem ipsum blah blah blah.
+<span class="ansi31">-The description of the repository is here by default</span>
+<span class="ansi32">+</span><span class="ansi32">This is a better description of this repository. Imagine you just wrote it</span>
+<span class="ansi32">+</span><span class="ansi32">into your text editor.</span>
+<span class="ansi32">+</span>
+<span class="ansi32">+</span><span class="ansi32">More text here. Lorem ipsum blah blah blah.</span>
 
 </pre>
 
