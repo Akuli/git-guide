@@ -19,5 +19,5 @@ jobs:
       - uses: actions/setup-python@v2
       - run: pip install -r requirements.txt
       - run: python3 build.py
-      - run: pip install linkchecker
+      - run: pip install git+https://github.com/linkchecker/linkchecker.git
       - run: linkchecker build/*.html
