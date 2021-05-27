@@ -27,6 +27,7 @@ class CommandRunner:
         self.git_config = {
             'core.pager': 'cat',
             'core.editor': 'true',  # Don't change commit message (for merge commits)
+            'color.ui': 'true',
             # Ensure we get same error as with freshly installed git
             'user.email': '',
             'user.name': '',
@@ -107,7 +108,6 @@ def create_runner():
         git config user.email "you@example.com"
         git config user.name "yourusername"
         git config receive.denyCurrentBranch ignore
-        git config color.ui true
         git checkout -q -b main
         git add .
         git commit -q -m "Initial commit"
