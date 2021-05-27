@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <%!
     import atexit
     import collections
@@ -11,8 +12,8 @@
     from build import create_runner
     from pygments import highlight, lexers, formatters
 
-    # This code runs only once, we use the same runner for everything
-    runner = create_runner()
+    runner = create_runner()   # Runs only once, same runner reused
+    pygments_formatter = formatters.HtmlFormatter(cssclass="pygments")
 
     def run_git_commands(input_string):
         should_be_empty, *commands_and_outputs = re.split(
@@ -84,17 +85,14 @@
             %>
         % endif
 
-        <!--
-        TODO: figure out why code no highlight
-        TODO: pygments.lexers.get_lexer_by_name
-        -->
-        ${highlight(code, lexers.Python3Lexer(), formatters.HtmlFormatter())}
+        ${highlight(code, lexers.get_lexer_by_name(lang), pygments_formatter)}
     </div>
 </%def>
 
 <html>
     <head>
         <title>${title}</title>
+        <style>${pygments_formatter.get_style_defs()}</style>
     </head>
     <body>
         <h1>${title}</h1>
