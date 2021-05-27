@@ -173,7 +173,7 @@ Changes to be committed:
 
 
 $ git commit -m &#34;create calculator.py&#34;
-[main 8fdf70c] create calculator.py
+[main 31a88dc] create calculator.py
  1 file changed, 10 insertions(+)
  create mode 100644 calculator.py
 
@@ -195,9 +195,9 @@ similarly to <code>git status</code>:
 
 
     <pre>$ git log --oneline --graph --all
-* 8fdf70c (HEAD -&gt; main) create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc (HEAD -&gt; main) create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -209,10 +209,10 @@ I will explain <code>--graph</code> and <code>--all</code> soon.
 GitHub's name for the default branch used to be <code>master</code>,
 and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
 
-<p>Seeing <code>main</code> next to <code>8fdf70c</code> means that
-<code>8fdf70c</code> is the latest commit on <code>main</code>.
+<p>Seeing <code>main</code> next to <code>31a88dc</code> means that
+<code>31a88dc</code> is the latest commit on <code>main</code>.
 Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>65d623a</code> next to it means that the latest commit we pushed is <code>65d623a</code>.
+so <code>656a830</code> next to it means that the latest commit we pushed is <code>656a830</code>.
 
 <p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
 Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
@@ -228,15 +228,15 @@ On branch multiplication
 nothing to commit, working tree clean
 
 $ git log --oneline --graph --all
-* 8fdf70c (HEAD -&gt; multiplication, main) create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc (HEAD -&gt; multiplication, main) create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
 
 <p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>8fdf70c</code>, same as on <code>main</code>.
+The latest commit on the <code>multiplication</code> branch is <code>31a88dc</code>, same as on <code>main</code>.
 
 <p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
 the <code>-b</code> means that a new branch is created.
@@ -255,9 +255,9 @@ Your branch is ahead of &#39;origin/main&#39; by 1 commit.
 nothing to commit, working tree clean
 
 $ git log --oneline --graph --all
-* 8fdf70c (HEAD -&gt; main, multiplication) create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc (HEAD -&gt; main, multiplication) create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 $ git checkout multiplication
 Switched to branch &#39;multiplication&#39;
@@ -267,9 +267,9 @@ On branch multiplication
 nothing to commit, working tree clean
 
 $ git log --oneline --graph --all
-* 8fdf70c (HEAD -&gt; multiplication, main) create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc (HEAD -&gt; multiplication, main) create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -297,7 +297,7 @@ it is good to know how that works, but I won't explain it here because I want to
 
     <pre>$ python3 calculator.py 2 &#34;*&#34; 3
 Traceback (most recent call last):
-  File &#34;/tmp/tmp6r93ubf2/working_dir/reponame/calculator.py&#34;, line 12, in &lt;module&gt;
+  File &#34;/tmp/tmpx_66sfxs/working_dir/reponame/calculator.py&#34;, line 12, in &lt;module&gt;
     print(first_number * second_unmber)
 NameError: name &#39;second_unmber&#39; is not defined
 
@@ -316,14 +316,14 @@ index 4b57a5f..eabc67c 100644
 +    print(first_number * second_unmber)
 
 $ git commit -m &#34;multiplication code, not working yet&#34;
-[multiplication a9d1725] multiplication code, not working yet
+[multiplication 2b996b3] multiplication code, not working yet
  1 file changed, 2 insertions(+)
 
 $ git log --oneline --graph --all
-* a9d1725 (HEAD -&gt; multiplication) multiplication code, not working yet
-* 8fdf70c (main) create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 2b996b3 (HEAD -&gt; multiplication) multiplication code, not working yet
+* 31a88dc (main) create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -375,7 +375,7 @@ index 4b57a5f..28264b8 100644
 +    print(first_number - second_number)
 
 $ git commit -m &#34;fix subtraction bug&#34;
-[main cad80df] fix subtraction bug
+[main f511560] fix subtraction bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 $ git status
@@ -386,12 +386,12 @@ Your branch is ahead of &#39;origin/main&#39; by 2 commits.
 nothing to commit, working tree clean
 
 $ git log --oneline --graph --all
-* cad80df (HEAD -&gt; main) fix subtraction bug
-| * a9d1725 (multiplication) multiplication code, not working yet
+* f511560 (HEAD -&gt; main) fix subtraction bug
+| * 2b996b3 (multiplication) multiplication code, not working yet
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -411,10 +411,10 @@ Your branch is ahead of &#39;origin/main&#39; by 2 commits.
 nothing to commit, working tree clean
 
 $ git log --oneline --graph
-* cad80df (HEAD -&gt; main) fix subtraction bug
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* f511560 (HEAD -&gt; main) fix subtraction bug
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -431,12 +431,12 @@ but I always use <code>--all</code>.
 Switched to branch &#39;multiplication&#39;
 
 $ git log --oneline --graph --all
-* cad80df (main) fix subtraction bug
-| * a9d1725 (HEAD -&gt; multiplication) multiplication code, not working yet
+* f511560 (main) fix subtraction bug
+| * 2b996b3 (HEAD -&gt; multiplication) multiplication code, not working yet
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -477,23 +477,23 @@ index eabc67c..56a6f0e 100644
 +    print(first_number * second_number)
 
 $ git commit -m &#34;fix multiplication bug&#34;
-[multiplication 17dcf76] fix multiplication bug
+[multiplication 4cfc9c8] fix multiplication bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 $ git log --oneline --graph --all
-* 17dcf76 (HEAD -&gt; multiplication) fix multiplication bug
-* a9d1725 multiplication code, not working yet
-| * cad80df (main) fix subtraction bug
+* 4cfc9c8 (HEAD -&gt; multiplication) fix multiplication bug
+* 2b996b3 multiplication code, not working yet
+| * f511560 (main) fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
 
-<p>Now the subtraction fix <code>cad80df</code> shows up
-below the first multiplication commit <code>a9d1725</code>,
+<p>Now the subtraction fix <code>f511560</code> shows up
+below the first multiplication commit <code>2b996b3</code>,
 even though the multiplication commit is older.
 In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
 
@@ -501,13 +501,13 @@ In other words, the latest commit is not always first in the output of our <code
 
 
     <pre>$ git log --oneline --graph --all --date-order
-* 17dcf76 (HEAD -&gt; multiplication) fix multiplication bug
-| * cad80df (main) fix subtraction bug
-* | a9d1725 multiplication code, not working yet
+* 4cfc9c8 (HEAD -&gt; multiplication) fix multiplication bug
+| * f511560 (main) fix subtraction bug
+* | 2b996b3 multiplication code, not working yet
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -516,8 +516,8 @@ In other words, the latest commit is not always first in the output of our <code
 I don't use <code>--date-order</code> because I don't actually care about
 which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
-and how <code>cad80df</code> and <code>a9d1725</code>
-are both based on <code>8fdf70c</code>, for example.
+and how <code>f511560</code> and <code>2b996b3</code>
+are both based on <code>31a88dc</code>, for example.
 
 
 <h2>Pushing a branch</h2>
@@ -585,13 +585,13 @@ the code on <code>main</code> can subtract correctly, and the code on <code>mult
 
 
     <pre>$ git log --oneline --graph --all
-* 17dcf76 (HEAD -&gt; multiplication, origin/multiplication) fix multiplication bug
-* a9d1725 multiplication code, not working yet
-| * cad80df (main) fix subtraction bug
+* 4cfc9c8 (HEAD -&gt; multiplication, origin/multiplication) fix multiplication bug
+* 2b996b3 multiplication code, not working yet
+| * f511560 (main) fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -756,18 +756,18 @@ Changes to be committed:
 
 $ git commit
 hint: Waiting for your editor to close the file...
-[main b6e2499] Merge branch &#39;multiplication&#39;
+[main 5ee6576] Merge branch &#39;multiplication&#39;
 
 $ git log --oneline --graph --all
-*   b6e2499 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+*   5ee6576 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
 |\  
-| * 17dcf76 (origin/multiplication, multiplication) fix multiplication bug
-| * a9d1725 multiplication code, not working yet
-* | cad80df fix subtraction bug
+| * 4cfc9c8 (origin/multiplication, multiplication) fix multiplication bug
+| * 2b996b3 multiplication code, not working yet
+* | f511560 fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -785,29 +785,29 @@ we no longer need the <code>multiplication</code> branch and we can delete it.
 
 
     <pre>$ git log --oneline --graph --all
-*   b6e2499 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+*   5ee6576 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
 |\  
-| * 17dcf76 (origin/multiplication, multiplication) fix multiplication bug
-| * a9d1725 multiplication code, not working yet
-* | cad80df fix subtraction bug
+| * 4cfc9c8 (origin/multiplication, multiplication) fix multiplication bug
+| * 2b996b3 multiplication code, not working yet
+* | f511560 fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 $ git branch -D multiplication
-Deleted branch multiplication (was 17dcf76).
+Deleted branch multiplication (was 4cfc9c8).
 
 $ git log --oneline --graph --all
-*   b6e2499 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+*   5ee6576 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
 |\  
-| * 17dcf76 (origin/multiplication) fix multiplication bug
-| * a9d1725 multiplication code, not working yet
-* | cad80df fix subtraction bug
+| * 4cfc9c8 (origin/multiplication) fix multiplication bug
+| * 2b996b3 multiplication code, not working yet
+* | f511560 fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
@@ -821,15 +821,15 @@ To https://github.com/username/reponame
  - [deleted]         multiplication
 
 $ git log --oneline --graph --all
-*   b6e2499 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
+*   5ee6576 (HEAD -&gt; main) Merge branch &#39;multiplication&#39;
 |\  
-| * 17dcf76 fix multiplication bug
-| * a9d1725 multiplication code, not working yet
-* | cad80df fix subtraction bug
+| * 4cfc9c8 fix multiplication bug
+| * 2b996b3 multiplication code, not working yet
+* | f511560 fix subtraction bug
 |/  
-* 8fdf70c create calculator.py
-* 65d623a (origin/main, origin/HEAD) add better description to README
-* e2007db Initial commit
+* 31a88dc create calculator.py
+* 656a830 (origin/main, origin/HEAD) add better description to README
+* e253723 Initial commit
 
 </pre>
 
