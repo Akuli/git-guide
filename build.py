@@ -3,6 +3,8 @@ import shutil
 
 from mako.lookup import TemplateLookup
 
+from pagelist import pagelist
+
 
 MAKO_TEMPLATES = pathlib.Path('mako-templates')
 BUILD = pathlib.Path('build')
@@ -16,11 +18,7 @@ BUILD.mkdir()
 
 lookup = TemplateLookup(directories=['./mako-templates'])
 
-for source_path in MAKO_TEMPLATES.glob("*.html"):
-    if source_path.name == 'base.html':
-        continue
-
-    template = lookup.get_template(source_path.name)
-    target_path = BUILD / source_path.name
-    print("Writing", target_path)
-    target_path.write_text(template.render(), encoding='utf-8')
+for filename in [filename for filename, *junk in pagelist] + ['index.html']:
+    template = lookup.get_template(filename)
+    print("Writing", BUILD / filename)
+    (BUILD / filename).write_text(template.render(filename=filename), encoding='utf-8')

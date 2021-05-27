@@ -15,7 +15,7 @@ Contents:
 ```
 $ python3 -m venv env
 $ source env/bin/activate
-$ pip install mako
+$ pip install mako pygments
 $ python3 build.py
 ```
 

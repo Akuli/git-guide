@@ -5,7 +5,7 @@
 
 <p>Suppose you are working on a calculator program.
 You start working on a new multiplication feature,
-and you have already <a href="committing.md">committed and pushed</a> several times.
+and you have already <a href="committing.html">committed and pushed</a> several times.
 The code is still WIP (Work In Progress, far from done);
 it errors when you try to run it, for example.
 Then someone discovers a bug, and you want to fix it right away.
@@ -22,7 +22,7 @@ and you can start fixing the bug at any time.
 
 <h2>The setup</h2>
 
-<p>Suppose that <code>calculator.py</code> contains the following Python program:
+<p>We will work on the following code.
 
 <%self:code lang="python" write="calculator.py">
 import sys
@@ -47,7 +47,7 @@ $ python3 calculator.py 7 - 3
 </%self:runcommands>
 
 <p>The subtraction doesn't work; this is the bug that we will fix later.
-Let's <a href="committing.md">commit</a> the code:
+Let's <a href="committing.html">commit</a> the code:
 
 <%self:runcommands>
 $ git status
@@ -67,7 +67,7 @@ similarly to <code>git status</code>:
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>We already saw <code>--oneline</code> <a href="committing.md#looking-at-previous-commits">last time</a>.
+<p>We already saw <code>--oneline</code> <a href="committing.html#looking-at-previous-commits">last time</a>.
 I will explain <code>--graph</code> and <code>--all</code> soon.
 
 <p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.

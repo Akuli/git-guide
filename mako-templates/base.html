@@ -2,6 +2,7 @@
 <%!
     import atexit
     import pathlib
+    from pygments import highlight, lexers, formatters
     import re
     import shutil
     import tempfile
@@ -38,7 +39,22 @@
 </%def>
 
 <%def name="code(lang='text', write=None, append=None, replacelastline=None)">
-    <pre>${capture(caller.body) | h}</pre>
+    <div class="code-container">
+        % if write is not None:
+            % if (runner.working_dir / write).exists():
+                <span>Change the content of ${write} to this:</span>
+            % else:
+                <span>Create ${write} with this content:</span>
+            % endif
+            <% (runner.working_dir / write).write_text(capture(caller.body)) %>
+        % endif
+
+        <!--
+        TODO: figure out why code no highlight
+        TODO: pygments.lexers.get_lexer_by_name
+        -->
+        ${highlight(capture(caller.body), lexers.Python3Lexer(), formatters.HtmlFormatter())}
+    </div>
 </%def>
 
 <html>
@@ -46,5 +62,10 @@
     </head>
     <body>
         ${self.body()}
+
+        % if filename != 'index.html':
+            <hr />
+            <a href="index.html">Back to front page</a>
+        % endif
     </body>
 </html>
