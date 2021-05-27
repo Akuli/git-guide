@@ -27,7 +27,7 @@ class CommandRunner:
         self.git_config = {
             'core.pager': 'cat',
             'core.editor': 'true',  # Don't change commit message (for merge commits)
-            'color.ui': 'true',
+            'color.ui': 'always',
             # Ensure we get same error as with freshly installed git
             'user.email': '',
             'user.name': '',
