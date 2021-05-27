@@ -15,7 +15,7 @@ $ git status
 </%self:runcommands>
 
 <p>If you get an error saying `fatal: not a git repository`,
-you forgot to `cd` to the cloned repo as shown <a href="getting-started.html#cloning-the-repo">here</a>.
+you forgot to `cd` to the cloned repo as shown <a href="getting-started.html#cloning">here</a>.
 
 <p>We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
