@@ -4,7 +4,7 @@
 <h1>Committing</h1>
 
 <p>A commit is a pile of changes. For example
-[this commit](https://github.com/Akuli/git-guide/commit/07ee936f719060550b2033ac6501b31d52b8f627)
+<a href="https://github.com/Akuli/git-guide/commit/07ee936f719060550b2033ac6501b31d52b8f627">this commit</a>
 changed two files in this guide:
 it deleted (red) and added (green) several things in <code>getting-started.md</code>,
 and added one line to <code>run_commands.py</code>.
@@ -17,7 +17,7 @@ $ git status
 </%self:runcommands>
 
 <p>If you get an error saying <code>fatal: not a git repository</code>,
-you forgot to <code>cd</code> to the cloned repo as shown [here](getting-started.md#cloning-the-repo).
+you forgot to <code>cd</code> to the cloned repo as shown <a href="getting-started.md#cloning-the-repo">here</a>.
 
 <p>We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
@@ -82,7 +82,7 @@ $ git config --global user.name "yourusername"
 $ git commit -m "add better description to README"
 </%self:runcommands>
 
-<p>The text after <code>-m</code> is a **commit message**.
+<p>The text after <code>-m</code> is a <strong>commit message</strong>.
 Enter something descriptive, such as "add better description to README" in this case;
 finding something from a long list of commits really sucks if the message of every commit is "files edited".
 
@@ -128,7 +128,7 @@ $ git log --oneline
 <p>Here <code>Initial commit</code> is what GitHub creates when you make a new repo,
 and <code>add better description to README</code> is the commit we just created.
 
-<p>Each commit has a unique **commit hash**, sometimes also known as commit ID or SHA.
+<p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
 For example, the hash of our latest commit is <code>5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
 so <code>5bf1f4e</code> and <code>5bf1f4e2101b044e4032b23fe6940f3cd1c9f33f</code> refer to the same commit.

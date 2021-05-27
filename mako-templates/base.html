@@ -37,6 +37,10 @@
     <pre>${run_git_commands(capture(caller.body)) | h}</pre>
 </%def>
 
+<%def name="code(lang='text', write=None, append=None, replacelastline=None)">
+    <pre>${capture(caller.body) | h}</pre>
+</%def>
+
 <html>
     <head>
     </head>

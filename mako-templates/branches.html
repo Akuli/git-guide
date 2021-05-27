@@ -5,14 +5,14 @@
 
 <p>Suppose you are working on a calculator program.
 You start working on a new multiplication feature,
-and you have already [committed and pushed](committing.md) several times.
+and you have already <a href="committing.md">committed and pushed</a> several times.
 The code is still WIP (Work In Progress, far from done);
 it errors when you try to run it, for example.
 Then someone discovers a bug, and you want to fix it right away.
 But now you have a problem: you can't work on the bug
 because you are in the middle of working on multiplication and the code is still WIP.
 
-<p>To prevent this situation, you can make a new **branch** when you start working on multiplication,
+<p>To prevent this situation, you can make a new <strong>branch</strong> when you start working on multiplication,
 and then put all your commits to the new multiplication branch.
 Commits on the new branch don't affect the rest of your project,
 and you can start fixing the bug at any time.
@@ -24,8 +24,7 @@ and you can start fixing the bug at any time.
 
 <p>Suppose that <code>calculator.py</code> contains the following Python program:
 
-```python
-# Write this to calculator.py
+<%self:code lang="python" write="calculator.py">
 import sys
 
 first_number = int(sys.argv[1])
@@ -36,7 +35,7 @@ if operation == "+":
     print(first_number + second_number)
 elif operation == "-":
     print(first_number + second_number)
-```
+</%self:code>
 
 <p>In case you are not familiar with Python code, this program is meant to be called from command line,
 and it uses 3 command line arguments to do a calculation.
@@ -48,7 +47,7 @@ $ python3 calculator.py 7 - 3
 </%self:runcommands>
 
 <p>The subtraction doesn't work; this is the bug that we will fix later.
-Let's [commit](committing.md) the code:
+Let's <a href="committing.md">commit</a> the code:
 
 <%self:runcommands>
 $ git status
@@ -68,7 +67,7 @@ similarly to <code>git status</code>:
 $ git log --oneline --graph --all
 </%self:runcommands>
 
-<p>We already saw <code>--oneline</code> [last time](committing.md#looking-at-previous-commits).
+<p>We already saw <code>--oneline</code> <a href="committing.md#looking-at-previous-commits">last time</a>.
 I will explain <code>--graph</code> and <code>--all</code> soon.
 
 <p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.
@@ -79,7 +78,7 @@ and many projects still have a branch named <code>master</code> instead of a <co
 Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
 so <code>5bf1f4e</code> next to it means that the latest commit we pushed is <code>5bf1f4e</code>.
 
-<p>There is also a notion of **current branch**, which is often called <code>HEAD</code>.
+<p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
 Above we see <code>(HEAD -> main)</code>, which means that now the current branch is <code>main</code>.
 
 <p>Let's make a new branch:
@@ -107,11 +106,10 @@ $ git log --oneline --graph --all
 
 <p>On the <code>multiplication</code> branch, let's create the multiplication code:
 
-```python
-# Add to end of calculator.py (on branch multiplication)
+<%self:code lang="python" append="calculator.py">
 elif operation == "*":
     print(first_number * second_unmber)
-```
+</%self:code>
 
 <p>The new multiplication code is buggy, but let's try it and commit it anyway.
 We need to quote <code>*</code> because it is a special character on the terminal;
@@ -136,10 +134,9 @@ $ git checkout main
 
 <p>...and fix the subtraction bug by changing just the last line:
 
-```python
-# Last line of calculator.py (on branch main)
+<%self:code lang="python" replacelastline="calculator.py">
     print(first_number - second_number)
-```
+</%self:code>
 
 <p>Let's commit the fix:
 
@@ -176,10 +173,9 @@ $ git log --oneline --graph --all
 
 <p>Now let's fix the multiplication bug by changing the last line:
 
-```python
-# Last line of calculator.py (on branch multiplication)
+<%self:code lang="python" replacelastline="calculator.py">
     print(first_number * second_number)
-```
+</%self:code>
 
 <p>Let's try it out and then commit the result:
 
@@ -249,7 +245,7 @@ $ git log --oneline --graph --all
 
 <p>Next we want to combine the changes from the <code>multiplication</code> branch into the <code>main</code> branch
 so that on <code>main</code>, subtraction and multiplication both work, and we no longer need the <code>multiplication</code> branch.
-This is called **merging** the multiplication branch into <code>main</code>.
+This is called <strong>merging</strong> the multiplication branch into <code>main</code>.
 
 <p>Before merging, you need to go to the branch where you want the result to be:
 
@@ -297,8 +293,7 @@ Now you have to combine it all together:
 you need to include the <code>*</code> code and make sure that the subtraction code actually subtracts.
 Like this:
 
-```python
-# Edit calculator.py so that it looks like this
+<%self:code lang="python" write="calculator.py">
 import sys
 
 first_number = int(sys.argv[1])
@@ -311,7 +306,7 @@ elif operation == "-":
     print(first_number - second_number)
 elif operation == "*":
     print(first_number * second_number)
-```
+</%self:code>
 
 <p>Let's check whether we combined it correctly:
 
