@@ -36,18 +36,7 @@ jobs:
       - uses: actions/setup-python@v2
       - run: pip install git+https://github.com/linkchecker/linkchecker.git
       - run: |
-          # Don't know why it needs to be ran separately for each file, finds more errors that way
-          #
-          #    akuli@akuli-desktop:~/git-guide$ head /tmp/*.html
-          #    ==> /tmp/a.html <==
-          #    <h1 id="foo">Hello</h1>
-          #
-          #    ==> /tmp/b.html <==
-          #    <a href="a.html#bar"></a>
-          #    akuli@akuli-desktop:~/git-guide$ linkchecker --config=./linkcheckerrc -a /tmp/b.html
-          #    That's it. 2 links in 2 URLs checked. 1 warning found. 0 errors found.
-          #    akuli@akuli-desktop:~/git-guide$ linkchecker --config=./linkcheckerrc -a /tmp/*.html
-          #    That's it. 2 links in 2 URLs checked. 0 warnings found. 0 errors found.
+          # https://github.com/linkchecker/linkchecker/issues/542
           for file in build/*.html; do
             linkchecker --config=./linkcheckerrc $file
           done
