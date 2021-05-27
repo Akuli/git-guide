@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 
 <%!
-    import atexit
-    import collections
-    import pathlib
     import re
-    import shutil
     import subprocess
-    import tempfile
     import textwrap
     from build import create_runner
     from pygments import highlight, lexers, formatters
@@ -35,7 +30,6 @@
             result += f'$ {command}\n{output}\n'
 
         return result
-
 %>
 
 <%def name="commit(git_ref, long=False)"><%
