@@ -110,6 +110,7 @@ def create_runner():
         git add .
         git commit -q -m "Initial commit"
         git config receive.denyCurrentBranch ignore
+        git config --list
         ''',
         shell=True,
         check=True,
