@@ -135,9 +135,9 @@ def build():
     os.mkdir("build")
 
     lookup = TemplateLookup()
-    for path in pathlib.Path("mako-templates").glob("*.html"):
+    for path in pathlib.Path("mako-templates").glob("*.mako"):
         html_string = re.sub(r'`(.+?)`', _handle_code, path.read_text())
-        lookup.put_string(path.name, html_string)
+        lookup.put_string(path.stem + '.html', html_string)
 
     for filename, title, description in pagelist:
         template = lookup.get_template(filename)
