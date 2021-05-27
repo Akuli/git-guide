@@ -33,8 +33,6 @@ jobs:
         with:
           name: build
           path: build
-      - run: ls
-      - run: ls *
       - uses: actions/setup-python@v2
       - run: pip install git+https://github.com/linkchecker/linkchecker.git
       - name: Run linkchecker
