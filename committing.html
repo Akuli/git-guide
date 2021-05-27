@@ -269,7 +269,7 @@ $ git config --global user.name &#34;yourusername&#34;
 
 
     <pre>$ git commit -m &#34;add better description to README&#34;
-[main 5596a83] add better description to README
+[main f25cb78] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -310,7 +310,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   ec35301..5596a83  main -&gt; main
+   16c229b..f25cb78  main -&gt; main
 
 </pre>
 
@@ -326,15 +326,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre>$ git log
-commit 5596a8316db1377646bc56f5fc8865d47c8221c7 (HEAD -&gt; main, origin/main, origin/HEAD)
+commit f25cb78e4ed0e7b9c7f77f3779b8f567ba462d1d (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 18:40:26 2021 +0200
 
     add better description to README
 
-commit ec3530109b66ca0a6421a1f92555da7d2eb203fe
+commit 16c229bf2a28cff50d811474aaefab7d465f56cc
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 16:52:30 2021 +0000
+Date:   Thu May 27 16:55:08 2021 +0000
 
     Initial commit
 
@@ -349,22 +349,22 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre>$ git log --oneline
-5596a83 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
-ec35301 Initial commit
+f25cb78 (HEAD -&gt; main, origin/main, origin/HEAD) add better description to README
+16c229b Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>5596a8316db1377646bc56f5fc8865d47c8221c7</code>.
+For example, the hash of our latest commit is <code>f25cb78e4ed0e7b9c7f77f3779b8f567ba462d1d</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>5596a83</code> and <code>5596a8316db1377646bc56f5fc8865d47c8221c7</code> refer to the same commit.
+so <code>f25cb78</code> and <code>f25cb78e4ed0e7b9c7f77f3779b8f567ba462d1d</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre>$ git show 5596a83
-commit 5596a8316db1377646bc56f5fc8865d47c8221c7 (HEAD -&gt; main, origin/main, origin/HEAD)
+    <pre>$ git show f25cb78
+commit f25cb78e4ed0e7b9c7f77f3779b8f567ba462d1d (HEAD -&gt; main, origin/main, origin/HEAD)
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 18:40:26 2021 +0200
 
