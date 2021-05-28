@@ -6,7 +6,35 @@
 
 <h2>Installing Git</h2>
 
-<p>TODO
+<details><summary>Windows</summary>
+    <p>Search "git download" on Google. The first result should be at gis-scm.org. Click it.
+    Then click "Windows" and run the installer.
+
+    <p>You can mostly click "Next" in the installer, except in two steps:
+    <ul><li>
+        When Git asks about editors, choose "Use the Nano editor" from the dropdown
+        instead of "Use vim (the ubiquitous text editor)".
+        While vim is powerful and some people love it, it's
+        <a href="https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/">ridiculously difficult</a>
+        to use at first.
+    </li><li>
+        Choose "Use Windows' default console window" instead of "Use MinTTY (the default terminal of MSYS2)".
+        This way you can use Git from cmd.exe or PowerShell, whichever you prefer.
+    </li></ul>
+
+    <p>Of course, you can choose everything however you want,
+    but the above choices should work for most people.
+</details>
+
+<details><summary>Linux</summary>
+    <p>Run `sudo apt install git` on terminal.
+    If you are using a distro that doesn't have `apt`, use whatever it has instead.
+</details>
+
+<details><summary>MacOS</summary>
+    <p>Instructions not written yet.
+    See <a href="https://github.com/Akuli/git-guide/issues/32">issue #32 on GitHub</a>.
+</details>
 
 
 <h2>Making a repo on GitHub</h2>
