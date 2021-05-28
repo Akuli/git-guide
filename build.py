@@ -83,7 +83,8 @@ class CommandRunner:
         #  - 'git log --all --pretty --oneline' should show * on the left side of
         #    commit hashes, just like it does on terminal
         if sys.platform == 'win32':
-            # Just run it in subprocess, supporting powershell syntax
+            # Just run it in subprocess, supporting powershell syntax.
+            # The 'git log' command above won't work, but most things work.
             actual_command = ['powershell', command_string]
         else:
             # The pty module creates pseudo-TTYs, which are essentially fake
