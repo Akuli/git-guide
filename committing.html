@@ -1278,7 +1278,18 @@ Changes to be committed:
         <span class="ansi32">modified:   README.md</span>
 
 
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
+</pre>
+
+
+<p>Notice that now <code>modified: README.md</code> shows up under <code>Changes to be committed</code>
+instead of the previous <code>Changes not staged for commit</code>.
+It also turned green, and in general, green output of <code>git status</code> means "this will be committed".
+
+<p>Before committing, let's look at what is going to be committed.
+According to <code>git status</code>, something changed in <code>README.md</code>, but let's see what exactly changed:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
 <span class="ansi1">diff --git a/README.md b/README.md</span>
 <span class="ansi1">index a93665e..610acc2 100644</span>
 <span class="ansi1">--- a/README.md</span>
@@ -1339,7 +1350,19 @@ Changes to be committed:
         <span class="ansi32">modified:   README.md</span>
 
 
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
+</pre>
+
+
+<p>Without <code>--staged</code>, <code>git restore</code> undoes changes that you saved in the editor but didn't <code>git add</code> yet.
+This is useful when you realize that you wrote something stupid and you want to start over.
+The same goes for <code>git diff</code>: without <code>--staged</code>,
+instead of showing what will be included in the commit, it shows changes that aren't added yet.
+
+<p>When you have added the changes you want and checked with <code>git diff --staged</code>,
+you are ready to <code>git commit</code>, like this:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
 Author identity unknown
 
 *** Please tell me who you are.
@@ -1374,7 +1397,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main 9690ee6] add better description to README
+[main dc97829] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 </pre>
@@ -1415,7 +1438,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   7fed3fc..9690ee6  main -&gt; main
+   2cf2bb9..dc97829  main -&gt; main
 
 </pre>
 
@@ -1431,15 +1454,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit 9690ee6d571c33e3b369146b530fe9a878422649</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 7fed3fc0568a9a84165196ecd87d82581ebf38be</span>
+<span class="ansi33">commit 2cf2bb9e85ddc7321dff35fcd431ff954593ab90</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Thu May 27 22:00:55 2021 +0000
+Date:   Fri May 28 13:48:08 2021 +0000
 
     Initial commit
 
@@ -1454,22 +1477,22 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">9690ee6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">7fed3fc</span> Initial commit
+<span class="ansi33">dc97829</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">2cf2bb9</span> Initial commit
 
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>9690ee6d571c33e3b369146b530fe9a878422649</code>.
+For example, the hash of our latest commit is <code>dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>9690ee6</code> and <code>9690ee6d571c33e3b369146b530fe9a878422649</code> refer to the same commit.
+so <code>dc97829</code> and <code>dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 9690ee6</span>
-<span class="ansi33">commit 9690ee6d571c33e3b369146b530fe9a878422649</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show dc97829</span>
+<span class="ansi33">commit dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
