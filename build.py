@@ -84,7 +84,7 @@ class CommandRunner:
         #    commit hashes, just like it does on terminal
         if sys.platform == 'win32':
             # Just run it in subprocess, supporting powershell syntax.
-            # The 'git log' command above won't work, but most things work.
+            # Output of 'git log' command above won't look right, but most things work.
             actual_command = ['powershell', command_string]
         else:
             # The pty module creates pseudo-TTYs, which are essentially fake
