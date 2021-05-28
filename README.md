@@ -9,6 +9,9 @@ The goal for this guide is to not suck.
 
 ## Developing
 
+You most likely want to edit the files in `mako-templates/`.
+When you have changed something, run these commands (on Windows, `py` instead of `python3` and no `source`)
+
 ```
 $ python3 -m venv env
 $ source env/bin/activate
@@ -16,7 +19,7 @@ $ pip install -r requirements.txt
 $ python3 build.py
 ```
 
-This creates `html` files inside `build/`. Open them with your browser.
+Now open `html/index.html` with your browser.
 
 If you are using a Linux distro that has `apt`, you can use `loop.sh` to
 automatically run `build.py` when something changes,

@@ -35,8 +35,8 @@ class CommandRunner:
         self.working_dir.mkdir()
         self.fake_time = 1622133500  # seconds since epoch
 
-    def run_command(self, bash_command):
-        print("  ", bash_command)
+    def run_command(self, command_string):
+        print("  ", command_string)
 
         # Make sure commit timestamps differ. Otherwise the output order of
         # 'git log --oneline --graph --all' can vary randomly.
@@ -44,9 +44,9 @@ class CommandRunner:
         # Using a prime number helps make the commit times seemingly random.
         self.fake_time += 7
 
-        if bash_command == 'git clone https://github.com/username/reponame':
+        if command_string == 'git clone https://github.com/username/reponame':
             subprocess.run(
-                ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
+                ['git', 'clone', '-q', str(self.fake_github_dir), str(self.working_dir / 'reponame')],
                 check=True,
             )
 
@@ -58,12 +58,12 @@ class CommandRunner:
                 )
             return None  # not used
 
-        if bash_command.startswith('cd '):
-            self.working_dir /= bash_command[3:]
+        if command_string.startswith('cd '):
+            self.working_dir /= command_string[3:]
             return ''  # No output
 
         # For example:  git config --global user.name "yourusername"
-        bash_command = bash_command.replace('--global', '')
+        command_string = command_string.replace(' --global ', ' ')
 
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
@@ -71,14 +71,20 @@ class CommandRunner:
         #  - 'ls' should show file names separated by two spaces, not one file per line
         #  - 'git log --all --pretty --oneline' should show * on the left side of
         #    commit hashes, just like it does on terminal
-        #
-        #
-        # The pty module creates pseudo-TTYs, which are essentially fake
-        # terminals. But for some reason, the output still goes to the real
-        # terminal, so I have to do it in a subprocess and capture its output.
-        args = ['bash', '-c', bash_command]
+        if sys.platform == 'win32':
+            # Just run it in subprocess, supporting powershell syntax.
+            # Output of 'git log' command above won't look right, but most things work.
+            actual_command = ['powershell', command_string]
+        else:
+            # The pty module creates pseudo-TTYs, which are essentially fake
+            # terminals. But for some reason, the output still goes to the real
+            # terminal, so I have to do it in a subprocess and capture its
+            # output.
+            args = ['bash', '-c', command_string]
+            actual_command = [sys.executable, '-c', f'import pty; pty.spawn({str(args)})']
+
         return subprocess.run(
-            [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
+            actual_command,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             cwd=self.working_dir,
@@ -101,21 +107,18 @@ def create_runner():
     )
     (tempdir / 'fake_github' / 'reponame' / 'LICENSE').touch()
     (tempdir / 'fake_github' / 'reponame' / '.gitignore').touch()
-    subprocess.run(
-        '''
-        set -e
-        git init -q
-        git config user.email "you@example.com"
-        git config user.name "yourusername"
-        git config receive.denyCurrentBranch ignore
-        git checkout -q -b main
-        git add .
-        git commit -q -m "Initial commit"
-        ''',
-        shell=True,
-        check=True,
-        cwd=(tempdir / 'fake_github' / 'reponame'),
-    )
+
+    commands = [
+        ['git', 'init', '-q'],
+        ['git', 'config', 'user.email', 'you@example.com'],
+        ['git', 'config', 'user.name', 'yourusername'],
+        ['git', 'config', 'receive.denyCurrentBranch', 'ignore'],
+        ['git', 'checkout', '-q', '-b', 'main'],
+        ['git', 'add', '.'],
+        ['git', 'commit', '-q', '-m', 'Initial commit'],
+    ]
+    for command in commands:
+        subprocess.run(command, check=True, cwd=(tempdir / 'fake_github' / 'reponame'))
     return CommandRunner(tempdir)
 
 

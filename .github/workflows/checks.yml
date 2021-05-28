@@ -13,7 +13,12 @@ jobs:
       - run: ./spellcheck.sh
 
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # TODO: macos build gets stuck somehow
+        #os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+        os: ["ubuntu-latest", "windows-latest"]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -21,7 +26,7 @@ jobs:
       - run: python3 build.py
       - uses: actions/upload-artifact@v2
         with:
-          name: build
+          name: build-${{ matrix.os }}
           path: build
 
   linkchecker:
@@ -31,7 +36,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: build
+          name: build-ubuntu-latest
           path: build
       - uses: actions/setup-python@v2
       - run: pip install git+https://github.com/linkchecker/linkchecker.git
