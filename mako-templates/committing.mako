@@ -49,6 +49,16 @@ We will add only one file, the README.md:
 <%self:runcommands>
 $ git add README.md
 $ git status
+</%self:runcommands>
+
+<p>Notice that now `modified: README.md` shows up under `Changes to be committed`
+instead of the previous `Changes not staged for commit`.
+It also turned green, and in general, green output of `git status` means "this will be committed".
+
+<p>Before committing, let's look at what is going to be committed.
+According to `git status`, something changed in `README.md`, but let's see what exactly changed:
+
+<%self:runcommands>
 $ git diff --staged
 </%self:runcommands>
 
@@ -69,6 +79,17 @@ $ git restore --staged README.md
 $ git status
 $ git add README.md
 $ git status
+</%self:runcommands>
+
+<p>Without `--staged`, `git restore` undoes changes that you saved in the editor but didn't `git add` yet.
+This is useful when you realize that you wrote something stupid and you want to start over.
+The same goes for `git diff`: without `--staged`,
+instead of showing what will be included in the commit, it shows changes that aren't added yet.
+
+<p>When you have added the changes you want and checked with `git diff --staged`,
+you are ready to `git commit`, like this:
+
+<%self:runcommands>
 $ git commit -m "add better description to README"
 </%self:runcommands>
 
