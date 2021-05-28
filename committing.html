@@ -1210,7 +1210,6 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 nothing to commit, working tree clean
-
 </pre>
 
 
@@ -1252,7 +1251,6 @@ Changes not staged for commit:
         <span class="ansi31">modified:   README.md</span>
 
 no changes added to commit (use "git add" and/or "git commit -a")
-
 </pre>
 
 
@@ -1277,7 +1275,6 @@ Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
         <span class="ansi32">modified:   README.md</span>
 
-
 </pre>
 
 
@@ -1301,7 +1298,6 @@ According to <code>git status</code>, something changed in <code>README.md</code
 <span class="ansi32">+</span><span class="ansi32">into your text editor.</span>
 <span class="ansi32">+</span>
 <span class="ansi32">+</span><span class="ansi32">More text here. Lorem ipsum blah blah blah.</span>
-
 </pre>
 
 
@@ -1349,7 +1345,6 @@ Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
         <span class="ansi32">modified:   README.md</span>
 
-
 </pre>
 
 
@@ -1376,7 +1371,6 @@ to set your account's default identity.
 Omit --global to set the identity only in this repository.
 
 fatal: empty ident name (for &lt;&gt;) not allowed
-
 </pre>
 
 
@@ -1389,7 +1383,6 @@ and <code>you@example.com</code> with the email address you used when creating y
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git config --global user.email "you@example.com"</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git config --global user.name "yourusername"</span>
-
 </pre>
 
 
@@ -1397,9 +1390,8 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main dc97829] add better description to README
+[main 5b9bb5e] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
-
 </pre>
 
 
@@ -1416,7 +1408,6 @@ Your branch is ahead of 'origin/main' by 1 commit.
   (use "git push" to publish your local commits)
 
 nothing to commit, working tree clean
-
 </pre>
 
 
@@ -1438,8 +1429,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   2cf2bb9..dc97829  main -&gt; main
-
+   7a86f3b..5b9bb5e  main -&gt; main
 </pre>
 
 
@@ -1454,18 +1444,17 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 5b9bb5eed3380947c456de57993ea66908d488cc</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 2cf2bb9e85ddc7321dff35fcd431ff954593ab90</span>
+<span class="ansi33">commit 7a86f3bf3e7bfc258ea44742b2b97f44bfda98c9</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Fri May 28 13:48:08 2021 +0000
+Date:   Fri May 28 15:28:10 2021 +0000
 
     Initial commit
-
 </pre>
 
 
@@ -1477,22 +1466,21 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">dc97829</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">2cf2bb9</span> Initial commit
-
+<span class="ansi33">5b9bb5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">7a86f3b</span> Initial commit
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</code>.
+For example, the hash of our latest commit is <code>5b9bb5eed3380947c456de57993ea66908d488cc</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>dc97829</code> and <code>dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</code> refer to the same commit.
+so <code>5b9bb5e</code> and <code>5b9bb5eed3380947c456de57993ea66908d488cc</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show dc97829</span>
-<span class="ansi33">commit dc978298dbf34694c3fd55e86fa6c374b1f9d9d3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 5b9bb5e</span>
+<span class="ansi33">commit 5b9bb5eed3380947c456de57993ea66908d488cc</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1509,7 +1497,6 @@ Date:   Thu May 27 16:40:26 2021 +0000
 <span class="ansi32">+</span><span class="ansi32">into your text editor.</span>
 <span class="ansi32">+</span>
 <span class="ansi32">+</span><span class="ansi32">More text here. Lorem ipsum blah blah blah.</span>
-
 </pre>
 
 
