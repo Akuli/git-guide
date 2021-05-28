@@ -46,7 +46,7 @@ class CommandRunner:
 
         if command_string == 'git clone https://github.com/username/reponame':
             subprocess.run(
-                ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
+                ['git', 'clone', '-q', str(self.fake_github_dir), str(self.working_dir / 'reponame')],
                 check=True,
             )
 
@@ -109,21 +109,18 @@ def create_runner():
     )
     (tempdir / 'fake_github' / 'reponame' / 'LICENSE').touch()
     (tempdir / 'fake_github' / 'reponame' / '.gitignore').touch()
-    subprocess.run(
-        '''
-        set -e
-        git init -q
-        git config user.email "you@example.com"
-        git config user.name "yourusername"
-        git config receive.denyCurrentBranch ignore
-        git checkout -q -b main
-        git add .
-        git commit -q -m "Initial commit"
-        ''',
-        shell=True,
-        check=True,
-        cwd=(tempdir / 'fake_github' / 'reponame'),
-    )
+
+    commands = [
+        ['git', 'init', '-q'],
+        ['git', 'config', 'user.email', 'you@example.com'],
+        ['git', 'config', 'user.name', 'yourusername'],
+        ['git', 'config', 'receive.denyCurrentBranch', 'ignore'],
+        ['git', 'checkout', '-q', '-b', 'main'],
+        ['git', 'add', '.'],
+        ['git', 'commit', '-q', '-m', 'Initial commit'],
+    ]
+    for command in commands:
+        subprocess.run(command, check=True, cwd=(tempdir / 'fake_github' / 'reponame'))
     return CommandRunner(tempdir)
 
 
