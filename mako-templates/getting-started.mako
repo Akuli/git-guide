@@ -98,7 +98,7 @@ as <a href="https://github.com/Akuli/git-guide/blob/main/LICENSE">the LICENCE of
 It means downloading a copy of the repo to your computer,
 so that you can edit the files in it and then upload your changes to GitHub.
 
-<p>I will assume you know the basics of using a terminal (or command prompt, if you are using Windows).
+<p>I will assume you know the basics of using a terminal (or command prompt or PowerShell, if you are using Windows).
 In particular, I assume you know how the `cd` command changes the current working directory.
 I will also use `dir` (Windows) or `ls` (e.g. Linux and MacOS) to show what's in the current working directory,
 but you can instead look at the directory with any file manager program.
@@ -138,7 +138,7 @@ and therefore your code should go into the cloned repo folder.
 $ ls
 </%self:runcommands>
 
-<p>If you are using Windows, you will need `dir` instead of `ls`,
+<p>If you are using Windows and you are not using PowerShell, you will need `dir` instead of `ls`,
 and the output will be shown differently than above.
 
 <p>The `.gitignore` file is also there, but `ls` doesn't show file names starting with a dot by default.

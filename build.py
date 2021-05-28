@@ -83,23 +83,19 @@ class CommandRunner:
         #  - 'git log --all --pretty --oneline' should show * on the left side of
         #    commit hashes, just like it does on terminal
         if sys.platform == 'win32':
-            # Windows support isn't great, but maybe you can kinda develop this
-            # project on windows?
-            try:
-                output = subprocess.run(command_string, **subprocess_kwargs).stdout.decode('utf-8')
-            except FileNotFoundError as e:   # e.g. ls
-                output = str(e) + '\n'
+            # Just run it in subprocess, supporting powershell syntax
+            actual_command = ['powershell', command_string]
         else:
             # The pty module creates pseudo-TTYs, which are essentially fake
             # terminals. But for some reason, the output still goes to the real
-            # terminal, so I have to do it in a subprocess and capture its output.
+            # terminal, so I have to do it in a subprocess and capture its
+            # output.
             args = ['bash', '-c', command_string]
-            output = subprocess.run(
-                [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
-                **subprocess_kwargs,
-            ).stdout.decode('utf-8')
+            actual_command = [sys.executable, '-c', f'import pty; pty.spawn({str(args)})']
 
-        return output.expandtabs(8).replace('\r\n', '\n')
+        return subprocess.run(
+            actual_command, **subprocess_kwargs
+        ).stdout.decode('utf-8').expandtabs(8).replace('\r\n', '\n')
 
 
 def create_runner():
