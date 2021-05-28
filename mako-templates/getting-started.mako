@@ -32,8 +32,8 @@
 </details>
 
 <details><summary>MacOS</summary>
-    <p>Instructions not written yet.
-    See <a href="https://github.com/Akuli/git-guide/issues/32">issue #32 on GitHub</a>.
+    <p>You will be asked to install XCode when you use git for the first time.
+    Click "Install" when a popup appears.
 </details>
 
 
