@@ -328,6 +328,15 @@ Let's do that:
 <%self:runcommands>
 $ git add calculator.py
 $ git status
+</%self:runcommands>
+
+As `git status` says, the next step is to commit the result.
+<strong>Do not use `-m` with merge commits</strong> such as this one.
+Instead, write just `git commit`, without anything else after it.
+It will open an editor that already contains a commit message for you;
+just close the editor by pressing Ctrl+X and you are done.
+
+<%self:runcommands>
 $ git commit
 $ git log --oneline --graph --all
 </%self:runcommands>
