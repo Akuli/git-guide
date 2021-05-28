@@ -35,8 +35,8 @@ class CommandRunner:
         self.working_dir.mkdir()
         self.fake_time = 1622133500  # seconds since epoch
 
-    def run_command(self, bash_command):
-        print("  ", bash_command)
+    def run_command(self, command_string):
+        print("  ", command_string)
 
         # Make sure commit timestamps differ. Otherwise the output order of
         # 'git log --oneline --graph --all' can vary randomly.
@@ -44,7 +44,7 @@ class CommandRunner:
         # Using a prime number helps make the commit times seemingly random.
         self.fake_time += 7
 
-        if bash_command == 'git clone https://github.com/username/reponame':
+        if command_string == 'git clone https://github.com/username/reponame':
             subprocess.run(
                 ['git', 'clone', '-q', self.fake_github_dir, self.working_dir / 'reponame'],
                 check=True,
@@ -58,12 +58,23 @@ class CommandRunner:
                 )
             return None  # not used
 
-        if bash_command.startswith('cd '):
-            self.working_dir /= bash_command[3:]
+        if command_string.startswith('cd '):
+            self.working_dir /= command_string[3:]
             return ''  # No output
 
         # For example:  git config --global user.name "yourusername"
-        bash_command = bash_command.replace('--global', '')
+        command_string = command_string.replace(' --global ', ' ')
+
+        subprocess_kwargs = {
+            'stdout': subprocess.PIPE,
+            'stderr': subprocess.STDOUT,
+            'cwd': self.working_dir,
+            'env': {
+                **os.environ,
+                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
+                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
+            },
+        }
 
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
@@ -71,23 +82,24 @@ class CommandRunner:
         #  - 'ls' should show file names separated by two spaces, not one file per line
         #  - 'git log --all --pretty --oneline' should show * on the left side of
         #    commit hashes, just like it does on terminal
-        #
-        #
-        # The pty module creates pseudo-TTYs, which are essentially fake
-        # terminals. But for some reason, the output still goes to the real
-        # terminal, so I have to do it in a subprocess and capture its output.
-        args = ['bash', '-c', bash_command]
-        return subprocess.run(
-            [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            cwd=self.working_dir,
-            env={
-                **os.environ,
-                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
-                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
-            },
-        ).stdout.decode('utf-8').expandtabs(8).replace('\r\n', '\n')
+        if sys.platform == 'win32':
+            # Windows support isn't great, but maybe you can kinda develop this
+            # project on windows?
+            try:
+                output = subprocess.run(command_string, **subprocess_kwargs).stdout.decode('utf-8')
+            except FileNotFoundError as e:   # e.g. ls
+                output = str(e) + '\n'
+        else:
+            # The pty module creates pseudo-TTYs, which are essentially fake
+            # terminals. But for some reason, the output still goes to the real
+            # terminal, so I have to do it in a subprocess and capture its output.
+            args = ['bash', '-c', command_string]
+            output = subprocess.run(
+                [sys.executable, '-c', f'import pty; pty.spawn({str(args)})'],
+                **subprocess_kwargs,
+            ).stdout.decode('utf-8')
+
+        return output.expandtabs(8).replace('\r\n', '\n')
 
 
 def create_runner():
