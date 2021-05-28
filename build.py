@@ -65,17 +65,6 @@ class CommandRunner:
         # For example:  git config --global user.name "yourusername"
         command_string = command_string.replace(' --global ', ' ')
 
-        subprocess_kwargs = {
-            'stdout': subprocess.PIPE,
-            'stderr': subprocess.STDOUT,
-            'cwd': self.working_dir,
-            'env': {
-                **os.environ,
-                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
-                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
-            },
-        }
-
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
         # programs to think so. For example:
@@ -95,7 +84,15 @@ class CommandRunner:
             actual_command = [sys.executable, '-c', f'import pty; pty.spawn({str(args)})']
 
         return subprocess.run(
-            actual_command, **subprocess_kwargs
+            actual_command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            cwd=self.working_dir,
+            env={
+                **os.environ,
+                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
+                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
+            },
         ).stdout.decode('utf-8').expandtabs(8).replace('\r\n', '\n')
 
 
