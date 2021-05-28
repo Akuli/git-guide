@@ -6,7 +6,7 @@
     import textwrap
 
     from ansi2html import Ansi2HTMLConverter
-    import colorama
+    from colorama import Fore, Style
     from pygments import highlight, lexers, formatters
 
     from build import create_runner
@@ -21,7 +21,7 @@
         )
         assert not should_be_empty.strip(), "missing $ at start of commands"
 
-        result = ""
+        parts = []
         for command_and_output in commands_and_outputs:
             command, hard_coded_output = command_and_output.split('\n', maxsplit=1)
             if hard_coded_output.strip():
@@ -32,10 +32,10 @@
                 output = runner.run_command(command)
                 assert output is not None, command
 
-            command_line = colorama.Style.BRIGHT + '$ ' + colorama.Fore.CYAN + command + colorama.Style.RESET_ALL
-            result += command_line + '\n' + output + '\n'
+            parts.append(Style.BRIGHT + '$ ' + Fore.CYAN + command + Style.RESET_ALL)
+            parts.append(output)
 
-        return ansi_converter.convert(result, full=False)
+        return ansi_converter.convert('\n'.join(parts), full=False)
 %>
 
 <%def name="commit(git_ref, long=False)"><%
