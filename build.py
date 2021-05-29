@@ -138,11 +138,19 @@ def build():
         html_string = re.sub(r'`(.+?)`', _handle_code, path.read_text())
         lookup.put_string(path.stem + '.html', html_string)
 
-    for filename, title, description in pagelist:
-        template = lookup.get_template(filename)
-        path = pathlib.Path("build") / filename
+    for index, page in enumerate(pagelist):
+        prev_page = pagelist[index-1] if index >= 2 else (None, None, None)
+        next_page = pagelist[index+1] if 1 <= index < len(pagelist)-1 else (None, None, None)
+
+        kwargs = {}
+        kwargs['filename'], kwargs['title'], kwargs['desc'] = page
+        kwargs['prev_filename'], kwargs['prev_title'], kwargs['prev_desc'] = prev_page
+        kwargs['next_filename'], kwargs['next_title'], kwargs['next_desc'] = next_page
+
+        template = lookup.get_template(kwargs['filename'])
+        path = pathlib.Path("build") / kwargs['filename']
         print("Writing", path)
-        path.write_text(template.render(filename=filename, title=title), encoding='utf-8')
+        path.write_text(template.render(**kwargs), encoding='utf-8')
 
 
 if __name__ == '__main__':

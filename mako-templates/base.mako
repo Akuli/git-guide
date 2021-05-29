@@ -96,12 +96,25 @@
         ${ansi_converter.produce_headers()}
     </head>
     <body>
-        <h1>${title}</h1>
-        ${self.body()}
+        <main>
+            <h1>${title}</h1>
+            ${self.body()}
+        </main>
+
+        <hr />
 
         % if filename != 'index.html':
-            <hr />
-            <a href="index.html">Back to front page</a>
+            <footer>
+                % if prev_filename is not None:
+                    Previous: <a href="${prev_filename}">${prev_title}</a><br />
+                % endif
+
+                % if next_filename is not None:
+                    Next: <a href="${next_filename}">${next_title}</a><br />
+                % endif
+
+                <a href="index.html">Back to front page</a>
+            </footer>
         % endif
     </body>
 </html>
