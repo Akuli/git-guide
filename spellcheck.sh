@@ -7,7 +7,7 @@ function delete_commit_hashes()
     sed 's/\b[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]\b//g'
 }
 
-files=$(find mako-templates -name '*.html' ! -name base.html)
+files=$(find mako-templates -name '*.mako' ! -name base.mako)
 
 ! grep -nowf <(
     # This subcommand outputs misspelled words in all files, one per line
