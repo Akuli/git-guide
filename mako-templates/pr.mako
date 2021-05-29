@@ -3,7 +3,7 @@
 
 <p>A <strong>pull request</strong>, or PR for short, is a bunch of <a href="committing.html">commits</a>
 that the person who created the PR would like to add to a repo.
-Usually a PR fixes a bug, adds a new feature or cleans up the code.
+Usually a PR fixes a bug, adds a new feature or cleans up messy code.
 For example, in <a href="https://github.com/kanga333/comment-hider/pull/28">this PR</a>,
 I added a new feature to kanga333's `comment-hider` repo.
 
@@ -96,8 +96,8 @@ Branch 'division' set up to track remote branch 'division' from 'origin'.
 
 <p>Notice that the `git push` output includes a link.
 Open it in your web browser.
-Alternatively, you can go to either repo on GitHub,
-and you should see big green "Compare &amp; pull request" buttons:
+Alternatively, you can open your fork or the original repo on GitHub,
+and you should see a big and green "Compare &amp; pull request" button:
 
 <p><img src="images/pr-button.png" alt='Big green button says "Compare & pull request"' />
 
@@ -110,10 +110,10 @@ when it shows up in the same list with many other PRs.
 <p>Then click "Create pull request" and wait for someone to review the PR.
 
 
-<%self:h2>Creating a review</%self:h2>
+<%self:h2>Reviewing</%self:h2>
 
 <p>When your repo receives a PR, you shouldn't accept it blindly.
-Usually the PR needs more work, and you should leave feedback.
+Usually the PR needs more work, and you should leave feedback for the person who created it.
 This is called a <strong>code review</strong>, or a <strong>review</strong> for short.
 
 <p>First, go to the "Files changed" tab in the PR:
@@ -134,21 +134,18 @@ For example, I changed `'` to `"`, and briefly explained why.
 <p><img src="images/review-suggestion.png" />
 
 <p>When the comment is done, click "Start a review".
-Add more review comments similarly if needed, and then click "Finish your review" at top left.
+Add more review comments similarly if needed, and then click "Finish your review" at top right.
 Fill in the dialog box that appears and then click "Submit review".
 Once done, your review should look something like this:
 
 <p><img src="images/review-done.png" />
-
-<p>When the PR finally looks good after enough reviewing and fixing, you can merge the PR;
-this merges the branch that the code comes from.
 
 
 <%self:h2>Responding to a review</%self:h2>
 
 <p>Imagine you are the person who wrote the PR.
 When your PR has been reviewed, you need to fix any issues that the reviewer brought up.
-If they left a suggestion, just click "Commit suggestion",
+If they left a suggestion and you agree it's a good idea, just click "Commit suggestion",
 and then confirm by clicking the "Commit changes" button that comes up.
 If not, <a href="committing.html">commit and push</a> more changes to the branch,
 and the changes will automatically appear on GitHub.
@@ -202,7 +199,7 @@ $ git lola
 <p>Note that `git pull` created a merge commit;
 it merges the commit on your computer (`commit created on cloned repo`)
 and the commit created by the "Commit suggestion" button (`Update calculator.py`).
-Therefore everything I said about
+Therefore everything I wrote about
 <a href="branches.html#merges-and-merge-conflicts">merges and merge conflicts</a> applies here too.
 
 <p>As you can see from the `git lola` output, `origin/division` (i.e. the `division` branch on GitHub)
@@ -228,8 +225,8 @@ $ git lola
 After enough reviewing, when the PR looks good, click "Merge pull request".
 As you would expect, this merges the PR author's branch into your main branch.
 
-<p>Many people prefer "Squash and merge",
-which causes the whole pull request to show up as just one commit in `git lola`,
+<p>Many people (including me) like to use "Squash and merge",
+which causes the whole pull request to show up as just one commit in Git logs (e.g. `git lola`),
 regardless of how many commits the PR author actually created.
 You can find that option by clicking the little arrow in the merge button:
 
@@ -238,7 +235,7 @@ You can find that option by clicking the little arrow in the merge button:
 
 <%self:h2>Making another PR</%self:h2>
 
-<p>Imagine you are the person who wrote the PR.
+<p>Imagine you are the person who wrote the division PR.
 While you are waiting for the division PR to get reviewed for the second time, and hopefully merged,
 you look at the code and you notice something:
 it doesn't handle invalid inputs for the operation.
@@ -256,16 +253,16 @@ But before you can run `git checkout -b`, there are a couple gotchas to be aware
 <ul><li>
     <p>Your new PR should be based on what's on the `main` branch,
     not based on what you have on the `division` branch.
-    Otherwise the new PR will also contain the division fixes, which isn't nice for the reviewers;
+    Otherwise the new PR will also contain the division code, which isn't nice for the reviewers;
     they want to review one thing at a time.
-    We can fix this with `git checkout main`,
-    so that `git checkout -b` will create the new branch based on that.
+    Because `git checkout -b` makes the new branch based on your current branch,
+    you can fix this by first switching to the `main` branch.
 </li><li>
     <p>Maybe it's been a while since you cloned the repo,
     and since then, the original repo has gotten other commits and PRs.
     To avoid unnecessary merge conflicts,
     your new PR should be based on the latest commit of the original repo.
-    We can fix this by pulling from the original repo.
+    Pull from the original repo to fix this.
 </li></ul>
 
 <p>For this illustration, suppose that the original repo has gotten two new commits unrelated to your PRs,
@@ -303,7 +300,7 @@ $ git lola
 </%self:runcommands>
 
 <p>With this pull, make sure to specify the <strong>original</strong> repo, not your fork;
-if you find yourself writing your GitHub username to that command, you are likely doing it wrong.
+if you find yourself writing your own GitHub username into the command, you are likely doing it wrong.
 
 <p>You might notice that `origin/main` is left behind, even though the two unrelated commits are on GitHub.
 This is because `origin/main` means your fork's main branch, as that is what you cloned.
@@ -313,18 +310,18 @@ but most people don't bother with updating the `main` branches of their forks.
 <p>From here on, you can make the PR as described above.
 
 
-<%self:h2>Conflicting PRs</%self:h2>
+<%self:h2>Conflicts in a PR</%self:h2>
 
-As explained above, the original repo can change while your PR isn't merged yet.
+<p>As explained above, the original repo can change while your PR isn't merged yet.
 If it changes in a way that conflicts with your PR, you will see this in GitHub:
 
 <p><img src="images/github-conflict.png" />
 
-To solve this, pull from the original repo as above, but do it on your PR branch.
+<p>To solve this, pull from the original repo as above, but do it on your PR branch.
 You will get <a href="branches.html#merges-and-merge-conflicts">merge conflicts</a>
 that you will have to resolve.
 
-For example, if the division PR conflicts, you would do this:
+<p>For example, if the division PR conflicts, you would do this:
 
 <%self:runcommands>
 $ git checkout division
