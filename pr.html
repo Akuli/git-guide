@@ -14,7 +14,7 @@
 
 <html>
     <head>
-        <title>Branches</title>
+        <title>Pull requests</title>
         <style>pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -1197,826 +1197,58 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     </head>
     <body>
         <main>
-            <h1>Branches</h1>
+            <h1>Pull requests</h1>
             
 
 
-<p>Suppose you are working on a calculator program.
-You start working on a new multiplication feature,
-and you have already <a href="committing.html">committed and pushed</a> several times.
-The code is still WIP (Work In Progress, far from done);
-it errors when you try to run it, for example.
-Then someone discovers a bug, and you want to fix it right away.
-But now you have a problem: you can't work on the bug
-because you are in the middle of working on multiplication and the code is still WIP.
+<p>A <strong>pull request</strong>, or PR for short, is a bunch of <a href="committing.html">commits</a>
+that the person who created the PR would like to add to a repo.
+Usually a PR fixes a bug, adds a new feature or cleans up messy code.
+For example, in <a href="https://github.com/kanga333/comment-hider/pull/28">this PR</a>,
+I added a new feature to kanga333's <code>comment-hider</code> repo.
 
-<p>To prevent this situation, you can make a new <strong>branch</strong> when you start working on multiplication,
-and then put all your commits to the new multiplication branch.
-Commits on the new branch don't affect the rest of your project,
-and you can start fixing the bug at any time.
-
-<p>Next we go through this process in practice.
+<p>In most open-source projects, anyone can create a PR,
+and that's the recommended way to contribute to the project.
+For example, kanga333 never gave me any kind of permissions to create a PR. I just did it.
 
 
 
     
 
-    <h2 id="the-setup">
-        The setup<a class="headerlink" href="#the-setup" title="Link to this title">¶</a>
+    <h2 id="making-a-pr">
+        Making a PR<a class="headerlink" href="#making-a-pr" title="Link to this title">¶</a>
     </h2>
 
 
-<p>We will work on the following code.
+<p>Usually you don't have the permissions to <a href="branches.html#pushing-a-branch">push a branch</a>
+directly to the repo where the PR will go.
+To work around that, the first step is to fork the repo.
+It basically means making your own copy of the repo.
+For example,
+<a href="https://github.com/Akuli/comment-hider">github.com/Akuli/comment-hider</a>
+is my fork of
+<a href="https://github.com/kanga333/comment-hider">github.com/kanga333/comment-hider</a>.
 
+<p>To create your own fork repo, open the original repo on GitHub,
+and then click the "Fork" button in the top right corner:
 
-    <div class="code-container">
-        
+<p><img src="images/fork.png" alt='Button that says "Fork", next to "Watch" and "Star" buttons' />
 
-                <span>Create calculator.py with this content:</span>
-            
+<p>Next you can <a href="getting-started.html#cloning-the-repo">clone</a> your fork.
+Make sure you write <strong>your own username</strong> into the command;
+otherwise you clone the original repo, even though you don't have permissions to push there.
+(TODO: what to do if you already cloned the original repo?)
 
-        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
 
-<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
-</pre></div>
 
-    </div>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git clone https://github.com/username/reponame</span>
+Cloning into 'reponame'...
+remote: Enumerating objects: 6, done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 6
+Unpacking objects: 100% (6/6), done.
 
-
-<p>In case you are not familiar with Python code, this program is meant to be called from command line,
-and it uses 3 command line arguments to do a calculation.
-Like this, for example (use <code>py</code> instead of <code>python3</code> on Windows):
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 1 + 2</span>
-3
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 7 - 3</span>
-10
-</pre>
-
-
-<p>The subtraction doesn't work; this is the bug that we will fix later.
-Let's <a href="committing.html">commit</a> the code:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Untracked files:
-  (use "git add &lt;file&gt;..." to include in what will be committed)
-        <span class="ansi31">calculator.py</span>
-
-nothing added to commit but untracked files present (use "git add" to track)
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Changes to be committed:
-  (use "git restore --staged &lt;file&gt;..." to unstage)
-        <span class="ansi32">new file:   calculator.py</span>
-
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "create calculator.py"</span>
-[main a93700d] create calculator.py
- 1 file changed, 10 insertions(+)
- create mode 100644 calculator.py
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-</pre>
-
-
-
-
-    
-
-    <h2 id="branch-basics">
-        Branch basics<a class="headerlink" href="#branch-basics" title="Link to this title">¶</a>
-    </h2>
-
-
-<p>When I work with branches, I constantly use the following command to check what's going on,
-similarly to <code>git status</code>:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>We already saw <code>--oneline</code> <a href="committing.html#looking-at-previous-commits">last time</a>.
-I will explain <code>--graph</code> and <code>--all</code> soon.
-
-<p>By default, there is only one branch. In new GitHub repos, it's called <code>main</code>.
-GitHub's name for the default branch used to be <code>master</code>,
-and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
-
-<p>Seeing <code>main</code> next to <code>a93700d</code> means that
-<code>a93700d</code> is the latest commit on <code>main</code>.
-Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>a03418c</code> next to it means that the latest commit we pushed is <code>a03418c</code>.
-
-<p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
-Above we see <code>(HEAD -&gt; main)</code>, which means that now the current branch is <code>main</code>.
-
-<p>Let's make a new branch:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout -b multiplication</span>
-Switched to a new branch 'multiplication'
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch multiplication
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>a93700d</code>, same as on <code>main</code>.
-
-<p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
-the <code>-b</code> means that a new branch is created.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout main</span>
-Switched to branch 'main'
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout multiplication</span>
-Switched to branch 'multiplication'
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch multiplication
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>On the <code>multiplication</code> branch, let's create the multiplication code:
-
-
-    <div class="code-container">
-        
-
-            <span>Add to end of calculator.py:</span>
-            
-
-        <div class="pygments"><pre><span></span><span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_unmber</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-
-
-<p>The new multiplication code is buggy, but let's try it and commit it anyway.
-We need to quote <code>*</code> because it is a special character on the terminal;
-it is good to know how that works, but I won't explain it here because I want to focus on git.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 2 "*" 3</span>
-Traceback (most recent call last):
-  File "/tmp/tmpfdj__f62/working_dir/reponame/calculator.py", line 12, in &lt;module&gt;
-    print(first_number * second_unmber)
-NameError: name 'second_unmber' is not defined
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
-<span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
-<span class="ansi1">index 4b57a5f..eabc67c 100644</span>
-<span class="ansi1">--- a/calculator.py</span>
-<span class="ansi1">+++ b/calculator.py</span>
-<span class="ansi36">@@ -8,3 +8,5 @@</span> if operation == "+":
-     print(first_number + second_number)
- elif operation == "-":
-     print(first_number + second_number)
-<span class="ansi32">+</span><span class="ansi32">elif operation == "*":</span>
-<span class="ansi32">+</span><span class="ansi32">    print(first_number * second_unmber)</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "multiplication code, not working yet"</span>
-[multiplication b466203] multiplication code, not working yet
- 1 file changed, 2 insertions(+)
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Note how the <code>main</code> branch was left behind when we committed;
-our latest commit is only on the <code>multiplication</code> branch, because we did <code>git checkout multiplication</code> before committing.
-
-<p>Let's leave the multiplication branch for now...
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout main</span>
-Switched to branch 'main'
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-</pre>
-
-
-<p>...and fix the subtraction bug by changing just the last line:
-
-
-    <div class="code-container">
-        
-
-            <span>Replace last line of calculator.py with this:</span>
-            
-
-        <div class="pygments"><pre><span></span>    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-
-
-<p>Let's commit the fix:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
-<span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
-<span class="ansi1">index 4b57a5f..28264b8 100644</span>
-<span class="ansi1">--- a/calculator.py</span>
-<span class="ansi1">+++ b/calculator.py</span>
-<span class="ansi36">@@ -7,4 +7,4 @@</span> second_number = int(sys.argv[3])
- if operation == "+":
-     print(first_number + second_number)
- elif operation == "-":
-<span class="ansi31">-    print(first_number + second_number)</span>
-<span class="ansi32">+</span><span class="ansi32">    print(first_number - second_number)</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix subtraction bug"</span>
-[main 35d1d5e] fix subtraction bug
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
-<span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Now you can see what the <code>--graph</code> does: it shows how commits are based on other commits,
-drawing a Y-shaped graph at left in this case.
-
-<p>Without <code>--all</code>, git hides some branches.
-For example, if you are on <code>main</code>, you won't see the <code>multiplication</code> branch:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>I guess this might be useful if you have many unrelated branches and you want to ignore them,
-but I always use <code>--all</code>.
-
-
-
-    
-
-    <h2 id="git-lola">
-        Git lola<a class="headerlink" href="#git-lola" title="Link to this title">¶</a>
-    </h2>
-
-
-As you can see, <code>git log --oneline --graph --all</code> is a very useful command, but it's a bit long to type.
-Run this:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git config --global alias.lola "log --oneline --graph --all"</span>
-</pre>
-
-
-Now <code>git lola</code> does the same as <code>git log --oneline --graph --all</code>:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
-<span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-You can name the alias however you want,
-but I named it <code>lola</code> for consistency with <a href="http://blog.kfish.org/2010/04/git-lola.html">this blog post</a>,
-which I believe is where the command comes from.
-The commands in the blog post are longer than here because back in 2010,
-<code>--oneline</code> didn't exist and you needed a combination of several other options instead.
-Also, it seems like colored output wasn't turned on by default.
-
-
-
-    
-
-    <h2 id="think-about--is-based-on--instead-of--is-newer-than-">
-        Think about "is based on" instead of "is newer than"<a class="headerlink" href="#think-about--is-based-on--instead-of--is-newer-than-" title="Link to this title">¶</a>
-    </h2>
-
-
-<p>Let's go back to the multiplication branch.
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout multiplication</span>
-Switched to branch 'multiplication'
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
-<span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Now let's fix the multiplication bug by changing the last line:
-
-
-    <div class="code-container">
-        
-
-            <span>Replace last line of calculator.py with this:</span>
-            
-
-        <div class="pygments"><pre><span></span>    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-
-
-<p>Let's try it out and then commit the result:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 2 "*" 3</span>
-6
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
-<span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
-<span class="ansi1">index eabc67c..56a6f0e 100644</span>
-<span class="ansi1">--- a/calculator.py</span>
-<span class="ansi1">+++ b/calculator.py</span>
-<span class="ansi36">@@ -9,4 +9,4 @@</span> if operation == "+":
- elif operation == "-":
-     print(first_number + second_number)
- elif operation == "*":
-<span class="ansi31">-    print(first_number * second_unmber)</span>
-<span class="ansi32">+</span><span class="ansi32">    print(first_number * second_number)</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix multiplication bug"</span>
-[multiplication e252924] fix multiplication bug
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-* <span class="ansi33">b466203</span> multiplication code, not working yet
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Now the subtraction fix <code>35d1d5e</code> shows up
-below the first multiplication commit <code>b466203</code>,
-even though the multiplication commit is older.
-In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
-
-<p>If you really want to, you can ask git to sort by commit time by adding <code>--date-order</code>:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola --date-order</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-* <span class="ansi32">|</span> <span class="ansi33">b466203</span> multiplication code, not working yet
-<span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>As you can see, it just looks messier this way, which is probably why this is not the default.
-I don't use <code>--date-order</code> because I don't actually care about
-which of two commits on different branches is newer and which is older;
-I just want to see what commits each branch contains,
-and how <code>35d1d5e</code> and <code>b466203</code>
-are both based on <code>a93700d</code>, for example.
-
-
-
-    
-
-    <h2 id="pushing-a-branch">
-        Pushing a branch<a class="headerlink" href="#pushing-a-branch" title="Link to this title">¶</a>
-    </h2>
-
-
-<p>Run <code>git push</code> to upload the current branch to GitHub.
-For example, we are currently on the <code>multiplication</code> branch,
-so <code>git push</code> will push that branch to GitHub.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch multiplication
-nothing to commit, working tree clean
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
-fatal: The current branch multiplication has no upstream branch.
-To push the current branch and set the remote as upstream, use
-
-    git push --set-upstream origin multiplication
-
-</pre>
-
-
-<p>This error message is confusing,
-but just copy/paste the command it suggests and run it.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git push --set-upstream origin multiplication</span>
-Username for 'https://github.com': username
-Password for 'https://username@github.com':
-Enumerating objects: 12, done.
-Counting objects: 100% (12/12), done.
-Delta compression using up to 2 threads
-Compressing objects: 100% (8/8), done.
-Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
-Total 8 (delta 5), reused 0 (delta 0)
-remote: Resolving deltas: 100% (5/5), completed with 4 local objects.
-remote:
-remote: Create a pull request for 'multiplication' on GitHub by visiting:
-remote:      https://github.com/username/reponame/pull/new/multiplication
-remote:
-To https://github.com/username/reponame
- * [new branch]      multiplication -&gt; multiplication
-Branch 'multiplication' set up to track remote branch 'multiplication' from 'origin'.
-</pre>
-
-
-<p>Now Git will remember that you already ran the command it suggested,
-and <code>git push</code> without anything else after it will work next time.
-This is branch-specific though, so you need to do the <code>--set-upstream</code> thing once for each branch.
-
-<p>In GitHub, there should be a menu where you can choose a branch and it says <code>main</code> by default.
-You should now see a <code>multiplication</code> branch in that menu,
-and if you click it and then open <code>calculator.py</code>, you should see the multiplication code.
-
-<p>The <code>git push</code> output contains a link for creating a pull request. We will use it later.
-(TODO: write about pull requests)
-
-
-
-    
-
-    <h2 id="merges-and-merge-conflicts">
-        Merges and merge conflicts<a class="headerlink" href="#merges-and-merge-conflicts" title="Link to this title">¶</a>
-    </h2>
-
-
-<p>Now we have two versions of the calculator program:
-the code on <code>main</code> can subtract correctly, and the code on <code>multiplication</code> can multiply.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
-* <span class="ansi33">b466203</span> multiplication code, not working yet
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>Next we want to combine the changes from the <code>multiplication</code> branch into the <code>main</code> branch
-so that on <code>main</code>, subtraction and multiplication both work, and we no longer need the <code>multiplication</code> branch.
-This is called <strong>merging</strong> the multiplication branch into <code>main</code>.
-
-<p>Before merging, you need to go to the branch where you want the result to be:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout main</span>
-Switched to branch 'main'
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-</pre>
-
-
-<p>Now we can merge.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git merge multiplication</span>
-Auto-merging calculator.py
-CONFLICT (content): Merge conflict in calculator.py
-Automatic merge failed; fix conflicts and then commit the result.
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-
-You have unmerged paths.
-  (fix conflicts and run "git commit")
-  (use "git merge --abort" to abort the merge)
-
-Unmerged paths:
-  (use "git add &lt;file&gt;..." to mark resolution)
-        <span class="ansi31">both modified:   calculator.py</span>
-
-no changes added to commit (use "git add" and/or "git commit -a")
-</pre>
-
-
-<p>Git tried to combine the changes (<code>Auto-merging calculator.py</code>),
-but it couldn't do it (<code>Automatic merge failed</code>)
-because the two branches contain conflicting changes (<code>CONFLICT</code>).
-In these cases, git needs your help.
-
-<p>Open <code>calculator.py</code> in your editor. You should see this:
-
-
-    <div class="code-container">
-        
-
-            
-
-        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-
-<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
-<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="o">=======</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">multiplication</span>
-</pre></div>
-
-    </div>
-
-
-<p>The code on main (current branch, aka <code>HEAD</code>) is between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>=======</code>.
-That's the correct subtraction code.
-The code on <code>multiplication</code> branch is between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.
-Now you have to combine it all together:
-you need to include the <code>*</code> code and make sure that the subtraction code actually subtracts.
-Like this:
-
-
-    <div class="code-container">
-        
-
-                <span>Change the content of calculator.py to this:</span>
-            
-
-        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-
-<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-
-
-<p>Let's check whether we combined it correctly:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 7 - 3</span>
-4
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 2 "*" 3</span>
-6
-</pre>
-
-
-<p>Let's ask <code>git status</code> what we should do next:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-
-You have unmerged paths.
-  (fix conflicts and run "git commit")
-  (use "git merge --abort" to abort the merge)
-
-Unmerged paths:
-  (use "git add &lt;file&gt;..." to mark resolution)
-        <span class="ansi31">both modified:   calculator.py</span>
-
-no changes added to commit (use "git add" and/or "git commit -a")
-</pre>
-
-
-<p>The relevant part is <code>(use "git add &lt;file&gt;..." to mark resolution)</code>,
-which means that once the conflicts are fixed, we should <code>git add</code> the file.
-Let's do that:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
-On branch main
-Your branch is ahead of 'origin/main' by 2 commits.
-  (use "git push" to publish your local commits)
-
-All conflicts fixed but you are still merging.
-  (use "git commit" to conclude merge)
-
-Changes to be committed:
-        <span class="ansi32">modified:   calculator.py</span>
-
-</pre>
-
-
-As <code>git status</code> says, the next step is to commit the result.
-<strong>Do not use <code>-m</code> with merge commits</strong> such as this one.
-Instead, write just <code>git commit</code>, without anything else after it.
-It will open an editor that already contains a commit message for you;
-just close the editor by pressing Ctrl+X and you are done.
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit</span>
-hint: Waiting for your editor to close the file...
-[main 9c2f17c] Merge branch 'multiplication'
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
-<span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
-<span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>The default commit message, <code>Merge branch 'multiplication'</code>, is very recognizable:
-when people see it in git logs, they immediately know what that commit does.
-
-Finally, we can push the merge commit:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
-Enumerating objects: 12, done.
-Counting objects: 100% (12/12), done.
-Delta compression using up to 2 threads
-Compressing objects: 100% (8/8), done.
-Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
-Total 8 (delta 5), reused 0 (delta 0)
-To https://github.com/username/reponame
-   a03418c..9c2f17c  main -&gt; main
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
-<span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
-<span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-
-
-    
-
-    <h2 id="deleting-a-branch">
-        Deleting a branch<a class="headerlink" href="#deleting-a-branch" title="Link to this title">¶</a>
-    </h2>
-
-
-<p>Because we have now merged <code>multiplication</code> into <code>main</code>,
-we no longer need the <code>multiplication</code> branch and we can delete it.
-
-<p>Let's start with <code>git branch -D</code>:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
-<span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
-<span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git branch -D multiplication</span>
-Deleted branch multiplication (was e252924).
-
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
-<span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
-<span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
-</pre>
-
-
-<p>We can see that <code>origin/multiplication</code> wasn't deleted, so the branch is still on GitHub.
-Let's delete it from GitHub too:
-
-
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git push --delete origin multiplication</span>
-To https://github.com/username/reponame
- - [deleted]         multiplication
+<span class="ansi1">$ </span><span class="ansi1 ansi36">cd reponame</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
 *   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
@@ -2031,17 +1263,432 @@ To https://github.com/username/reponame
 </pre>
 
 
-<p>For whatever reason, you need to specify <code>origin</code> in the <code>git push</code> command.
-As usual, <code>origin</code> means GitHub.
+<p>We will continue from <a href="branches.html#the-setup">this calculator example</a>.
+
+
+<p>Next make <a href="branches.html">a new branch</a>. I will name it <code>division</code>.
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout -b division</span>
+Switched to a new branch 'division'
+</pre>
+
+
+<p>Let's add a new feature to the calculator, and then <a href="committing.html">commit and push</a> it:
+
+
+    <div class="code-container">
+        
+
+            <span>Add to end of calculator.py:</span>
+            
+
+        <div class="pygments"><pre><span></span><span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">/</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
+On branch division
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        <span class="ansi31">modified:   calculator.py</span>
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
+<span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
+<span class="ansi1">index c8f88eb..db81b3d 100644</span>
+<span class="ansi1">--- a/calculator.py</span>
+<span class="ansi1">+++ b/calculator.py</span>
+<span class="ansi36">@@ -10,3 +10,5 @@</span> elif operation == "-":
+     print(first_number - second_number)
+ elif operation == "*":
+     print(first_number * second_number)
+<span class="ansi32">+</span><span class="ansi32">elif operation == '/':</span>
+<span class="ansi32">+</span><span class="ansi32">    print(first_number / second_number)</span>
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "new division feature"</span>
+[division 9ccf2b6] new division feature
+ 1 file changed, 2 insertions(+)
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
+fatal: The current branch division has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin division
+
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git push --set-upstream origin division</span>
+Username for 'https://github.com': username
+Password for 'https://username@github.com':
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 4 local objects.
+remote:
+remote: Create a pull request for 'division' on GitHub by visiting:
+remote:      https://github.com/username/reponame/pull/new/division
+remote:
+To https://github.com/username/reponame
+ * [new branch]      division -&gt; division
+Branch 'division' set up to track remote branch 'division' from 'origin'.
+</pre>
+
+
+<p>Notice that the <code>git push</code> output includes a link.
+Open it in your web browser.
+Alternatively, you can open your fork or the original repo on GitHub,
+and you should see a big and green "Compare &amp; pull request" button:
+
+<p><img src="images/pr-button.png" alt='Big green button says "Compare & pull request"' />
+
+<p>Adjust the title and description of the PR as needed.
+Try to write the title so that it's easy to see what the PR does
+when it shows up in the same list with many other PRs.
+
+<p><img src="images/creating-pr.png" alt='Title "support division" and example command to divide' />
+
+<p>Then click "Create pull request" and wait for someone to review the PR.
+
+
+
+    
+
+    <h2 id="reviewing">
+        Reviewing<a class="headerlink" href="#reviewing" title="Link to this title">¶</a>
+    </h2>
+
+
+<p>When your repo receives a PR, you shouldn't accept it blindly.
+Usually the PR needs more work, and you should leave feedback for the person who created it.
+This is called a <strong>code review</strong>, or a <strong>review</strong> for short.
+
+<p>First, go to the "Files changed" tab in the PR:
+
+<p><img src="images/files-changed-tab.png" alt='"Files changed" tab next to "Commits" and "Checks" tabs' />
+
+<p>Read the changes. If there's something wrong with a specific line,
+hover the line with your mouse, and a blue <code>+</code> icon should appear.
+
+<p><img src="images/review-comment-hover.png" />
+
+<p>Click the blue + icon. This will let you comment the line.
+
+<p>If you want to do a specific change to the line, click the plus-minus button at top left corner.
+The line should appear in the comment, and you can edit it to be like you wanted it.
+For example, I changed <code>'</code> to <code>"</code>, and briefly explained why.
+
+<p><img src="images/review-suggestion.png" />
+
+<p>When the comment is done, click "Start a review".
+Add more review comments similarly if needed, and then click "Finish your review" at top right.
+Fill in the dialog box that appears and then click "Submit review".
+Once done, your review should look something like this:
+
+<p><img src="images/review-done.png" />
+
+
+
+    
+
+    <h2 id="responding-to-a-review">
+        Responding to a review<a class="headerlink" href="#responding-to-a-review" title="Link to this title">¶</a>
+    </h2>
+
+
+<p>Imagine you are the person who wrote the PR.
+When your PR has been reviewed, you need to fix any issues that the reviewer brought up.
+If they left a suggestion and you agree it's a good idea, just click "Commit suggestion",
+and then confirm by clicking the "Commit changes" button that comes up.
+If not, <a href="committing.html">commit and push</a> more changes to the branch,
+and the changes will automatically appear on GitHub.
+
+
+
+<p>The "Commit suggestion" button creates a commit only on GitHub.
+On the other hand, <code>git commit</code> creates the commit only on your computer.
+To see what happens when these collide, suppose you created a commit on your computer,
+with the commit message <code>commit created on cloned repo</code>,
+and you used the "Commit suggestion" button on GitHub.
+When you try to push your commit, it fails:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
+To https://github.com/username/reponame
+ ! [rejected]        division -&gt; division (fetch first)
+error: failed to push some refs to 'https://github.com/username/reponame'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</pre>
+
+
+<p>In this situation, as the error message suggests, you need to <code>git pull</code> before you can <code>git push</code>.
+As you would expect, this downloads commits from GitHub to the cloned repo on your computer.
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git pull</span>
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/username/reponame
+   67a661d..a198d97  division   -&gt; origin/division
+Merge made by the 'recursive' strategy.
+ calculator.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
+*   <span class="ansi33">9068bc8</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+<span class="ansi31">|</span><span class="ansi32">\</span>  
+<span class="ansi31">|</span> * <span class="ansi33">8025f35</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">4659648</span> commit created on cloned repo
+<span class="ansi32">|</span><span class="ansi32">/</span>  
+* <span class="ansi33">9ccf2b6</span> new division feature
+*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+<span class="ansi33">|</span><span class="ansi34">\</span>  
+<span class="ansi33">|</span> * <span class="ansi33">e252924</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi34">|</span><span class="ansi34">/</span>  
+* <span class="ansi33">a93700d</span> create calculator.py
+* <span class="ansi33">a03418c</span> add better description to README
+* <span class="ansi33">8347a6d</span> Initial commit
+</pre>
+
+
+<p>Note that <code>git pull</code> created a merge commit;
+it merges the commit on your computer (<code>commit created on cloned repo</code>)
+and the commit created by the "Commit suggestion" button (<code>Update calculator.py</code>).
+Therefore everything I wrote about
+<a href="branches.html#merges-and-merge-conflicts">merges and merge conflicts</a> applies here too.
+
+<p>As you can see from the <code>git lola</code> output, <code>origin/division</code> (i.e. the <code>division</code> branch on GitHub)
+isn't up to date yet, and we need to push:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
+Enumerating objects: 2, done.
+Counting objects: 100% (2/2), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 410 bytes | 410.00 KiB/s, done.
+Total 2 (delta 0), reused 0 (delta 0)
+To https://github.com/username/reponame
+   a198d97..a7cf99d  division -&gt; division
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
+*   <span class="ansi33">9068bc8</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+<span class="ansi31">|</span><span class="ansi32">\</span>  
+<span class="ansi31">|</span> * <span class="ansi33">8025f35</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">4659648</span> commit created on cloned repo
+<span class="ansi32">|</span><span class="ansi32">/</span>  
+* <span class="ansi33">9ccf2b6</span> new division feature
+*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+<span class="ansi33">|</span><span class="ansi34">\</span>  
+<span class="ansi33">|</span> * <span class="ansi33">e252924</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi34">|</span><span class="ansi34">/</span>  
+* <span class="ansi33">a93700d</span> create calculator.py
+* <span class="ansi33">a03418c</span> add better description to README
+* <span class="ansi33">8347a6d</span> Initial commit
+</pre>
+
+
+
+
+    
+
+    <h2 id="merging-a-pr">
+        Merging a PR<a class="headerlink" href="#merging-a-pr" title="Link to this title">¶</a>
+    </h2>
+
+
+<p>Imagine you are the reviewer.
+After enough reviewing, when the PR looks good, click "Merge pull request".
+As you would expect, this merges the PR author's branch into your main branch.
+
+<p>Many people (including me) like to use "Squash and merge",
+which causes the whole pull request to show up as just one commit in Git logs (e.g. <code>git lola</code>),
+regardless of how many commits the PR author actually created.
+You can find that option by clicking the little arrow in the merge button:
+
+<p><img src="images/squash-and-merge.png" />
+
+
+
+    
+
+    <h2 id="making-another-pr">
+        Making another PR<a class="headerlink" href="#making-another-pr" title="Link to this title">¶</a>
+    </h2>
+
+
+<p>Imagine you are the person who wrote the division PR.
+While you are waiting for the division PR to get reviewed for the second time, and hopefully merged,
+you look at the code and you notice something:
+it doesn't handle invalid inputs for the operation.
+There's no error, and it just doesn't do anything.
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 1 + 2</span>
+3
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 1 / 2</span>
+0.5
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 1 lolwut 2</span>
+</pre>
+
+
+You decide to make another PR to fix it.
+But before you can run <code>git checkout -b</code>, there are a couple gotchas to be aware of:
+
+<ul><li>
+    <p>Your new PR should be based on what's on the <code>main</code> branch,
+    not based on what you have on the <code>division</code> branch.
+    Otherwise the new PR will also contain the division code, which isn't nice for the reviewers;
+    they want to review one thing at a time.
+    Because <code>git checkout -b</code> makes the new branch based on your current branch,
+    you can fix this by first switching to the <code>main</code> branch.
+</li><li>
+    <p>Maybe it's been a while since you cloned the repo,
+    and since then, the original repo has gotten other commits and PRs.
+    To avoid unnecessary merge conflicts,
+    your new PR should be based on the latest commit of the original repo.
+    Pull from the original repo to fix this.
+</li></ul>
+
+<p>For this illustration, suppose that the original repo has gotten two new commits unrelated to your PRs,
+with commit messages <code>unrelated commit 1</code> and <code>unrelated commit 2</code>.
+
+
+
+<p>Let's fix the problems:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
+*   <span class="ansi33">9068bc8</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+<span class="ansi31">|</span><span class="ansi32">\</span>  
+<span class="ansi31">|</span> * <span class="ansi33">8025f35</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">4659648</span> commit created on cloned repo
+<span class="ansi32">|</span><span class="ansi32">/</span>  
+* <span class="ansi33">9ccf2b6</span> new division feature
+*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+<span class="ansi33">|</span><span class="ansi34">\</span>  
+<span class="ansi33">|</span> * <span class="ansi33">e252924</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi34">|</span><span class="ansi34">/</span>  
+* <span class="ansi33">a93700d</span> create calculator.py
+* <span class="ansi33">a03418c</span> add better description to README
+* <span class="ansi33">8347a6d</span> Initial commit
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout main</span>
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git pull https://github.com/where_you_forked_it_from/reponame</span>
+remote: Enumerating objects: 2, done.
+remote: Counting objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/where_you_forked_it_from/reponame
+ * branch            HEAD       -&gt; FETCH_HEAD
+Updating 9c2f17c..4adf167
+Fast-forward
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
+* <span class="ansi33">4adf167</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> unrelated commit 2
+* <span class="ansi33">6b6c867</span> unrelated commit 1
+<span class="ansi31">|</span> *   <span class="ansi33">9068bc8</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">, </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+<span class="ansi31">|</span> <span class="ansi32">|</span><span class="ansi33">\</span>  
+<span class="ansi31">|</span> <span class="ansi32">|</span> * <span class="ansi33">8025f35</span> Update calculator.py
+<span class="ansi31">|</span> * <span class="ansi33">|</span> <span class="ansi33">4659648</span> commit created on cloned repo
+<span class="ansi31">|</span> <span class="ansi33">|</span><span class="ansi33">/</span>  
+<span class="ansi31">|</span> * <span class="ansi33">9ccf2b6</span> new division feature
+<span class="ansi31">|</span><span class="ansi31">/</span>  
+*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+<span class="ansi34">|</span><span class="ansi35">\</span>  
+<span class="ansi34">|</span> * <span class="ansi33">e252924</span> fix multiplication bug
+<span class="ansi34">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
+* <span class="ansi35">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi35">|</span><span class="ansi35">/</span>  
+* <span class="ansi33">a93700d</span> create calculator.py
+* <span class="ansi33">a03418c</span> add better description to README
+* <span class="ansi33">8347a6d</span> Initial commit
+</pre>
+
+
+<p>With this pull, make sure to specify the <strong>original</strong> repo, not your fork;
+if you find yourself writing your own GitHub username into the command, you are likely doing it wrong.
+
+<p>You might notice that <code>origin/main</code> is left behind, even though the two unrelated commits are on GitHub.
+This is because <code>origin/main</code> means your fork's main branch, as that is what you cloned.
+You can run <code>git push</code> on the <code>main</code> branch if you want,
+but most people don't bother with updating the <code>main</code> branches of their forks.
+
+<p>From here on, you can make the PR as described above.
+
+
+
+    
+
+    <h2 id="conflicts-in-a-pr">
+        Conflicts in a PR<a class="headerlink" href="#conflicts-in-a-pr" title="Link to this title">¶</a>
+    </h2>
+
+
+<p>As explained above, the original repo can change while your PR isn't merged yet.
+If it changes in a way that conflicts with your PR, you will see this in GitHub:
+
+<p><img src="images/github-conflict.png" />
+
+<p>To solve this, pull from the original repo as above, but do it on your PR branch.
+You will get <a href="branches.html#merges-and-merge-conflicts">merge conflicts</a>
+that you will have to resolve.
+
+<p>For example, if the division PR conflicts, you would do this:
+
+
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout division</span>
+Switched to branch 'division'
+Your branch is up to date with 'origin/division'.
+
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git pull https://github.com/where_you_forked_it_from/reponame</span>
+remote: Enumerating objects: 2, done.
+remote: Counting objects: 100% (2/2), done.
+remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (2/2), done.
+From https://github.com/where_you_forked_it_from/reponame
+ * branch            HEAD       -&gt; FETCH_HEAD
+Auto-merging calculator.py
+CONFLICT (content): Merge conflict in calculator.py
+Automatic merge failed; fix conflicts and then commit the result.
+</pre>
+
 
         </main>
 
         <hr />
 
             <footer>
-                    Previous: <a href="committing.html">Committing</a><br />
+                    Previous: <a href="branches.html">Branches</a><br />
 
-                    Next: <a href="pr.html">Pull requests</a><br />
 
                 <a href="index.html">Back to front page</a>
             </footer>
