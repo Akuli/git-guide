@@ -3,6 +3,7 @@ import html
 import os
 import pathlib
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -16,6 +17,7 @@ pagelist = [
     ("getting-started.html", "Getting started", "installing Git, making and cloning a repo"),
     ("committing.html", "Committing", "add, commit, push, status, diff, log, show"),
     ("branches.html", "Branches", "checkout, lola, merge"),
+    ("pr.html", "Pull requests", ""),
 ]
 
 
@@ -24,14 +26,14 @@ class CommandRunner:
     def __init__(self, tempdir):
         self.working_dir = tempdir / 'working_dir'
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
-        self.git_config = {
-            'core.pager': 'cat',
-            'core.editor': 'true',  # Don't change commit message (for merge commits)
-            'color.ui': 'always',
+        self._repo_config_commands = [
+            'git config core.pager cat',
+            'git config core.editor true',  # Don't change commit message (for merge commits)
+            'git config color.ui always',
             # Ensure we get same error as with freshly installed git
-            'user.email': '',
-            'user.name': '',
-        }
+            'git config user.email ""',
+            'git config user.name ""',
+        ]
         self.working_dir.mkdir()
         self.fake_time = 1622133500  # seconds since epoch
 
@@ -49,21 +51,17 @@ class CommandRunner:
                 ['git', 'clone', '-q', str(self.fake_github_dir), str(self.working_dir / 'reponame')],
                 check=True,
             )
-
-            for name, value in self.git_config.items():
-                subprocess.run(
-                    ['git', 'config', name, value],
-                    cwd=(self.working_dir / 'reponame'),
-                    check=True,
-                )
+            for command in self._repo_config_commands:
+                subprocess.run(command, cwd=(self.working_dir / 'reponame'), check=True, shell=True)
             return None  # not used
 
         if command_string.startswith('cd '):
             self.working_dir /= command_string[3:]
             return ''  # No output
 
-        # For example:  git config --global user.name "yourusername"
-        command_string = command_string.replace(' --global ', ' ')
+        if command_string.startswith("git config --global "):
+            command_string = command_string.replace('--global', '', 1)
+            self._repo_config_commands.append(command_string)
 
         # Many programs display their output differently when they think the
         # output is going to a terminal. For this guide, we generally want
@@ -134,8 +132,9 @@ def build():
     os.mkdir("build")
 
     shutil.copytree("css", "build/css")
+    shutil.copytree("images", "build/images")
 
-    lookup = TemplateLookup()
+    lookup = TemplateLookup(strict_undefined=True)
     for path in pathlib.Path("mako-templates").glob("*.mako"):
         print("Preparing", path)
         html_string = re.sub(r'`(.+?)`', _handle_code, path.read_text())
