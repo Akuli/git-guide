@@ -270,8 +270,8 @@ This is branch-specific though, so you need to do the `--set-upstream` thing onc
 You should now see a `multiplication` branch in that menu,
 and if you click it and then open `calculator.py`, you should see the multiplication code.
 
-<p>The `git push` output contains a link for creating a pull request. We will use it later.
-(TODO: write about pull requests)
+<p>The `git push` output contains a link for creating a pull request.
+We will use it <a href="pr.html#making-a-pr">later</a>.
 
 
 <%self:h2>Merges and merge conflicts</%self:h2>
