@@ -1396,7 +1396,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main b8a4bb0] add better description to README
+[main 1a1b41c] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 </pre>
 
@@ -1435,7 +1435,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   2fa98ae..b8a4bb0  main -&gt; main
+   5ec3799..1a1b41c  main -&gt; main
 </pre>
 
 
@@ -1456,15 +1456,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit b8a4bb0229f90f188404c0139ce25b821a976a4a</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 1a1b41c2120e758b08d365417b68a328484369ea</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 2fa98ae347c28435abbf147c47cda3601e8b57f9</span>
+<span class="ansi33">commit 5ec379950fba8b5ba34f38503347b027941d3381</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Sat May 29 22:25:16 2021 +0000
+Date:   Sat May 29 22:26:49 2021 +0000
 
     Initial commit
 </pre>
@@ -1478,21 +1478,21 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">2fa98ae</span> Initial commit
+<span class="ansi33">1a1b41c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">5ec3799</span> Initial commit
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>b8a4bb0229f90f188404c0139ce25b821a976a4a</code>.
+For example, the hash of our latest commit is <code>1a1b41c2120e758b08d365417b68a328484369ea</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>b8a4bb0</code> and <code>b8a4bb0229f90f188404c0139ce25b821a976a4a</code> refer to the same commit.
+so <code>1a1b41c</code> and <code>1a1b41c2120e758b08d365417b68a328484369ea</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show b8a4bb0</span>
-<span class="ansi33">commit b8a4bb0229f90f188404c0139ce25b821a976a4a</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 1a1b41c</span>
+<span class="ansi33">commit 1a1b41c2120e758b08d365417b68a328484369ea</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1529,10 +1529,10 @@ instead of the corresponding commands shown in this tutorial.
 <p>For example, if I <code>git add</code> a file on my computer and then run <code>git status</code>,
 it suggests this instead of <code>git restore --staged</code>:
 
-<pre>  (use "git rm --staged <file>..." to unstage)</pre>
+<pre>  (use "git rm --cached <file>..." to unstage)</pre>
 
-<p>So on new versions of git, <code>git restore --staged</code> and <code>git rm --staged</code> do the same thing,
-and on my older version of git, only <code>git rm --staged</code> works.
+<p>So on new versions of git, <code>git restore --staged</code> and <code>git rm --cached</code> do the same thing,
+and on my older version of git, only <code>git rm --cached</code> works.
 There's also a third way to do this, suggested by even older versions of git.
 
 <p>In short, the commands that <code>git status</code> suggests will always work,
