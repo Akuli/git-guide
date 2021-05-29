@@ -71,7 +71,7 @@ elif operation == '/':
 <%self:runcommands>
 $ git status
 $ git add calculator.py
-$ git diff --cached
+$ git diff --staged
 $ git commit -m "new division feature"
 $ git push
 $ git push --set-upstream origin division
