@@ -117,7 +117,7 @@ it is good to know how that works, but I won't explain it here because I want to
 <%self:runcommands>
 $ python3 calculator.py 2 "*" 3
 $ git add calculator.py
-$ git diff --staged
+$ git diff --cached
 $ git commit -m "multiplication code, not working yet"
 $ git log --oneline --graph --all
 </%self:runcommands>
@@ -141,7 +141,7 @@ $ git checkout main
 
 <%self:runcommands>
 $ git add calculator.py
-$ git diff --staged
+$ git diff --cached
 $ git commit -m "fix subtraction bug"
 $ git status
 $ git log --oneline --graph --all
@@ -204,7 +204,7 @@ $ git lola
 <%self:runcommands>
 $ python3 calculator.py 2 "*" 3
 $ git add calculator.py
-$ git diff --staged
+$ git diff --cached
 $ git commit -m "fix multiplication bug"
 $ git lola
 </%self:runcommands>
