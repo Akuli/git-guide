@@ -162,12 +162,35 @@ $ git log --oneline --graph
 but I always use `--all`.
 
 
+<h2>Git lola</h2>
+
+As you can see, `git log --oneline --graph --all` is a very useful command, but it's a bit long to type.
+Run this:
+
+<%self:runcommands>
+$ git config --global alias.lola "log --oneline --graph --all"
+</%self:runcommands>
+
+Now `git lola` does the same as `git log --oneline --graph --all`:
+
+<%self:runcommands>
+$ git lola
+</%self:runcommands>
+
+You can name the alias however you want,
+but I named it `lola` for consistency with <a href="http://blog.kfish.org/2010/04/git-lola.html">this blog post</a>,
+which I believe is where the command comes from.
+The commands in the blog post are longer than here because back in 2010,
+`--oneline` didn't exist and you needed a combination of several other options instead.
+Also, it seems like colored output wasn't turned on by default.
+
+
 <h2>Think about "is based on" instead of "is newer than"</h2>
 
 <p>Let's go back to the multiplication branch.
 <%self:runcommands>
 $ git checkout multiplication
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>Now let's fix the multiplication bug by changing the last line:
@@ -183,7 +206,7 @@ $ python3 calculator.py 2 "*" 3
 $ git add calculator.py
 $ git diff --cached
 $ git commit -m "fix multiplication bug"
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>Now the subtraction fix `${commit("main")}` shows up
@@ -194,7 +217,7 @@ In other words, the latest commit is not always first in the output of our `--gr
 <p>If you really want to, you can ask git to sort by commit time by adding `--date-order`:
 
 <%self:runcommands>
-$ git log --oneline --graph --all --date-order
+$ git lola --date-order
 </%self:runcommands>
 
 <p>As you can see, it just looks messier this way, which is probably why this is not the default.
@@ -257,7 +280,7 @@ and if you click it and then open `calculator.py`, you should see the multiplica
 the code on `main` can subtract correctly, and the code on `multiplication` can multiply.
 
 <%self:runcommands>
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>Next we want to combine the changes from the `multiplication` branch into the `main` branch
@@ -338,7 +361,7 @@ just close the editor by pressing Ctrl+X and you are done.
 
 <%self:runcommands>
 $ git commit
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
@@ -353,9 +376,9 @@ we no longer need the `multiplication` branch and we can delete it.
 <p>Let's start with `git branch -D`:
 
 <%self:runcommands>
-$ git log --oneline --graph --all
+$ git lola
 $ git branch -D multiplication
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>We can see that `origin/multiplication` wasn't deleted, so the branch is still on GitHub.
@@ -365,7 +388,7 @@ Let's delete it from GitHub too:
 $ git push --delete origin multiplication
 To https://github.com/username/reponame
  - [deleted]         multiplication
-$ git log --oneline --graph --all
+$ git lola
 </%self:runcommands>
 
 <p>For whatever reason, you need to specify `origin` in the `git push` command.

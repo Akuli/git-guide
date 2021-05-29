@@ -14,8 +14,8 @@ from mako.lookup import TemplateLookup
 pagelist = [
     ("index.html", "Akuli's Git Guide", "Front page"),
     ("getting-started.html", "Getting started", "installing Git, making and cloning a repo"),
-    ("committing.html", "Committing", "add, commit, push, status, diff"),
-    ("branches.html", "Branches", "checkout, log, merge"),
+    ("committing.html", "Committing", "add, commit, push, status, diff, log, show"),
+    ("branches.html", "Branches", "checkout, lola, merge"),
 ]
 
 

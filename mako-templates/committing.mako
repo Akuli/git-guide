@@ -1,7 +1,7 @@
 <%inherit file="base.html"/>
 <%namespace file="base.html" import="*" />
 
-<p>A commit is a pile of changes. For example
+<p>A commit is a pile of changes. For example,
 <a href="https://github.com/Akuli/git-guide/commit/07ee936f719060550b2033ac6501b31d52b8f627">this commit</a>
 changed two files in this guide:
 it deleted (red) and added (green) several things in `getting-started.html`,
