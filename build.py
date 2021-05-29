@@ -4,10 +4,10 @@ import os
 import pathlib
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
-import time
 
 from mako.lookup import TemplateLookup
 
@@ -112,12 +112,11 @@ class CommandRunner:
 
 def delete_folder(path):
     if sys.platform == 'win32':
-        # Windows bubble gum that kinda holds it together
-        try:
-            shutil.rmtree(path)
-        except PermissionError:
-            time.sleep(1)
-            shutil.rmtree(path)
+        # https://stackoverflow.com/a/55718140
+        def on_rm_error(func, path, exc_info):
+            os.chmod(path, stat.S_IWRITE)
+            os.unlink(path)
+        shutil.rmtree(path, onerror=on_rm_error)
     else:
         shutil.rmtree(path)
 
