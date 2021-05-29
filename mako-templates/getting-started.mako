@@ -4,7 +4,7 @@
 <p>This page contains everything you need to know for getting started with GitHub.
 
 
-<h2>Installing Git</h2>
+<%self:h2>Installing Git</%self:h2>
 
 <details><summary>Windows</summary>
     <p>Search "git download" on Google. The first result should be at gis-scm.org. Click it.
@@ -37,7 +37,7 @@
 </details>
 
 
-<h2>Making a repo on GitHub</h2>
+<%self:h2>Making a repo on GitHub</%self:h2>
 
 <p>A Git repository, or repo for short, is basically a project.
 For example, <a href="https://github.com/Akuli/git-guide">github.com/Akuli/git-guide</a> is the GitHub repo of this guide.
@@ -92,7 +92,7 @@ Also, I'm not responsible for anything I say in this guide,
 as <a href="https://github.com/Akuli/git-guide/blob/main/LICENSE">the LICENCE of this guide</a> says.
 
 
-<h2 id="cloning">Cloning the repo</h2>
+<%self:h2>Cloning the repo</%self:h2>
 
 <p>After creating a repo on GitHub, the next step is to clone it.
 It means downloading a copy of the repo to your computer,
@@ -154,7 +154,7 @@ $ ls -a
 <p>On Windows, `dir` shows everything by default.
 
 
-<h2>git init</h2>
+<%self:h2>git init</%self:h2>
 
 <p>Many other Git instructions recommend `git init` for making a new repo.
 Unlike the `git clone https://github.com/...` command above, `git init` does nothing with GitHub;

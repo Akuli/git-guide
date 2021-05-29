@@ -18,7 +18,7 @@ and you can start fixing the bug at any time.
 <p>Next we go through this process in practice.
 
 
-<h2>The setup</h2>
+<%self:h2>The setup</%self:h2>
 
 <p>We will work on the following code.
 
@@ -56,7 +56,7 @@ $ git status
 </%self:runcommands>
 
 
-<h2>Branch basics</h2>
+<%self:h2>Branch basics</%self:h2>
 
 <p>When I work with branches, I constantly use the following command to check what's going on,
 similarly to `git status`:
@@ -162,7 +162,7 @@ $ git log --oneline --graph
 but I always use `--all`.
 
 
-<h2>Git lola</h2>
+<%self:h2>Git lola</%self:h2>
 
 As you can see, `git log --oneline --graph --all` is a very useful command, but it's a bit long to type.
 Run this:
@@ -185,7 +185,7 @@ The commands in the blog post are longer than here because back in 2010,
 Also, it seems like colored output wasn't turned on by default.
 
 
-<h2>Think about "is based on" instead of "is newer than"</h2>
+<%self:h2>Think about "is based on" instead of "is newer than"</%self:h2>
 
 <p>Let's go back to the multiplication branch.
 <%self:runcommands>
@@ -228,7 +228,7 @@ and how `${commit("main")}` and `${commit("multiplication^")}`
 are both based on `${commit("main^")}`, for example.
 
 
-<h2>Pushing a branch</h2>
+<%self:h2>Pushing a branch</%self:h2>
 
 <p>Run `git push` to upload the current branch to GitHub.
 For example, we are currently on the `multiplication` branch,
@@ -274,7 +274,7 @@ and if you click it and then open `calculator.py`, you should see the multiplica
 (TODO: write about pull requests)
 
 
-<h2>Merges and merge conflicts</h2>
+<%self:h2>Merges and merge conflicts</%self:h2>
 
 <p>Now we have two versions of the calculator program:
 the code on `main` can subtract correctly, and the code on `multiplication` can multiply.
@@ -368,7 +368,7 @@ $ git lola
 when people see it in git logs, they immediately know what that commit does.
 
 
-<h2>Deleting a branch</h2>
+<%self:h2>Deleting a branch</%self:h2>
 
 <p>Because we have now merged `multiplication` into `main`,
 we no longer need the `multiplication` branch and we can delete it.

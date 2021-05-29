@@ -133,8 +133,11 @@ def build():
         pass
     os.mkdir("build")
 
+    shutil.copytree("css", "build/css")
+
     lookup = TemplateLookup()
     for path in pathlib.Path("mako-templates").glob("*.mako"):
+        print("Preparing", path)
         html_string = re.sub(r'`(.+?)`', _handle_code, path.read_text())
         lookup.put_string(path.stem + '.html', html_string)
 

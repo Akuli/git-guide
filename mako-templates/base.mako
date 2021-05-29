@@ -38,6 +38,17 @@
         return ansi_converter.convert('\n'.join(parts), full=False)
 %>
 
+<%def name="h2()">
+    <%
+        text = capture(caller.body).lstrip("\n")
+        element_id = re.sub(r'[^a-z]', '-', text.lower())
+    %>
+
+    <h2 id="${element_id}">
+        ${text}<a class="headerlink" href="#${element_id}" title="Link to this title">¶</a>
+    </h2>
+</%def>
+
 <%def name="commit(git_ref, long=False)"><%
     result = subprocess.check_output(
         ['git', 'rev-parse', git_ref],
@@ -94,6 +105,7 @@
         <title>${title}</title>
         <style>${pygments_formatter.get_style_defs()}</style>
         ${ansi_converter.produce_headers()}
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <main>

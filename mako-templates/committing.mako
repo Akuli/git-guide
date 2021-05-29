@@ -15,7 +15,7 @@ $ git status
 </%self:runcommands>
 
 <p>If you get an error saying `fatal: not a git repository`,
-you forgot to `cd` to the cloned repo as shown <a href="getting-started.html#cloning">here</a>.
+you forgot to `cd` to the cloned repo as shown <a href="getting-started.html#cloning-the-repo">here</a>.
 
 <p>We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
@@ -145,7 +145,7 @@ You won't see the password as you type it in, and that's completely normal.
 After pushing, you should immediately your changes on GitHub.
 
 
-<h2>Looking at previous commits</h2>
+<%self:h2>Looking at previous commits</%self:h2>
 
 <p>Run `git log` to get a list of all previous commits.
 
@@ -175,7 +175,7 @@ $ git show ${commit("HEAD")}
 </%self:runcommands>
 
 
-<h2>Commands in older versions of git</h2>
+<%self:h2>Commands in older versions of git</%self:h2>
 
 <p>If you find that the `git status` output suggests different commands than in this tutorial,
 it's likely because you have an old version of git.
