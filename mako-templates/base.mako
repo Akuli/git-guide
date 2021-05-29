@@ -39,9 +39,7 @@
 %>
 
 <%
-    # TODO: this is a hack
-    print(runner)
-    context.runner = runner
+    context.runner = runner  # TODO: this is a hack
 %>
 
 <%def name="h2()">
