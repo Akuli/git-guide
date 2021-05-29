@@ -38,6 +38,10 @@
         return ansi_converter.convert('\n'.join(parts), full=False)
 %>
 
+<%
+    context.runner = runner  # TODO: this is a hack
+%>
+
 <%def name="h2()">
     <%
         text = capture(caller.body).lstrip("\n")

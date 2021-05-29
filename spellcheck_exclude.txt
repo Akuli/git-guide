@@ -5,6 +5,7 @@ MacOS
 MiB
 MinTTY
 Nano
+PRs
 PowerShell
 README
 SHA
@@ -29,6 +30,7 @@ ing
 init
 ipsum
 lola
+lolwut
 md
 oneline
 pagelist
