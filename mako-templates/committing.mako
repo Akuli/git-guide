@@ -185,10 +185,10 @@ instead of the corresponding commands shown in this tutorial.
 <p>For example, if I `git add` a file on my computer and then run `git status`,
 it suggests this instead of `git restore --staged`:
 
-<pre>  (use "git rm --cached <file>..." to unstage)</pre>
+<pre>  (use "git rm --staged <file>..." to unstage)</pre>
 
-<p>So on new versions of git, `git restore --staged` and `git rm --cached` do the same thing,
-and on my older version of git, only `git rm --cached` works.
+<p>So on new versions of git, `git restore --staged` and `git rm --staged` do the same thing,
+and on my older version of git, only `git rm --staged` works.
 There's also a third way to do this, suggested by even older versions of git.
 
 <p>In short, the commands that `git status` suggests will always work,
