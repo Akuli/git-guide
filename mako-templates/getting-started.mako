@@ -7,12 +7,12 @@
 <%self:h2>Installing Git</%self:h2>
 
 <details><summary>Windows</summary>
-    <p>Search "git download" on Google. The first result should be at gis-scm.org. Click it.
+    <p>Search "git download" on Google. The first result should be at git-scm.org. Click it.
     Then click "Windows" and run the installer.
 
     <p>You can mostly click "Next" in the installer, except in two steps:
     <ul><li>
-        When Git asks about editors, choose "Use the Nano editor" from the dropdown
+        When Git asks about editors, choose "Use the Nano editor" from the drop-down
         instead of "Use vim (the ubiquitous text editor)".
         While vim is powerful and some people love it, it's
         <a href="https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/">ridiculously difficult</a>
