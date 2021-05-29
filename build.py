@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 from mako.lookup import TemplateLookup
 
@@ -109,9 +110,21 @@ class CommandRunner:
         )
 
 
+def delete_folder(path):
+    if sys.platform == 'win32':
+        # Windows bubble gum that kinda holds it together
+        try:
+            shutil.rmtree(path)
+        except PermissionError:
+            time.sleep(1)
+            shutil.rmtree(path)
+    else:
+        shutil.rmtree(path)
+
+
 def create_runner():
     tempdir = pathlib.Path(tempfile.mkdtemp())
-    atexit.register(lambda: shutil.rmtree(tempdir))
+    atexit.register(lambda: delete_folder(tempdir))
 
     # Simulate with github does when you create empty repo
     (tempdir / 'fake_github' / 'reponame').mkdir(parents=True)
@@ -141,7 +154,7 @@ def _handle_code(match):
 
 def build():
     try:
-        shutil.rmtree("build")
+        delete_folder("build")
     except FileNotFoundError:
         pass
     os.mkdir("build")

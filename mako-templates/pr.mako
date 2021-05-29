@@ -34,10 +34,10 @@ otherwise you clone the original repo, even though you don't have permissions to
 (TODO: what to do if you already cloned the original repo?)
 
 <%
-    import shutil
+    from build import delete_folder
 
     runner = context['parent'].context.runner  # TODO: this is a bit hacky
-    shutil.rmtree(runner.working_dir)
+    delete_folder(runner.working_dir)
     runner.working_dir = runner.working_dir.parent
 %>
 
