@@ -1289,7 +1289,7 @@ Changes to be committed:
 
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "create calculator.py"</span>
-[main a93700d] create calculator.py
+[main 76181f6] create calculator.py
  1 file changed, 10 insertions(+)
  create mode 100644 calculator.py
 
@@ -1316,9 +1316,9 @@ similarly to <code>git status</code>:
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1329,10 +1329,10 @@ I will explain <code>--graph</code> and <code>--all</code> soon.
 GitHub's name for the default branch used to be <code>master</code>,
 and many projects still have a branch named <code>master</code> instead of a <code>main</code> branch.
 
-<p>Seeing <code>main</code> next to <code>a93700d</code> means that
-<code>a93700d</code> is the latest commit on <code>main</code>.
+<p>Seeing <code>main</code> next to <code>76181f6</code> means that
+<code>76181f6</code> is the latest commit on <code>main</code>.
 Here <code>origin</code> means GitHub and <code>origin/main</code> is GitHub's main branch,
-so <code>a03418c</code> next to it means that the latest commit we pushed is <code>a03418c</code>.
+so <code>b8a4bb0</code> next to it means that the latest commit we pushed is <code>b8a4bb0</code>.
 
 <p>There is also a notion of <strong>current branch</strong>, which is often called <code>HEAD</code>.
 Above we see <code>(HEAD -&gt; main)</code>, which means that now the current branch is <code>main</code>.
@@ -1348,14 +1348,14 @@ On branch multiplication
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
 <p>Here <code>multiplication</code> is a branch name; you can name a branch however you want.
-The latest commit on the <code>multiplication</code> branch is <code>a93700d</code>, same as on <code>main</code>.
+The latest commit on the <code>multiplication</code> branch is <code>76181f6</code>, same as on <code>main</code>.
 
 <p>We can go back to the <code>main</code> branch with <code>git checkout</code>, but without <code>-b</code>;
 the <code>-b</code> means that a new branch is created.
@@ -1374,9 +1374,9 @@ Your branch is ahead of 'origin/main' by 1 commit.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout multiplication</span>
 Switched to branch 'multiplication'
@@ -1386,9 +1386,9 @@ On branch multiplication
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1415,13 +1415,13 @@ it is good to know how that works, but I won't explain it here because I want to
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">python3 calculator.py 2 "*" 3</span>
 Traceback (most recent call last):
-  File "/tmp/tmpfdj__f62/working_dir/reponame/calculator.py", line 12, in &lt;module&gt;
+  File "/tmp/tmptxt20015/working_dir/reponame/calculator.py", line 12, in &lt;module&gt;
     print(first_number * second_unmber)
 NameError: name 'second_unmber' is not defined
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
 
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
 <span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
 <span class="ansi1">index 4b57a5f..eabc67c 100644</span>
 <span class="ansi1">--- a/calculator.py</span>
@@ -1434,14 +1434,14 @@ NameError: name 'second_unmber' is not defined
 <span class="ansi32">+</span><span class="ansi32">    print(first_number * second_unmber)</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "multiplication code, not working yet"</span>
-[multiplication b466203] multiplication code, not working yet
+[multiplication 4276c63] multiplication code, not working yet
  1 file changed, 2 insertions(+)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
-* <span class="ansi33">a93700d</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">4276c63</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
+* <span class="ansi33">76181f6</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1478,7 +1478,7 @@ Your branch is ahead of 'origin/main' by 1 commit.
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
 
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
 <span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
 <span class="ansi1">index 4b57a5f..28264b8 100644</span>
 <span class="ansi1">--- a/calculator.py</span>
@@ -1491,7 +1491,7 @@ Your branch is ahead of 'origin/main' by 1 commit.
 <span class="ansi32">+</span><span class="ansi32">    print(first_number - second_number)</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix subtraction bug"</span>
-[main 35d1d5e] fix subtraction bug
+[main 7b30e77] fix subtraction bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git status</span>
@@ -1502,12 +1502,12 @@ Your branch is ahead of 'origin/main' by 2 commits.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph --all</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
+* <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1526,10 +1526,10 @@ Your branch is ahead of 'origin/main' by 2 commits.
 nothing to commit, working tree clean
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline --graph</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1557,12 +1557,12 @@ Now <code>git lola</code> does the same as <code>git log --oneline --graph --all
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
+* <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span><span class="ansi33"> (</span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1588,12 +1588,12 @@ Also, it seems like colored output wasn't turned on by default.
 Switched to branch 'multiplication'
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
+* <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> multiplication code, not working yet
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1620,7 +1620,7 @@ Switched to branch 'multiplication'
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git add calculator.py</span>
 
-<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --cached</span>
+<span class="ansi1">$ </span><span class="ansi1 ansi36">git diff --staged</span>
 <span class="ansi1">diff --git a/calculator.py b/calculator.py</span>
 <span class="ansi1">index eabc67c..56a6f0e 100644</span>
 <span class="ansi1">--- a/calculator.py</span>
@@ -1633,22 +1633,22 @@ Switched to branch 'multiplication'
 <span class="ansi32">+</span><span class="ansi32">    print(first_number * second_number)</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "fix multiplication bug"</span>
-[multiplication e252924] fix multiplication bug
+[multiplication 09a8c05] fix multiplication bug
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-* <span class="ansi33">b466203</span> multiplication code, not working yet
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+* <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
+* <span class="ansi33">4276c63</span> multiplication code, not working yet
+<span class="ansi31">|</span> * <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
-<p>Now the subtraction fix <code>35d1d5e</code> shows up
-below the first multiplication commit <code>b466203</code>,
+<p>Now the subtraction fix <code>7b30e77</code> shows up
+below the first multiplication commit <code>4276c63</code>,
 even though the multiplication commit is older.
 In other words, the latest commit is not always first in the output of our <code>--graph</code> command.
 
@@ -1656,13 +1656,13 @@ In other words, the latest commit is not always first in the output of our <code
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola --date-order</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
-* <span class="ansi32">|</span> <span class="ansi33">b466203</span> multiplication code, not working yet
+* <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+* <span class="ansi32">|</span> <span class="ansi33">4276c63</span> multiplication code, not working yet
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1670,8 +1670,8 @@ In other words, the latest commit is not always first in the output of our <code
 I don't use <code>--date-order</code> because I don't actually care about
 which of two commits on different branches is newer and which is older;
 I just want to see what commits each branch contains,
-and how <code>35d1d5e</code> and <code>b466203</code>
-are both based on <code>a93700d</code>, for example.
+and how <code>7b30e77</code> and <code>4276c63</code>
+are both based on <code>76181f6</code>, for example.
 
 
 
@@ -1749,13 +1749,13 @@ the code on <code>main</code> can subtract correctly, and the code on <code>mult
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
-* <span class="ansi33">b466203</span> multiplication code, not working yet
-<span class="ansi31">|</span> * <span class="ansi33">35d1d5e</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
+* <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
+* <span class="ansi33">4276c63</span> multiplication code, not working yet
+<span class="ansi31">|</span> * <span class="ansi33">7b30e77</span><span class="ansi33"> (</span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> fix subtraction bug
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1924,18 +1924,18 @@ just close the editor by pressing Ctrl+X and you are done.
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit</span>
 hint: Waiting for your editor to close the file...
-[main 9c2f17c] Merge branch 'multiplication'
+[main 2b11732] Merge branch 'multiplication'
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">2b11732</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">7b30e77</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1953,18 +1953,18 @@ Compressing objects: 100% (8/8), done.
 Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
 Total 8 (delta 5), reused 0 (delta 0)
 To https://github.com/username/reponame
-   a03418c..9c2f17c  main -&gt; main
+   b8a4bb0..2b11732  main -&gt; main
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">2b11732</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">7b30e77</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -1984,29 +1984,29 @@ we no longer need the <code>multiplication</code> branch and we can delete it.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">2b11732</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">, </span><span class="ansi1 ansi32">multiplication</span><span class="ansi33">)</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">7b30e77</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git branch -D multiplication</span>
-Deleted branch multiplication (was e252924).
+Deleted branch multiplication (was 09a8c05).
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">2b11732</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">09a8c05</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/multiplication</span><span class="ansi33">)</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">7b30e77</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
@@ -2019,15 +2019,15 @@ To https://github.com/username/reponame
  - [deleted]         multiplication
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">9c2f17c</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">2b11732</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">e252924</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">b466203</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">35d1d5e</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">09a8c05</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">4276c63</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">7b30e77</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">a93700d</span> create calculator.py
-* <span class="ansi33">a03418c</span> add better description to README
-* <span class="ansi33">8347a6d</span> Initial commit
+* <span class="ansi33">76181f6</span> create calculator.py
+* <span class="ansi33">b8a4bb0</span> add better description to README
+* <span class="ansi33">2fa98ae</span> Initial commit
 </pre>
 
 
