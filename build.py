@@ -3,7 +3,6 @@ import html
 import os
 import pathlib
 import re
-import shlex
 import shutil
 import subprocess
 import sys
@@ -26,6 +25,7 @@ class CommandRunner:
     def __init__(self, tempdir):
         self.working_dir = tempdir / 'working_dir'
         self.fake_github_dir = tempdir / 'fake_github' / 'reponame'
+        self.fake_fork_source_dir = tempdir / 'fake_fork_source' / 'reponame'
         self._repo_config_commands = [
             'git config core.pager cat',
             'git config core.editor true',  # Don't change commit message (for merge commits)
@@ -55,6 +55,14 @@ class CommandRunner:
                 subprocess.run(command, cwd=(self.working_dir / 'reponame'), check=True, shell=True)
             return None  # not used
 
+        if command_string == 'git pull https://github.com/where_you_forked_it_from/reponame':
+            subprocess.run(
+                ['git', 'pull', str(self.fake_fork_source_dir)],
+                cwd=self.working_dir,
+                check=True,
+            )
+            return None   # not used
+
         if command_string.startswith('cd '):
             self.working_dir /= command_string[3:]
             return ''  # No output
@@ -81,17 +89,24 @@ class CommandRunner:
             args = ['bash', '-c', command_string]
             actual_command = [sys.executable, '-c', f'import pty; pty.spawn({str(args)})']
 
-        return subprocess.run(
-            actual_command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            cwd=self.working_dir,
-            env={
-                **os.environ,
-                'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
-                'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
-            },
-        ).stdout.decode('utf-8').expandtabs(8).replace('\r\n', '\n')
+        return (
+            subprocess.run(
+                actual_command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                cwd=self.working_dir,
+                env={
+                    **os.environ,
+                    'GIT_AUTHOR_DATE': f'{self.fake_time} +0000',
+                    'GIT_COMMITTER_DATE': f'{self.fake_time} +0000',
+                },
+            )
+            .stdout
+            .decode('utf-8')
+            .expandtabs(8)
+            .replace('\r\n', '\n')
+            .replace(str(self.fake_github_dir), 'https://github.com/username/reponame')
+        )
 
 
 def create_runner():

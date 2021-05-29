@@ -367,6 +367,21 @@ $ git lola
 <p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
+Finally, we can push the merge commit:
+
+<%self:runcommands>
+$ git push
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 5.76 KiB | 5.76 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0)
+To https://github.com/username/reponame
+   ${commit("origin/main")}..${commit("main")}  main -> main
+$ git lola
+</%self:runcommands>
+
 
 <%self:h2>Deleting a branch</%self:h2>
 
