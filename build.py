@@ -37,6 +37,11 @@ class CommandRunner:
         self.working_dir.mkdir()
         self.fake_time = 1622133500  # seconds since epoch
 
+    def clone(self, source, dest):
+        subprocess.run(['git', 'clone', '-q', str(source), str(dest)], check=True)
+        for command in self._repo_config_commands:
+            subprocess.run(command, cwd=dest, check=True, shell=True)
+
     def run_command(self, command_string):
         print("  ", command_string)
 
@@ -47,12 +52,7 @@ class CommandRunner:
         self.fake_time += 7
 
         if command_string == 'git clone https://github.com/username/reponame':
-            subprocess.run(
-                ['git', 'clone', '-q', str(self.fake_github_dir), str(self.working_dir / 'reponame')],
-                check=True,
-            )
-            for command in self._repo_config_commands:
-                subprocess.run(command, cwd=(self.working_dir / 'reponame'), check=True, shell=True)
+            self.clone(self.fake_github_dir, self.working_dir / 'reponame')
             return None  # not used
 
         if command_string == 'git pull https://github.com/where_you_forked_it_from/reponame':

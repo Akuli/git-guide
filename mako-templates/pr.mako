@@ -270,7 +270,7 @@ with commit messages `unrelated commit 1` and `unrelated commit 2`.
 
 <%
     # Create fake fork source dir
-    subprocess.run(['git', 'clone', str(runner.fake_github_dir), str(runner.fake_fork_source_dir)], check=True)
+    runner.clone(runner.fake_github_dir, runner.fake_fork_source_dir)
     subprocess.run(['git', 'checkout', 'main'], cwd=runner.fake_fork_source_dir, check=True)
     subprocess.run(['git', 'remote', 'rm', 'origin'], cwd=runner.fake_fork_source_dir, check=True)
     subprocess.run(['git', 'branch', '-D', 'division'], cwd=runner.fake_fork_source_dir, check=True)
