@@ -16,7 +16,7 @@ pagelist = [
     ("getting-started.html", "Getting started", "installing Git, making and cloning a repo"),
     ("committing.html", "Committing", "add, commit, push, status, diff, log, show"),
     ("branches.html", "Branches", "checkout, lola, merge"),
-    ("pr.html", "Pull requests", ""),
+    ("pr.html", "Pull requests", "forking, reviewing, merging, git pull"),
 ]
 
 
