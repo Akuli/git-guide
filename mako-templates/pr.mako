@@ -36,8 +36,7 @@ otherwise you clone the original repo, even though you don't have permissions to
 <%
     import shutil
 
-    # TODO: this is a bit of a hack
-    runner = context['parent'].context.runner
+    runner = context['parent'].context.runner  # TODO: this is a bit hacky
     shutil.rmtree(runner.working_dir)
     runner.working_dir = runner.working_dir.parent
 %>
