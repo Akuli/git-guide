@@ -8,6 +8,8 @@
 
 
 
+
+
 <html>
     <head>
         <title>Committing</title>
@@ -1189,6 +1191,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .inv48-255 { color: #eeeeee; }
 </style>
 
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <main>
@@ -1215,7 +1218,7 @@ nothing to commit, working tree clean
 
 
 <p>If you get an error saying <code>fatal: not a git repository</code>,
-you forgot to <code>cd</code> to the cloned repo as shown <a href="getting-started.html#cloning">here</a>.
+you forgot to <code>cd</code> to the cloned repo as shown <a href="getting-started.html#cloning-the-repo">here</a>.
 
 <p>We'll talk more about branches later, but the last line is relevant;
 it basically means you haven't done anything yet.
@@ -1391,7 +1394,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main 531a603] add better description to README
+[main 6ab92d7] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 </pre>
 
@@ -1430,7 +1433,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   2f41bb0..531a603  main -&gt; main
+   6e46187..6ab92d7  main -&gt; main
 </pre>
 
 
@@ -1439,21 +1442,27 @@ You won't see the password as you type it in, and that's completely normal.
 After pushing, you should immediately your changes on GitHub.
 
 
-<h2>Looking at previous commits</h2>
+
+    
+
+    <h2 id="looking-at-previous-commits">
+        Looking at previous commits<a class="headerlink" href="#looking-at-previous-commits" title="Link to this title">¶</a>
+    </h2>
+
 
 <p>Run <code>git log</code> to get a list of all previous commits.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit 531a60331d51fb4f9268ba7f7e5770d2a4574474</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 6ab92d7a524b9ae443b8a3dc42e5a7febc2ff81f</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 2f41bb03d95e99b4f60187188ba590ed4ffaad00</span>
+<span class="ansi33">commit 6e46187eb4de7f3a0acf1fc75dfbf6eec7b93062</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Sat May 29 09:41:58 2021 +0000
+Date:   Sat May 29 10:00:58 2021 +0000
 
     Initial commit
 </pre>
@@ -1467,21 +1476,21 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">531a603</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">2f41bb0</span> Initial commit
+<span class="ansi33">6ab92d7</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">6e46187</span> Initial commit
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>531a60331d51fb4f9268ba7f7e5770d2a4574474</code>.
+For example, the hash of our latest commit is <code>6ab92d7a524b9ae443b8a3dc42e5a7febc2ff81f</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>531a603</code> and <code>531a60331d51fb4f9268ba7f7e5770d2a4574474</code> refer to the same commit.
+so <code>6ab92d7</code> and <code>6ab92d7a524b9ae443b8a3dc42e5a7febc2ff81f</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 531a603</span>
-<span class="ansi33">commit 531a60331d51fb4f9268ba7f7e5770d2a4574474</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 6ab92d7</span>
+<span class="ansi33">commit 6ab92d7a524b9ae443b8a3dc42e5a7febc2ff81f</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1502,7 +1511,13 @@ Date:   Thu May 27 16:40:26 2021 +0000
 
 
 
-<h2>Commands in older versions of git</h2>
+
+    
+
+    <h2 id="commands-in-older-versions-of-git">
+        Commands in older versions of git<a class="headerlink" href="#commands-in-older-versions-of-git" title="Link to this title">¶</a>
+    </h2>
+
 
 <p>If you find that the <code>git status</code> output suggests different commands than in this tutorial,
 it's likely because you have an old version of git.

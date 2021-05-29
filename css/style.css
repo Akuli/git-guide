@@ -1,0 +1,9 @@
+.headerlink {
+    color: #eee;
+    text-decoration: none;   /* taken care of with border-bottom */
+}
+
+.headerlink:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
