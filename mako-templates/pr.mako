@@ -306,7 +306,7 @@ This is because `origin/main` means your fork's main branch, as that is what you
 You can run `git push` on the `main` branch if you want,
 but most people don't bother with updating the `main` branches of their forks.
 
-<p>From here on, you can make the PR as described above.
+<p>To create a new PR from here, create a new branch and so on as described above.
 
 
 <%self:h2>Conflicts in a PR</%self:h2>
