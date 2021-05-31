@@ -15,3 +15,6 @@ pre {font-size:120%;padding:1ex;border-radius:2px;background:#fdf6e3;box-shadow:
     word-break: break-all;
 }
 code{font-weight:bold;}
+
+details>* {margin-left:2em}
+details>summary {margin-left:unset}
