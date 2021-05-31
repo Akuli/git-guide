@@ -1396,7 +1396,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main f4e3bb9] add better description to README
+[main 4ec4a03] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 </pre>
 
@@ -1435,7 +1435,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   84b8eff..f4e3bb9  main -&gt; main
+   08fec5e..4ec4a03  main -&gt; main
 </pre>
 
 
@@ -1456,15 +1456,15 @@ After pushing, you should immediately your changes on GitHub.
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit f4e3bb99c943013222a97283b600fc52b3bd7915</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 4ec4a0319efeedf244fc0297224952900f8b7dac</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 84b8effb823b801d4006d0df729a45173fea36a7</span>
+<span class="ansi33">commit 08fec5e982457e9c1a4d3bcde15426699a1189e6</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Sun May 30 09:50:22 2021 +0000
+Date:   Mon May 31 21:56:32 2021 +0000
 
     Initial commit
 </pre>
@@ -1478,21 +1478,21 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
 
     <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">f4e3bb9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">84b8eff</span> Initial commit
+<span class="ansi33">4ec4a03</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">08fec5e</span> Initial commit
 </pre>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>f4e3bb99c943013222a97283b600fc52b3bd7915</code>.
+For example, the hash of our latest commit is <code>4ec4a0319efeedf244fc0297224952900f8b7dac</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>f4e3bb9</code> and <code>f4e3bb99c943013222a97283b600fc52b3bd7915</code> refer to the same commit.
+so <code>4ec4a03</code> and <code>4ec4a0319efeedf244fc0297224952900f8b7dac</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
-    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show f4e3bb9</span>
-<span class="ansi33">commit f4e3bb99c943013222a97283b600fc52b3bd7915</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+    <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 4ec4a03</span>
+<span class="ansi33">commit 4ec4a0319efeedf244fc0297224952900f8b7dac</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1542,12 +1542,16 @@ but the output may depend on the git version.
 
         <hr />
 
-            <footer>
+        <footer>
+                <p>
                     Previous: <a href="getting-started.html">Getting started</a><br />
 
                     Next: <a href="branches.html">Branches</a><br />
 
                 <a href="index.html">Back to front page</a>
-            </footer>
+
+            <p>This guide is developed in <a href="https://github.com/Akuli/git-guide">this GitHub repo</a>.
+            Please create an issue if you notice a problem.
+        </footer>
     </body>
 </html>
