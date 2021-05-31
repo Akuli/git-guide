@@ -1,3 +1,14 @@
+a {
+    color: #067;
+    border-bottom: 1px dotted;
+    text-decoration: none;   /* replaced by border-bottom */
+}
+
+a:hover {
+    color: #852;
+    border-bottom: 1px solid;
+}
+
 .headerlink {
     color: #eee;
     text-decoration: none;
