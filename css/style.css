@@ -15,12 +15,12 @@
 }
 
 main {
-    max-width: 600px;
+    max-width: 700px;  /* fits about 80 chars inside <pre> */
     margin: 0 auto;
 }
 
 pre {
-    font-size: 120%;
+    font-size: 110%;
     padding: 1ex;
     border-radius: 2px;
     background: #fdf6e3;
