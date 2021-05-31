@@ -119,8 +119,9 @@
 
         <hr />
 
-        % if filename != 'index.html':
-            <footer>
+        <footer>
+            % if filename != 'index.html':
+                <p>
                 % if prev_filename is not None:
                     Previous: <a href="${prev_filename}">${prev_title}</a><br />
                 % endif
@@ -130,7 +131,10 @@
                 % endif
 
                 <a href="index.html">Back to front page</a>
-            </footer>
-        % endif
+            % endif
+
+            <p>This guide is developed in <a href="https://github.com/Akuli/git-guide">this GitHub repo</a>.
+            Please create an issue if you notice a problem.
+        </footer>
     </body>
 </html>
