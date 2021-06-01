@@ -100,6 +100,7 @@
                 assert not code.strip()
                 code = (runner.working_dir / read).read_text()
             %>
+            <span>Content of ${read}</span>
         % endif
 
         ${highlight(code, lexers.get_lexer_by_name(lang), pygments_formatter)}

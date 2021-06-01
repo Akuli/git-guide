@@ -53,8 +53,8 @@ $ git lola
 
 <p>We will continue from <a href="branches.html#the-setup">this calculator example</a>.
 
-<%# self:code lang="python" read="calculator.py" />
-%>
+<%self:code lang="python" read="calculator.py" />
+
 <p>Next make <a href="branches.html">a new branch</a>. I will name it `division`.
 
 <%self:runcommands>
