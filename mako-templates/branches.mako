@@ -367,7 +367,7 @@ $ git lola
 <p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
-Finally, we can push the merge commit:
+<p>Finally, we can push the merge commit:
 
 <%self:runcommands>
 $ git push

@@ -87,7 +87,7 @@ it just means that you are not by law required to fix anything or pay money to c
 <p>For example, I use <a href="https://opensource.org/licenses/MIT">the MIT license</a> in my projects,
 because it's very short but it still guarantees all this.
 
-<strong>I'm not a lawyer</strong>, so I might have gotten some details wrong.
+<p><strong>I'm not a lawyer</strong>, so I might have gotten some details wrong.
 Also, I'm not responsible for anything I say in this guide,
 as <a href="https://github.com/Akuli/git-guide/blob/main/LICENSE">the LICENCE of this guide</a> says.
 
