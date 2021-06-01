@@ -11,9 +11,9 @@
 
     from build import create_runner
 
-    runner = create_runner()   # Runs only once, same runner reused
-    pygments_formatter = formatters.HtmlFormatter(cssclass="pygments")
-    ansi_converter = Ansi2HTMLConverter()
+    runner = create_runner()   # This code runs only once, same runner reused
+    pygments_formatter = formatters.HtmlFormatter(cssclass="pygments", style='monokai')
+    ansi_converter = Ansi2HTMLConverter(scheme='xterm')
 
     def run_git_commands(input_string):
         should_be_empty, *commands_and_outputs = re.split(
@@ -62,7 +62,9 @@
 %></%def>
 
 <%def name="runcommands()">
-    <pre>${run_git_commands(capture(caller.body))}</pre>
+    <div class="code-container">
+        <pre>${run_git_commands(capture(caller.body))}</pre>
+    </div>
 </%def>
 
 <%def name="code(lang='text', write=None, append=None, replacelastline=None, read=None)">
@@ -71,19 +73,19 @@
 
         % if write is not None:
             % if (runner.working_dir / write).exists():
-                <span>Change the content of ${write} to this:</span>
+                <span>Change the content of ${write} to this</span>
             % else:
-                <span>Create ${write} with this content:</span>
+                <span>Create ${write} with this content</span>
             % endif
             <% (runner.working_dir / write).write_text(code) %>
         % elif append is not None:
-            <span>Add to end of ${append}:</span>
+            <span>Add to end of ${append}</span>
             <%
                 with (runner.working_dir / append).open("a") as file:
                     file.write(code)
             %>
         % elif replacelastline is not None:
-            <span>Replace last line of ${replacelastline} with this:</span>
+            <span>Replace last line of ${replacelastline} with this</span>
             <%
                 assert code.endswith("\n") and code.count("\n") == 1
 

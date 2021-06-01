@@ -164,20 +164,20 @@ but I always use `--all`.
 
 <%self:h2>Git lola</%self:h2>
 
-As you can see, `git log --oneline --graph --all` is a very useful command, but it's a bit long to type.
+<p>As you can see, `git log --oneline --graph --all` is a very useful command, but it's a bit long to type.
 Run this:
 
 <%self:runcommands>
 $ git config --global alias.lola "log --oneline --graph --all"
 </%self:runcommands>
 
-Now `git lola` does the same as `git log --oneline --graph --all`:
+<p>Now `git lola` does the same as `git log --oneline --graph --all`:
 
 <%self:runcommands>
 $ git lola
 </%self:runcommands>
 
-You can name the alias however you want,
+<p>You can name the alias however you want,
 but I named it `lola` for consistency with <a href="http://blog.kfish.org/2010/04/git-lola.html">this blog post</a>,
 which I believe is where the command comes from.
 The commands in the blog post are longer than here because back in 2010,
@@ -353,7 +353,7 @@ $ git add calculator.py
 $ git status
 </%self:runcommands>
 
-As `git status` says, the next step is to commit the result.
+<p>As `git status` says, the next step is to commit the result.
 <strong>Do not use `-m` with merge commits</strong> such as this one.
 Instead, write just `git commit`, without anything else after it.
 It will open an editor that already contains a commit message for you;
@@ -367,7 +367,7 @@ $ git lola
 <p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
-Finally, we can push the merge commit:
+<p>Finally, we can push the merge commit:
 
 <%self:runcommands>
 $ git push
