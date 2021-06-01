@@ -37,7 +37,7 @@ div.code-container {
     flex-direction: column;
 }
 
-pre {
+div.code-container > pre {
     margin: 0px;
     font-size: 110%;
     padding: 0.8em;
