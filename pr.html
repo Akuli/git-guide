@@ -1255,20 +1255,43 @@ Unpacking objects: 100% (6/6), done.
 <span class="ansi1">$ </span><span class="ansi1 ansi36">cd reponame</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">486bcb4</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">1c0f355</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">b779758</span> fix multiplication bug
-<span class="ansi31">|</span> * <span class="ansi33">60e7424</span> multiplication code, not working yet
-* <span class="ansi32">|</span> <span class="ansi33">caff657</span> fix subtraction bug
+<span class="ansi31">|</span> * <span class="ansi33">4c6bc77</span> fix multiplication bug
+<span class="ansi31">|</span> * <span class="ansi33">cb9aaca</span> multiplication code, not working yet
+* <span class="ansi32">|</span> <span class="ansi33">2b2492c</span> fix subtraction bug
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">28a0f4d</span> create calculator.py
-* <span class="ansi33">0390555</span> add better description to README
-* <span class="ansi33">8c3b268</span> Initial commit
+* <span class="ansi33">f785da9</span> create calculator.py
+* <span class="ansi33">b484add</span> add better description to README
+* <span class="ansi33">1575c69</span> Initial commit
 </pre>
     </div>
 
 
 <p>We will continue from <a href="branches.html#the-setup">this calculator example</a>.
+
+
+    <div class="code-container">
+        
+
+            
+            <span>Content of calculator.py</span>
+
+        <div class="pygments"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">first_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">second_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">+</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">-</span> <span class="n">second_number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_number</span> <span class="o">*</span> <span class="n">second_number</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 
 
 <p>Next make <a href="branches.html">a new branch</a>. I will name it <code>division</code>.
@@ -1323,7 +1346,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 <span class="ansi32">+</span><span class="ansi32">    print(first_number / second_number)</span>
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "new division feature"</span>
-[division ecf440c] new division feature
+[division f8204d1] new division feature
  1 file changed, 2 insertions(+)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git push</span>
@@ -1464,21 +1487,21 @@ Merge made by the 'recursive' strategy.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">dc9fba3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+*   <span class="ansi33">bfaa184</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">71b264f</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Update calculator.py
-* <span class="ansi32">|</span> <span class="ansi33">9ed4f49</span> commit created on cloned repo
+<span class="ansi31">|</span> * <span class="ansi33">0a8d078</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">574f00f</span> commit created on cloned repo
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">ecf440c</span> new division feature
-*   <span class="ansi33">486bcb4</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+* <span class="ansi33">f8204d1</span> new division feature
+*   <span class="ansi33">1c0f355</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi33">|</span><span class="ansi34">\</span>  
-<span class="ansi33">|</span> * <span class="ansi33">b779758</span> fix multiplication bug
-<span class="ansi33">|</span> * <span class="ansi33">60e7424</span> multiplication code, not working yet
-* <span class="ansi34">|</span> <span class="ansi33">caff657</span> fix subtraction bug
+<span class="ansi33">|</span> * <span class="ansi33">4c6bc77</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">cb9aaca</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">2b2492c</span> fix subtraction bug
 <span class="ansi34">|</span><span class="ansi34">/</span>  
-* <span class="ansi33">28a0f4d</span> create calculator.py
-* <span class="ansi33">0390555</span> add better description to README
-* <span class="ansi33">8c3b268</span> Initial commit
+* <span class="ansi33">f785da9</span> create calculator.py
+* <span class="ansi33">b484add</span> add better description to README
+* <span class="ansi33">1575c69</span> Initial commit
 </pre>
     </div>
 
@@ -1505,21 +1528,21 @@ To https://github.com/username/reponame
    a198d97..a7cf99d  division -&gt; division
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">dc9fba3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+*   <span class="ansi33">bfaa184</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">71b264f</span> Update calculator.py
-* <span class="ansi32">|</span> <span class="ansi33">9ed4f49</span> commit created on cloned repo
+<span class="ansi31">|</span> * <span class="ansi33">0a8d078</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">574f00f</span> commit created on cloned repo
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">ecf440c</span> new division feature
-*   <span class="ansi33">486bcb4</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+* <span class="ansi33">f8204d1</span> new division feature
+*   <span class="ansi33">1c0f355</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi33">|</span><span class="ansi34">\</span>  
-<span class="ansi33">|</span> * <span class="ansi33">b779758</span> fix multiplication bug
-<span class="ansi33">|</span> * <span class="ansi33">60e7424</span> multiplication code, not working yet
-* <span class="ansi34">|</span> <span class="ansi33">caff657</span> fix subtraction bug
+<span class="ansi33">|</span> * <span class="ansi33">4c6bc77</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">cb9aaca</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">2b2492c</span> fix subtraction bug
 <span class="ansi34">|</span><span class="ansi34">/</span>  
-* <span class="ansi33">28a0f4d</span> create calculator.py
-* <span class="ansi33">0390555</span> add better description to README
-* <span class="ansi33">8c3b268</span> Initial commit
+* <span class="ansi33">f785da9</span> create calculator.py
+* <span class="ansi33">b484add</span> add better description to README
+* <span class="ansi33">1575c69</span> Initial commit
 </pre>
     </div>
 
@@ -1600,21 +1623,21 @@ with commit messages <code>unrelated commit 1</code> and <code>unrelated commit 
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-*   <span class="ansi33">dc9fba3</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+*   <span class="ansi33">bfaa184</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">division</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
 <span class="ansi31">|</span><span class="ansi32">\</span>  
-<span class="ansi31">|</span> * <span class="ansi33">71b264f</span> Update calculator.py
-* <span class="ansi32">|</span> <span class="ansi33">9ed4f49</span> commit created on cloned repo
+<span class="ansi31">|</span> * <span class="ansi33">0a8d078</span> Update calculator.py
+* <span class="ansi32">|</span> <span class="ansi33">574f00f</span> commit created on cloned repo
 <span class="ansi32">|</span><span class="ansi32">/</span>  
-* <span class="ansi33">ecf440c</span> new division feature
-*   <span class="ansi33">486bcb4</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
+* <span class="ansi33">f8204d1</span> new division feature
+*   <span class="ansi33">1c0f355</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">, </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi33">|</span><span class="ansi34">\</span>  
-<span class="ansi33">|</span> * <span class="ansi33">b779758</span> fix multiplication bug
-<span class="ansi33">|</span> * <span class="ansi33">60e7424</span> multiplication code, not working yet
-* <span class="ansi34">|</span> <span class="ansi33">caff657</span> fix subtraction bug
+<span class="ansi33">|</span> * <span class="ansi33">4c6bc77</span> fix multiplication bug
+<span class="ansi33">|</span> * <span class="ansi33">cb9aaca</span> multiplication code, not working yet
+* <span class="ansi34">|</span> <span class="ansi33">2b2492c</span> fix subtraction bug
 <span class="ansi34">|</span><span class="ansi34">/</span>  
-* <span class="ansi33">28a0f4d</span> create calculator.py
-* <span class="ansi33">0390555</span> add better description to README
-* <span class="ansi33">8c3b268</span> Initial commit
+* <span class="ansi33">f785da9</span> create calculator.py
+* <span class="ansi33">b484add</span> add better description to README
+* <span class="ansi33">1575c69</span> Initial commit
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git checkout main</span>
 Switched to branch 'main'
@@ -1627,28 +1650,28 @@ remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
 Unpacking objects: 100% (2/2), done.
 From https://github.com/where_you_forked_it_from/reponame
  * branch            HEAD       -&gt; FETCH_HEAD
-Updating 486bcb4..dc41b82
+Updating 1c0f355..2fb8cea
 Fast-forward
 
 <span class="ansi1">$ </span><span class="ansi1 ansi36">git lola</span>
-* <span class="ansi33">dc41b82</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> unrelated commit 2
-* <span class="ansi33">1ebac5c</span> unrelated commit 1
-<span class="ansi31">|</span> *   <span class="ansi33">dc9fba3</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">, </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
+* <span class="ansi33">2fb8cea</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">)</span> unrelated commit 2
+* <span class="ansi33">aa1c265</span> unrelated commit 1
+<span class="ansi31">|</span> *   <span class="ansi33">bfaa184</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/division</span><span class="ansi33">, </span><span class="ansi1 ansi32">division</span><span class="ansi33">)</span> Merge branch 'division' of https://github.com/username/reponame into division
 <span class="ansi31">|</span> <span class="ansi32">|</span><span class="ansi33">\</span>  
-<span class="ansi31">|</span> <span class="ansi32">|</span> * <span class="ansi33">71b264f</span> Update calculator.py
-<span class="ansi31">|</span> * <span class="ansi33">|</span> <span class="ansi33">9ed4f49</span> commit created on cloned repo
+<span class="ansi31">|</span> <span class="ansi32">|</span> * <span class="ansi33">0a8d078</span> Update calculator.py
+<span class="ansi31">|</span> * <span class="ansi33">|</span> <span class="ansi33">574f00f</span> commit created on cloned repo
 <span class="ansi31">|</span> <span class="ansi33">|</span><span class="ansi33">/</span>  
-<span class="ansi31">|</span> * <span class="ansi33">ecf440c</span> new division feature
+<span class="ansi31">|</span> * <span class="ansi33">f8204d1</span> new division feature
 <span class="ansi31">|</span><span class="ansi31">/</span>  
-*   <span class="ansi33">486bcb4</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
+*   <span class="ansi33">1c0f355</span><span class="ansi33"> (</span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> Merge branch 'multiplication'
 <span class="ansi34">|</span><span class="ansi35">\</span>  
-<span class="ansi34">|</span> * <span class="ansi33">b779758</span> fix multiplication bug
-<span class="ansi34">|</span> * <span class="ansi33">60e7424</span> multiplication code, not working yet
-* <span class="ansi35">|</span> <span class="ansi33">caff657</span> fix subtraction bug
+<span class="ansi34">|</span> * <span class="ansi33">4c6bc77</span> fix multiplication bug
+<span class="ansi34">|</span> * <span class="ansi33">cb9aaca</span> multiplication code, not working yet
+* <span class="ansi35">|</span> <span class="ansi33">2b2492c</span> fix subtraction bug
 <span class="ansi35">|</span><span class="ansi35">/</span>  
-* <span class="ansi33">28a0f4d</span> create calculator.py
-* <span class="ansi33">0390555</span> add better description to README
-* <span class="ansi33">8c3b268</span> Initial commit
+* <span class="ansi33">f785da9</span> create calculator.py
+* <span class="ansi33">b484add</span> add better description to README
+* <span class="ansi33">1575c69</span> Initial commit
 </pre>
     </div>
 
