@@ -24,7 +24,7 @@ body {
     text-align: justify;
     background: #333;
     color: white;
-    max-width: 700px;  /* fits about 80 chars inside <pre> */
+    max-width: 666px;  /* fits about 80 chars inside <pre> */
     margin: 0 auto;
     line-height: 140%;
 }
@@ -39,7 +39,7 @@ div.code-container {
 
 pre {
     margin: 0px;
-    font-size: 110%;
+    font-size: 105%;
     padding: 0.8em;
     white-space: pre-wrap;
     word-break: break-all;
