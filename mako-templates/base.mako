@@ -11,7 +11,7 @@
 
     from build import create_runner
 
-    runner = create_runner()   # Runs only once, same runner reused
+    runner = create_runner()   # This code runs only once, same runner reused
     pygments_formatter = formatters.HtmlFormatter(cssclass="pygments", style='monokai')
     ansi_converter = Ansi2HTMLConverter(scheme='xterm')
 
