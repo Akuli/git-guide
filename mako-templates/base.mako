@@ -12,7 +12,7 @@
     from build import create_runner
 
     runner = create_runner()   # Runs only once, same runner reused
-    pygments_formatter = formatters.HtmlFormatter(cssclass="pygments")
+    pygments_formatter = formatters.HtmlFormatter(cssclass="pygments", style='monokai')
     ansi_converter = Ansi2HTMLConverter()
 
     def run_git_commands(input_string):
