@@ -25,7 +25,7 @@ body {
     background: #333;
     color: white;
     max-width: 666px;  /* fits about 80 chars inside <pre> */
-    margin: 0 auto;
+    margin: 0 auto;    /* center it */
     line-height: 140%;
 }
 
