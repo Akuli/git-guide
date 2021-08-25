@@ -142,7 +142,7 @@ To https://github.com/username/reponame
 
 <p>Git will ask for your GitHub username and password.
 You won't see the password as you type it in, and that's completely normal.
-After pushing, you should immediately your changes on GitHub.
+After pushing, you should immediately see your changes on GitHub.
 
 
 <%self:h2>Looking at previous commits</%self:h2>
