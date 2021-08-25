@@ -408,3 +408,8 @@ $ git lola
 
 <p>For whatever reason, you need to specify `origin` in the `git push` command.
 As usual, `origin` means GitHub.
+
+<p>It is also possible to delete a branch by clicking something in GitHub,
+but then it will keep showing up in `git lola`
+because Git on your computer won't know that it is gone.
+To fix this, you can run `git fetch --prune` and then look at `git lola` again.
