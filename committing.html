@@ -1414,7 +1414,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main fac53aa] add better description to README
+[main 7b47314] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 </pre>
     </div>
@@ -1457,7 +1457,7 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   44b98c9..fac53aa  main -&gt; main
+   50ec14e..7b47314  main -&gt; main
 </pre>
     </div>
 
@@ -1480,15 +1480,15 @@ After pushing, you should immediately see your changes on GitHub.
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 7b473143eaf1d261486537dcabd1f99c2c3c0dcf</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 44b98c994e2c11117910372097c79694491263cc</span>
+<span class="ansi33">commit 50ec14e1b733e35b9eb4af5b695a7a560391d900</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Wed Aug 25 10:38:47 2021 +0000
+Date:   Wed Aug 25 10:45:17 2021 +0000
 
     Initial commit
 </pre>
@@ -1504,23 +1504,23 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">fac53aa</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">44b98c9</span> Initial commit
+<span class="ansi33">7b47314</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">50ec14e</span> Initial commit
 </pre>
     </div>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>fac53aaedd476c387cb213e7b5e8fae8ffd042f9</code>.
+For example, the hash of our latest commit is <code>7b473143eaf1d261486537dcabd1f99c2c3c0dcf</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>fac53aa</code> and <code>fac53aaedd476c387cb213e7b5e8fae8ffd042f9</code> refer to the same commit.
+so <code>7b47314</code> and <code>7b473143eaf1d261486537dcabd1f99c2c3c0dcf</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
     <div class="code-container">
-        <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show fac53aa</span>
-<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+        <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show 7b47314</span>
+<span class="ansi33">commit 7b473143eaf1d261486537dcabd1f99c2c3c0dcf</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1546,7 +1546,7 @@ Date:   Thu May 27 16:40:26 2021 +0000
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show</span>
-<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit 7b473143eaf1d261486537dcabd1f99c2c3c0dcf</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
