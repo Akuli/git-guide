@@ -74,7 +74,7 @@ and many projects still have a branch named `master` instead of a `main` branch.
 
 <p>Seeing `main` next to `${commit("main")}` means that
 `${commit("main")}` is the latest commit on `main`.
-Here `origin` means GitHub and `origin/main` is GitHub's main branch,
+On the next line, `origin` means GitHub and `origin/main` is GitHub's main branch,
 so `${commit("origin/main")}` next to it means that the latest commit we pushed is `${commit("origin/main")}`.
 
 <p>There is also a notion of <strong>current branch</strong>, which is often called `HEAD`.
@@ -367,7 +367,7 @@ $ git lola
 <p>The default commit message, `Merge branch 'multiplication'`, is very recognizable:
 when people see it in git logs, they immediately know what that commit does.
 
-<p>Finally, we can push the merge commit:
+<p>Finally, we can push all this to GitHub:
 
 <%self:runcommands>
 $ git push
