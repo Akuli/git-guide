@@ -174,6 +174,12 @@ so `${commit("HEAD")}` and `${commit("HEAD", long=True)}` refer to the same comm
 $ git show ${commit("HEAD")}
 </%self:runcommands>
 
+<p>If you don't specify a commit hash, it shows the latest commit:
+
+<%self:runcommands>
+$ git show
+</%self:runcommands>
+
 
 <%self:h2>Commands in older versions of git</%self:h2>
 
