@@ -198,4 +198,4 @@ and on my older version of git, only `git rm --cached` works.
 There's also a third way to do this, suggested by even older versions of git.
 
 <p>In short, the commands that `git status` suggests will always work,
-but the output may depend on the git version.
+but they depend on the git version.
