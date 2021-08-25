@@ -30,6 +30,6 @@ $ sudo apt install inotify-tools
 $ ./loop.sh
 ```
 
-GitHub Actions spell checks all markdown files when you make a pull request.
+GitHub Actions spell checks all Mako templates when you make a pull request.
 If the spell check complains about a word that you know you spelled correctly,
 add the word to `spellcheck_exclude.txt`.
