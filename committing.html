@@ -1414,7 +1414,7 @@ and <code>you@example.com</code> with the email address you used when creating y
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git commit -m "add better description to README"</span>
-[main c9f9a4e] add better description to README
+[main fac53aa] add better description to README
  1 file changed, 4 insertions(+), 1 deletion(-)
 </pre>
     </div>
@@ -1457,14 +1457,14 @@ Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 184 bytes | 184.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/username/reponame
-   9bd4824..c9f9a4e  main -&gt; main
+   44b98c9..fac53aa  main -&gt; main
 </pre>
     </div>
 
 
 <p>Git will ask for your GitHub username and password.
 You won't see the password as you type it in, and that's completely normal.
-After pushing, you should immediately your changes on GitHub.
+After pushing, you should immediately see your changes on GitHub.
 
 
 
@@ -1480,15 +1480,15 @@ After pushing, you should immediately your changes on GitHub.
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log</span>
-<span class="ansi33">commit c9f9a4ed9be613a91caf4e904b0b86173fc53979</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
     add better description to README
 
-<span class="ansi33">commit 9bd4824d26f0a9ae4c63c528d672550952559bb6</span>
+<span class="ansi33">commit 44b98c994e2c11117910372097c79694491263cc</span>
 Author: yourusername &lt;you@example.com&gt;
-Date:   Tue Jun 1 16:00:55 2021 +0000
+Date:   Wed Aug 25 10:38:47 2021 +0000
 
     Initial commit
 </pre>
@@ -1504,23 +1504,49 @@ If you have many commits, specify <code>--oneline</code> so you can fit more com
 
     <div class="code-container">
         <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git log --oneline</span>
-<span class="ansi33">c9f9a4e</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
-<span class="ansi33">9bd4824</span> Initial commit
+<span class="ansi33">fac53aa</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span> add better description to README
+<span class="ansi33">44b98c9</span> Initial commit
 </pre>
     </div>
 
 
 <p>Each commit has a unique <strong>commit hash</strong>, sometimes also known as commit ID or SHA.
-For example, the hash of our latest commit is <code>c9f9a4ed9be613a91caf4e904b0b86173fc53979</code>.
+For example, the hash of our latest commit is <code>fac53aaedd476c387cb213e7b5e8fae8ffd042f9</code>.
 The hashes are often abbreviated by taking a few characters from the beginning,
-so <code>c9f9a4e</code> and <code>c9f9a4ed9be613a91caf4e904b0b86173fc53979</code> refer to the same commit.
+so <code>fac53aa</code> and <code>fac53aaedd476c387cb213e7b5e8fae8ffd042f9</code> refer to the same commit.
 
 <p>Use <code>git show</code> to show the code changes of a commit:
 
 
     <div class="code-container">
-        <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show c9f9a4e</span>
-<span class="ansi33">commit c9f9a4ed9be613a91caf4e904b0b86173fc53979</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+        <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show fac53aa</span>
+<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
+Author: yourusername &lt;you@example.com&gt;
+Date:   Thu May 27 16:40:26 2021 +0000
+
+    add better description to README
+
+<span class="ansi1">diff --git a/README.md b/README.md</span>
+<span class="ansi1">index a93665e..610acc2 100644</span>
+<span class="ansi1">--- a/README.md</span>
+<span class="ansi1">+++ b/README.md</span>
+<span class="ansi36">@@ -1,2 +1,5 @@</span>
+ # reponame
+<span class="ansi31">-The description of the repository is here by default</span>
+<span class="ansi32">+</span><span class="ansi32">This is a better description of this repository. Imagine you just wrote it</span>
+<span class="ansi32">+</span><span class="ansi32">into your text editor.</span>
+<span class="ansi32">+</span>
+<span class="ansi32">+</span><span class="ansi32">More text here. Lorem ipsum blah blah blah.</span>
+</pre>
+    </div>
+
+
+<p>If you don't specify a commit hash, it shows the latest commit:
+
+
+    <div class="code-container">
+        <pre><span class="ansi1">$ </span><span class="ansi1 ansi36">git show</span>
+<span class="ansi33">commit fac53aaedd476c387cb213e7b5e8fae8ffd042f9</span><span class="ansi33"> (</span><span class="ansi1 ansi36">HEAD -&gt; </span><span class="ansi1 ansi32">main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/main</span><span class="ansi33">, </span><span class="ansi1 ansi31">origin/HEAD</span><span class="ansi33">)</span>
 Author: yourusername &lt;you@example.com&gt;
 Date:   Thu May 27 16:40:26 2021 +0000
 
@@ -1565,7 +1591,7 @@ and on my older version of git, only <code>git rm --cached</code> works.
 There's also a third way to do this, suggested by even older versions of git.
 
 <p>In short, the commands that <code>git status</code> suggests will always work,
-but the output may depend on the git version.
+but they depend on the git version.
 
         </main>
 
