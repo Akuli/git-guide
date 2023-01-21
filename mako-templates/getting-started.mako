@@ -10,17 +10,12 @@
     <p>Search "git download" on Google. The first result should be at git-scm.org. Click it.
     Then click "Windows" and run the installer.
 
-    <p>You can mostly click "Next" in the installer, except in two steps:
-    <ul><li>
-        When Git asks about editors, choose "Use the Nano editor" from the drop-down
-        instead of "Use vim (the ubiquitous text editor)".
-        While vim is powerful and some people love it, it's
-        <a href="https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/">ridiculously difficult</a>
-        to use at first.
-    </li><li>
-        Choose "Use Windows' default console window" instead of "Use MinTTY (the default terminal of MSYS2)".
-        This way you can use Git from cmd.exe or PowerShell, whichever you prefer.
-    </li></ul>
+    <p>You can mostly click "Next" in the installer, but when Git asks about editors,
+    choose "Use the Nano editor" from the drop-down instead of
+    "Use vim (the ubiquitous text editor)".
+    While vim is powerful and some people love it, it's
+    <a href="https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/">ridiculously difficult</a>
+    to use at first.
 
     <p>Of course, you can choose everything however you want,
     but the above choices should work for most people.
